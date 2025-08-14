@@ -172,6 +172,19 @@ if ($mail_sent) {
     // Логируем успех
     error_log("✅ EMAIL SUCCESS: Sent to " . $to . " from " . $email);
     
+    // Сохраняем lead в базу данных
+    try {
+        require_once __DIR__ . '/models/Lead.php';
+        $leadSaved = saveLeadToDatabase($input, $service);
+        if ($leadSaved) {
+            error_log("✅ LEAD SAVED: Успешно сохранен в базу данных");
+        } else {
+            error_log("⚠️ LEAD SAVE FAILED: Не удалось сохранить в базу данных");
+        }
+    } catch (Exception $e) {
+        error_log("❌ LEAD SAVE ERROR: " . $e->getMessage());
+    }
+    
 } else {
     // Ошибка отправки
     $last_error = error_get_last();
