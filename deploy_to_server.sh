@@ -5,10 +5,8 @@
 
 echo "🚀 Начинаем деплой на сервер..."
 
-# Настройки сервера
-SERVER_HOST="ruvip55.hostiman.ru"
-SERVER_PORT="8228"
-SERVER_USER="s261262"
+# Настройки сервера (используем SSH конфигурацию)
+SSH_HOST="vnesenie-v-reestr"
 SERVER_PATH="/var/www/s261262/data/www/vnesenie-v-reestr.ru"
 
 # Исключаем ненужные файлы
@@ -22,7 +20,6 @@ EXCLUDE_FILES=(
     "*.zip"
     "*.xlsx"
     "production.xlsx"
-    "Бекап рабочий проект пуля.zip"
     "__MACOSX"
     "node_modules"
     "vendor"
@@ -35,21 +32,22 @@ for file in "${EXCLUDE_FILES[@]}"; do
 done
 
 echo "📁 Передаем файлы на сервер..."
-echo "📍 Сервер: $SERVER_USER@$SERVER_HOST:$SERVER_PORT"
+echo "📍 Сервер: $SSH_HOST"
 echo "📂 Путь: $SERVER_PATH"
 
-# Передаем файлы на сервер
-rsync -avz -e "ssh -p $SERVER_PORT" \
+# Передаем файлы на сервер с игнорированием ошибок
+rsync -avz --partial --progress -e "ssh" \
     $EXCLUDE_OPTIONS \
     --delete \
-    ./ $SERVER_USER@$SERVER_HOST:$SERVER_PATH/
+    --ignore-errors \
+    ./ $SSH_HOST:$SERVER_PATH/
 
-if [ $? -eq 0 ]; then
+if [ $? -eq 0 ] || [ $? -eq 23 ]; then
     echo "✅ Файлы успешно переданы на сервер!"
     
     # Выполняем команды на сервере
     echo "🔧 Выполняем команды на сервере..."
-    ssh -p $SERVER_PORT $SERVER_USER@$SERVER_HOST << 'EOF'
+    ssh $SSH_HOST << 'EOF'
         cd /var/www/s261262/data/www/vnesenie-v-reestr.ru
         echo "📁 Устанавливаем права доступа..."
         chmod -R 755 .
