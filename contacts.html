@@ -56,6 +56,61 @@
     </script>
     
     <style>
+    /* Стили для сообщений формы */
+    .success-message, .error-message {
+        margin-top: 20px;
+        padding: 20px;
+        border-radius: 10px;
+        border: 2px solid;
+        animation: slideIn 0.3s ease-out;
+    }
+
+    .success-message {
+        background: #d4edda;
+        border-color: #c3e6cb;
+        color: #155724;
+    }
+
+    .error-message {
+        background: #f8d7da;
+        border-color: #f5c6cb;
+        color: #721c24;
+    }
+
+    .message-content {
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .message-icon {
+        font-size: 24px;
+        flex-shrink: 0;
+    }
+
+    .message-text h4 {
+        margin: 0 0 8px 0;
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    .message-text p {
+        margin: 0;
+        font-size: 16px;
+        line-height: 1.5;
+    }
+
+    @keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
     .contacts-hero {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: white;
@@ -627,12 +682,24 @@
 
                         <button type="submit" class="submit-btn" id="submitBtn">Отправить сообщение</button>
 
-                        <div class="success-message" id="successMessage">
-                            ✅ Сообщение успешно отправлено! Мы свяжемся с вами в ближайшее время.
+                        <div class="success-message" id="successMessage" style="display: none;">
+                            <div class="message-content">
+                                <div class="message-icon">✅</div>
+                                <div class="message-text">
+                                    <h4>Сообщение успешно отправлено!</h4>
+                                    <p>Мы свяжемся с вами в течение 30 минут в рабочее время.</p>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="error-message" id="errorMessage">
-                            ❌ Произошла ошибка при отправке. Попробуйте еще раз или свяжитесь с нами по телефону.
+                        <div class="error-message" id="errorMessage" style="display: none;">
+                            <div class="message-content">
+                                <div class="message-icon">❌</div>
+                                <div class="message-text">
+                                    <h4>Произошла ошибка при отправке</h4>
+                                    <p>Попробуйте еще раз или свяжитесь с нами по телефону: <strong>+7 920-898-17-18</strong></p>
+                                </div>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -716,9 +783,21 @@
         const successMessage = document.getElementById('successMessage');
         const errorMessage = document.getElementById('errorMessage');
 
+        // Флаг для предотвращения повторной отправки
+        let isSubmitting = false;
+
         if (contactForm) {
             contactForm.addEventListener('submit', async function(e) {
                 e.preventDefault();
+                
+                // Проверяем, не отправляется ли уже форма
+                if (isSubmitting) {
+                    console.log('Форма уже отправляется, игнорируем повторный клик');
+                    return;
+                }
+                
+                // Устанавливаем флаг отправки
+                isSubmitting = true;
                 
                 // Показываем состояние загрузки
                 submitBtn.disabled = true;
@@ -751,8 +830,19 @@
                     if (response.ok) {
                         const result = await response.json();
                         if (result.success) {
+                            // Показываем успешное сообщение
                             successMessage.style.display = 'block';
+                            successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            
+                            // Очищаем форму
                             contactForm.reset();
+                            
+                            // Скрываем сообщение через 5 секунд
+                            setTimeout(() => {
+                                successMessage.style.display = 'none';
+                            }, 5000);
+                            
+                            console.log('✅ Форма успешно отправлена');
                         } else {
                             throw new Error(result.error || 'Server error');
                         }
@@ -761,12 +851,16 @@
                     }
 
                 } catch (error) {
-                    console.error('Ошибка отправки:', error);
+                    console.error('❌ Ошибка отправки:', error);
                     errorMessage.style.display = 'block';
+                    errorMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 } finally {
                     // Возвращаем кнопку в исходное состояние
                     submitBtn.disabled = false;
                     submitBtn.textContent = 'Отправить сообщение';
+                    
+                    // Сбрасываем флаг отправки
+                    isSubmitting = false;
                 }
             });
         }

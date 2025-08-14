@@ -9,6 +9,7 @@
 # Логи
 *.log
 logs/
+logs/*.log
 
 # Загрузки
 uploads/
