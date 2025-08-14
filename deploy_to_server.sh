@@ -1,0 +1,68 @@
+#!/bin/bash
+
+# 🚀 Скрипт для передачи файлов на сервер vnesenie-v-reestr.ru
+# Использование: ./deploy_to_server.sh
+
+echo "🚀 Начинаем деплой на сервер..."
+
+# Настройки сервера
+SERVER_HOST="ruvip55.hostiman.ru"
+SERVER_PORT="8228"
+SERVER_USER="s261262"
+SERVER_PATH="/var/www/s261262/data/www/vnesenie-v-reestr.ru"
+
+# Исключаем ненужные файлы
+EXCLUDE_FILES=(
+    ".git"
+    ".DS_Store"
+    "uploads"
+    "logs"
+    "*.log"
+    "*.db"
+    "*.zip"
+    "*.xlsx"
+    "production.xlsx"
+    "Бекап рабочий проект пуля.zip"
+    "__MACOSX"
+    "node_modules"
+    "vendor"
+)
+
+# Строим строку исключений для rsync
+EXCLUDE_OPTIONS=""
+for file in "${EXCLUDE_FILES[@]}"; do
+    EXCLUDE_OPTIONS="$EXCLUDE_OPTIONS --exclude=$file"
+done
+
+echo "📁 Передаем файлы на сервер..."
+echo "📍 Сервер: $SERVER_USER@$SERVER_HOST:$SERVER_PORT"
+echo "📂 Путь: $SERVER_PATH"
+
+# Передаем файлы на сервер
+rsync -avz -e "ssh -p $SERVER_PORT" \
+    $EXCLUDE_OPTIONS \
+    --delete \
+    ./ $SERVER_USER@$SERVER_HOST:$SERVER_PATH/
+
+if [ $? -eq 0 ]; then
+    echo "✅ Файлы успешно переданы на сервер!"
+    
+    # Выполняем команды на сервере
+    echo "🔧 Выполняем команды на сервере..."
+    ssh -p $SERVER_PORT $SERVER_USER@$SERVER_HOST << 'EOF'
+        cd /var/www/s261262/data/www/vnesenie-v-reestr.ru
+        echo "📁 Устанавливаем права доступа..."
+        chmod -R 755 .
+        chown -R s261262:s261262 .
+        
+        echo "🔍 Проверяем PHP синтаксис..."
+        find . -name "*.php" -exec php -l {} \; | grep -v "No syntax errors" || echo "✅ PHP синтаксис корректен"
+        
+        echo "🎉 Деплой завершен успешно!"
+EOF
+else
+    echo "❌ Ошибка при передаче файлов на сервер"
+    exit 1
+fi
+
+echo "🎯 Деплой завершен! Сайт обновлен на сервере."
