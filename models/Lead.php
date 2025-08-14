@@ -29,11 +29,11 @@ class Lead {
             $leadData = $this->prepareLeadData($data, $service);
             
             $sql = "INSERT INTO leads (
-                name, phone, email, company, message, service, 
+                name, phone, email, message, 
                 ip_address, user_agent, page_url, utm_source, 
-                utm_medium, utm_campaign, created_at, site_name
+                utm_medium, utm_campaign, date_created, site_name
             ) VALUES (
-                :name, :phone, :email, :company, :message, :service,
+                :name, :phone, :email, :message,
                 :ip_address, :user_agent, :page_url, :utm_source,
                 :utm_medium, :utm_campaign, NOW(), :site_name
             )";
@@ -72,9 +72,7 @@ class Lead {
             'name' => $data['name'] ?? '',
             'phone' => $data['phone'] ?? '',
             'email' => $data['email'] ?? '',
-            'company' => $data['company'] ?? '',
-            'message' => $data['message'] ?? '',
-            'service' => $service,
+            'message' => ($data['message'] ?? '') . ($data['company'] ? ' | Компания: ' . $data['company'] : '') . ($service ? ' | Услуга: ' . $service : ''),
             'ip_address' => $this->getClientIp(),
             'user_agent' => $_SERVER['HTTP_USER_AGENT'] ?? '',
             'page_url' => $pageInfo['url'],
@@ -151,7 +149,7 @@ class Lead {
         if (!$this->pdo) return false;
         
         try {
-            $stmt = $this->pdo->query("SELECT * FROM leads ORDER BY created_at DESC");
+            $stmt = $this->pdo->query("SELECT * FROM leads ORDER BY date_created DESC");
             return $stmt->fetchAll();
         } catch (PDOException $e) {
             error_log("Lead::getAll: " . $e->getMessage());
@@ -173,12 +171,8 @@ class Lead {
             $stmt = $this->pdo->query("SELECT COUNT(*) as total FROM leads");
             $stats['total'] = $stmt->fetch()['total'];
             
-            // По услугам
-            $stmt = $this->pdo->query("SELECT service, COUNT(*) as count FROM leads GROUP BY service ORDER BY count DESC");
-            $stats['by_service'] = $stmt->fetchAll();
-            
             // По дням (последние 30 дней)
-            $stmt = $this->pdo->query("SELECT DATE(created_at) as date, COUNT(*) as count FROM leads WHERE created_at >= DATE_SUB(NOW(), INTERVAL 30 DAY) GROUP BY DATE(created_at) ORDER BY date DESC");
+            $stmt = $this->pdo->query("SELECT DATE(date_created) as date, COUNT(*) as count FROM leads WHERE date_created >= DATE_SUB(NOW(), INTERVAL 30 DAY) GROUP BY DATE(date_created) ORDER BY date DESC");
             $stats['by_date'] = $stmt->fetchAll();
             
             return $stats;
