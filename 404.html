@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Страница не найдена | Реестр Гарант</title>
+    <meta name="description" content="Страница не найдена. Возможно, она была удалена или перемещена. Вернитесь на главную страницу или воспользуйтесь навигацией.">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <!-- Подключение основных стилей -->
+    <link rel="stylesheet" href="/styles-new.css">
+    <link rel="stylesheet" href="/components-styles.css">
+    
+    <!-- Фавиконы -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+        }
+        
+        .error-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 40px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .error-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+        
+        .error-code {
+            font-size: 6rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            line-height: 1;
+        }
+        
+        .error-title {
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .error-message {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+        
+        .error-actions {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+        
+        .error-btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .error-btn.primary {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+        }
+        
+        .error-btn.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        .error-btn.secondary {
+            background: #f8f9fa;
+            color: #2c3e50;
+            border: 2px solid #e9ecef;
+        }
+        
+        .error-btn.secondary:hover {
+            background: #e9ecef;
+            border-color: #dee2e6;
+        }
+        
+        .helpful-links {
+            margin-top: 40px;
+            padding-top: 40px;
+            border-top: 1px solid #e9ecef;
+        }
+        
+        .helpful-links h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .link-card {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+        
+        .link-card:hover {
+            background: #e9ecef;
+            transform: translateY(-2px);
+        }
+        
+        .link-card a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            display: block;
+        }
+        
+        .link-card a:hover {
+            color: #764ba2;
+        }
+        
+        /* Стили для поиска убраны */
+        
+        .contact-info {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+        
+        .contact-info h4 {
+            margin: 0 0 10px 0;
+            font-size: 1.1rem;
+        }
+        
+        .contact-info p {
+            margin: 5px 0;
+            opacity: 0.9;
+        }
+        
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .error-container {
+                margin: 20px;
+                padding: 30px 20px;
+            }
+            
+            .error-code {
+                font-size: 4rem;
+            }
+            
+            .error-title {
+                font-size: 1.5rem;
+            }
+            
+            .error-actions {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+            
+            .error-btn {
+                width: 100%;
+                max-width: 250px;
+                justify-content: center;
+            }
+            
+            .links-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <div class="error-code">404</div>
+        <h1 class="error-title">Страница не найдена</h1>
+        <p class="error-message">
+            К сожалению, запрашиваемая страница не существует или была перемещена. 
+            Воспользуйтесь навигацией ниже или вернитесь на главную страницу.
+        </p>
+        
+        <div class="error-actions">
+            <a href="/" class="error-btn primary">
+                🏠 Перейти на главную
+            </a>
+            <button onclick="history.back()" class="error-btn secondary">
+                ← Вернуться назад
+            </button>
+            <a href="tel:+79208981718" class="error-btn secondary">
+                📞 Позвонить нам
+            </a>
+        </div>
+        
+        <!-- Поиск убран, так как функция поиска не реализована -->
+        
+        <div class="helpful-links">
+            <h3>Полезные ссылки:</h3>
+            <div class="links-grid">
+                <div class="link-card">
+                    <a href="/">Главная страница</a>
+                </div>
+                <div class="link-card">
+                    <a href="/industrial">Промышленная продукция</a>
+                </div>
+                <div class="link-card">
+                    <a href="/radioelectronic">Радиоэлектронная продукция</a>
+                </div>
+                <div class="link-card">
+                    <a href="/software">Программное обеспечение</a>
+                </div>
+                <div class="link-card">
+                    <a href="/medical-devices">Медицинские изделия</a>
+                </div>
+                <div class="link-card">
+                    <a href="/news/">Новости</a>
+                </div>
+                <div class="link-card">
+                    <a href="/telecom-equipment">Телекоммуникационное оборудование</a>
+                </div>
+                <div class="link-card">
+                    <a href="/oil-gas-equipment">Нефтегазовое оборудование</a>
+                </div>
+                <div class="link-card">
+                    <a href="/contacts">Контакты</a>
+                </div>
+                <div class="link-card">
+                    <a href="/about">О нас</a>
+                </div>
+                <div class="link-card">
+                    <a href="/vkljuchenie-v-reestr-minpromtorga/moskva">Москва</a>
+                </div>
+                <div class="link-card">
+                    <a href="/vkljuchenie-v-reestr-minpromtorga/sankt-peterburg">Санкт-Петербург</a>
+                </div>
+                <div class="link-card">
+                    <a href="/vkljuchenie-v-reestr-minpromtorga/novosibirsk">Новосибирск</a>
+                </div>
+                <div class="link-card">
+                    <a href="/vkljuchenie-v-reestr-minpromtorga/yekaterinburg">Екатеринбург</a>
+                </div>
+                <div class="link-card">
+                    <a href="/vkljuchenie-v-reestr-minpromtorga/kazan">Казань</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="contact-info">
+            <h4>Нужна помощь?</h4>
+            <p>Телефон: <a href="tel:+79208981718">+7 920-898-17-18</a></p>
+            <p>Email: <a href="mailto:reestrgarant@mail.ru">reestrgarant@mail.ru</a></p>
+            <p>Время работы: Пн-Пт с 9:00 до 18:00</p>
+        </div>
+    </div>
+
+    <script>
+        // Логирование 404 ошибок для аналитики
+        if (window.ym) {
+            ym(102244644, 'hit', window.location.href, {
+                title: '404 - Страница не найдена',
+                params: {
+                    404: true,
+                    referrer: document.referrer
+                }
+            });
+        }
+    </script>
+</body>
+</html>

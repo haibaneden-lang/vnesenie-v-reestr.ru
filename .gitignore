@@ -1,0 +1,60 @@
+# Временные файлы
+.DS_Store
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# Логи
+*.log
+logs/
+
+# Загрузки
+uploads/
+*.zip
+*.rar
+*.7z
+
+# Конфигурационные файлы с чувствительными данными
+config/database.php
+config/rss-zen-config.php
+
+# База данных
+*.db
+*.sqlite
+*.sqlite3
+
+# Кэш
+cache/
+*.cache
+
+# Временные файлы PHP
+*.php~
+
+# Резервные копии
+*.bak
+*.backup
+*_backup.*
+
+# Файлы IDE
+.vscode/
+.idea/
+*.sublime-*
+
+# Node modules (если будут)
+node_modules/
+npm-debug.log*
+
+# Composer (если будет)
+vendor/
+composer.lock
+
+# Файлы загрузок
+telegram_bot/published_news.db
+telegram_bot/bot.log
+telegram_bot/telegram_bot.log
+telegram_bot/published.txt
+
+# Временные файлы загрузок
+admin/media/

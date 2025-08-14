@@ -1,0 +1,31 @@
+# .htaccess для папки /vkljuchenie-v-reestr-minpromtorga/
+# Обработка городских страниц
+
+RewriteEngine On
+
+# Обработка запросов к городам
+# Пример: /vkljuchenie-v-reestr-minpromtorga/moskva -> index.php?city=moskva
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([a-z-]+)/?$ index.php?city=$1 [QSA,L]
+
+# Блокировка прямого доступа к папке без города
+# /vkljuchenie-v-reestr-minpromtorga/ -> 404
+RewriteRule ^$ - [R=404,L]
+
+# Блокировка доступа к служебным файлам
+<Files "cities.php">
+    Order allow,deny
+    Deny from all
+</Files>
+
+<Files ".htaccess">
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Разрешение доступа к index.php
+<Files "index.php">
+    Order allow,deny
+    Allow from all
+</Files>

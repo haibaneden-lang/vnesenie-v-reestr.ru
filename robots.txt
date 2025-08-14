@@ -1,0 +1,122 @@
+# Robots.txt для vnesenie-v-reestr.ru
+# Сайт о помощи включения в реестр Минпромторга
+
+# Разрешаем всем поисковым роботам доступ ко всему сайту
+User-agent: *
+Allow: /
+
+# Запрещаем индексацию служебных файлов и папок
+Disallow: /admin/
+Disallow: /config/
+Disallow: /models/
+Disallow: /includes/
+Disallow: /assets/temp/
+Disallow: /backup/
+Disallow: /logs/
+Disallow: /*.log
+Disallow: /*.tmp
+
+# Запрещаем индексацию технических файлов
+Disallow: /send-email.php
+Disallow: /test-email.php
+Disallow: /*.php$
+Disallow: /include.js
+Disallow: /script.js
+
+# Запрещаем индексацию файлов конфигурации
+Disallow: /database.php
+Disallow: /.htaccess
+Disallow: /.env
+Disallow: /composer.json
+Disallow: /composer.lock
+Disallow: /package.json
+
+# Запрещаем поисковые параметры и служебные URL
+Disallow: /*?*utm_*
+Disallow: /*?*fbclid*
+Disallow: /*?*gclid*
+Disallow: /*?*yclid*
+Disallow: /*search=*
+Disallow: /404.php
+
+# Разрешаем важные файлы
+Allow: /sitemap.xml
+Allow: /sitemap.php
+Allow: /news/
+Allow: /radioelectronic
+Allow: /yandex_91a39aef3e2de27a.html
+
+# Указываем расположение sitemap
+Sitemap: https://vnesenie-v-reestr.ru/sitemap.xml
+
+# Специальные правила для Яндекса
+User-agent: Yandex
+Allow: /
+
+# Разрешаем важные файлы
+Allow: /sitemap.xml
+Allow: /sitemap.php
+Allow: /news/
+Allow: /radioelectronic
+Allow: /yandex_91a39aef3e2de27a.html
+
+# Указываем расположение sitemap
+Sitemap: https://vnesenie-v-reestr.ru/sitemap.xml
+
+# Специальные правила для Google
+User-agent: Googlebot
+Allow: /
+
+# Блокируем нежелательных ботов
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+# Разрешаем доступ к важным файлам
+Allow: /styles-new.css
+Allow: /components-styles.css
+Allow: /news-styles.css
+Allow: /favicon.ico
+Allow: /android-chrome-192x192.png
+Allow: /android-chrome-512x512.png
+Allow: /apple-touch-icon.png
+Allow: /favicon-16x16.png
+Allow: /favicon-32x32.png
+
+# Разрешаем доступ к изображениям
+Allow: /images/
+Allow: /uploads/
+Allow: /*.jpg
+Allow: /*.jpeg
+Allow: /*.png
+Allow: /*.gif
+Allow: /*.webp
+Allow: /*.svg
+
+# Указываем sitemap
+Sitemap: https://vnesenie-v-reestr.ru/sitemap.xml
+
+# Время задержки между запросами (в секундах)
+Crawl-delay: 1
+
+# Дополнительные директивы для российских поисковиков
+User-agent: YandexBot
+Crawl-delay: 1
+Host: vnesenie-v-reestr.ru
+
+User-agent: YandexImages
+Allow: /images/
+Allow: /uploads/
+Allow: /*.jpg
+Allow: /*.jpeg
+Allow: /*.png
+Allow: /*.gif
+Allow: /*.webp

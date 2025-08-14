@@ -1,0 +1,49 @@
+<!-- Модальное окно -->
+<div id="consultationModal" class="modal">
+    <div class="modal-content">
+        <span class="modal-close" onclick="closeModal()">&times;</span>
+        <h3 id="modalTitle">Получить консультацию</h3>
+        <p id="modalDescription">Заполните форму и мы свяжемся с вами в течение 30 минут</p>
+        
+        <form id="contactForm">
+            <div class="form-group">
+                <label for="name">Имя *</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="phone">Телефон *</label>
+                <input type="tel" id="phone" name="phone" required placeholder="+7">
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email *</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="company">Компания</label>
+                <input type="text" id="company" name="company">
+            </div>
+            
+            <div class="form-group">
+                <label for="message">Сообщение</label>
+                <textarea id="message" name="message" placeholder="Опишите задачу..." rows="3"></textarea>
+            </div>
+            
+            <div class="privacy-notice">
+                <p>Отправляя форму, вы соглашаетесь с <a href="/privacy" target="_blank">политикой конфиденциальности</a></p>
+            </div>
+            
+            <button type="submit" class="submit-btn" id="submitBtn">Отправить заявку</button>
+            
+            <div class="success-message" id="successMessage">
+                ✅ Заявка отправлена! Мы свяжемся с вами.
+            </div>
+            
+            <div class="error-message" id="errorMessage">
+                ❌ Ошибка отправки. Попробуйте еще раз.
+            </div>
+        </form>
+    </div>
+</div>

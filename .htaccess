@@ -1,0 +1,162 @@
+RewriteEngine On
+RewriteBase /
+
+# =============================================
+# 301 РЕДИРЕКТЫ НА НОВЫЙ ДОМЕН
+# =============================================
+# Редиректы страниц сертификации на поддомен
+RewriteRule ^certification/sertifikacija-iso-9001/?$ https://certification.vnesenie-v-reestr.ru/certification/sertifikacija-iso-9001 [R=301,L]
+RewriteRule ^certification/sertifikatsiya-bio-produktsii/?$ https://certification.vnesenie-v-reestr.ru/certification/sertifikatsiya-bio-produktsii [R=301,L]
+RewriteRule ^certification/sertifikat-bez-gmo/?$ https://certification.vnesenie-v-reestr.ru/certification/sertifikat-bez-gmo [R=301,L]
+RewriteRule ^certification/ekologicheskiy-sertifikat-2025-oformlenie-stoimost-ot-8000-rubley-sroki-polucheniya-dokumenty-dlya-ekologicheskoy-sertifikatsii/?$ https://certification.vnesenie-v-reestr.ru/certification/ekologicheskiy-sertifikat-2025-oformlenie-stoimost-ot-8000-rubley-sroki-polucheniya-dokumenty-dlya-ekologicheskoy-sertifikatsii [R=301,L]
+RewriteRule ^certification/oformlenie-tovarnogo-znaka-v-2025-godu-tseny-sroki-i-protsedura-registratsii-v-rospatente/?$ https://certification.vnesenie-v-reestr.ru/certification/oformlenie-tovarnogo-znaka-v-2025-godu-tseny-sroki-i-protsedura-registratsii-v-rospatente [R=301,L]
+RewriteRule ^certification/protokol-radiologii-oformlenie-dokumenta-sroki-deystviya-i-protsedura-polucheniya/?$ https://certification.vnesenie-v-reestr.ru/certification/protokol-radiologii-oformlenie-dokumenta-sroki-deystviya-i-protsedura-polucheniya [R=301,L]
+RewriteRule ^certification/shtrihkodirovanie-tovarov/?$ https://certification.vnesenie-v-reestr.ru/certification/shtrihkodirovanie-tovarov [R=301,L]
+RewriteRule ^certification/oformlenie-patenta-na-izobretenie/?$ https://certification.vnesenie-v-reestr.ru/oformlenie-patenta-na-izobretenie-i-poleznuyu-model [R=301,L]
+RewriteRule ^certification/ekspertnoe-zaklyuchenie-rospotrebnadzora/?$ https://certification.vnesenie-v-reestr.ru/ekspertnoe-zaklyuchenie-rospotrebnadzora-1754126097 [R=301,L]
+RewriteRule ^certification/otkaznoe-pis-mo-po-sertifikatsii/?$ https://certification.vnesenie-v-reestr.ru/certification/otkaznoe-pis-mo-po-sertifikatsii [R=301,L]
+RewriteRule ^certification/sertifikatsiya-gost-r-51705-1-2024/?$ https://certification.vnesenie-v-reestr.ru/certification/sertifikatsiya-gost-r-51705-1-2024 [R=301,L]
+RewriteRule ^certification/sertifikatsiya-gost-r-56404/?$ https://certification.vnesenie-v-reestr.ru/certification/sertifikatsiya-gost-r-56404 [R=301,L]
+RewriteRule ^certification/sertifikatsiya-gost-r-55-0-02-2014/?$ https://certification.vnesenie-v-reestr.ru/certification/sertifikatsiya-gost-r-55-0-02-2014 [R=301,L]
+RewriteRule ^certification/sertifikatsiya-po-gost-r-53624-2009/?$ https://certification.vnesenie-v-reestr.ru/certification/sertifikatsiya-po-gost-r-53624-2009 [R=301,L]
+RewriteRule ^certification/sertifikatsiya-po-gost-r-55267-2012/?$ https://certification.vnesenie-v-reestr.ru/certification/sertifikatsiya-po-gost-r-55267-2012 [R=301,L]
+RewriteRule ^certification/sertifikatsiya-po-gost-r-55235-1-2012/?$ https://certification.vnesenie-v-reestr.ru/certification/sertifikatsiya-po-gost-r-55235-1-2012 [R=301,L]
+RewriteRule ^certification/sertifikatsiya-po-gost-r-54869-2011/?$ https://certification.vnesenie-v-reestr.ru/certification/sertifikatsiya-po-gost-r-54869-2011 [R=301,L]
+RewriteRule ^certification/sertifikatsiya-iso-50001/?$ https://certification.vnesenie-v-reestr.ru/certification/sertifikatsiya-iso-50001 [R=301,L]
+RewriteRule ^certification/sertifikatsiya-iso-31000/?$ https://certification.vnesenie-v-reestr.ru/certification/sertifikatsiya-iso-31000 [R=301,L]
+RewriteRule ^certification/sertifikatsiya-gost-r-iso-30301-2014/?$ https://certification.vnesenie-v-reestr.ru/certification/sertifikatsiya-gost-r-iso-30301-2014 [R=301,L]
+RewriteRule ^certification/iso-30300-2015/?$ https://certification.vnesenie-v-reestr.ru/certification/iso-30300-2015 [R=301,L]
+RewriteRule ^certification/gost-r-iso-29001-2023/?$ https://certification.vnesenie-v-reestr.ru/certification/gost-r-iso-29001-2023 [R=301,L]
+RewriteRule ^certification/sertifikatsiya-gost-r-iso-28001/?$ https://certification.vnesenie-v-reestr.ru/certification/sertifikatsiya-gost-r-iso-28001 [R=301,L]
+RewriteRule ^certification/sertifikatsiya-gost-r-iso-28002/?$ https://certification.vnesenie-v-reestr.ru/certification/sertifikatsiya-gost-r-iso-28002 [R=301,L]
+RewriteRule ^certification/sertifikatsiya-gost-r-iso-28000/?$ https://certification.vnesenie-v-reestr.ru/certification/sertifikatsiya-gost-r-iso-28000 [R=301,L]
+RewriteRule ^certification/sertifikatsiya-gost-r-iso-mek-27001/?$ https://certification.vnesenie-v-reestr.ru/certification/sertifikatsiya-gost-r-iso-mek-27001 [R=301,L]
+RewriteRule ^certification/s/?$ https://certification.vnesenie-v-reestr.ru/certification/s [R=301,L]
+RewriteRule ^certification/sertifikatsiya-gost-r-iso-22301/?$ https://certification.vnesenie-v-reestr.ru/certification/sertifikatsiya-gost-r-iso-22301 [R=301,L]
+RewriteRule ^certification/sertifikatsiya-gost-r-iso-20121/?$ https://certification.vnesenie-v-reestr.ru/certification/sertifikatsiya-gost-r-iso-20121 [R=301,L]
+RewriteRule ^certification/sertifikatsiya-gost-r-iso-mek-20000/?$ https://certification.vnesenie-v-reestr.ru/certification/sertifikatsiya-gost-r-iso-mek-20000 [R=301,L]
+RewriteRule ^certification/sertifikatsiya-gost-r-iso-13485/?$ https://certification.vnesenie-v-reestr.ru/certification/sertifikatsiya-gost-r-iso-13485 [R=301,L]
+RewriteRule ^certification/sertifikatsiya-gost-r-iso-10012/?$ https://certification.vnesenie-v-reestr.ru/certification/sertifikatsiya-gost-r-iso-10012 [R=301,L]
+RewriteRule ^certification/sertifikatsiya-gost-r-iso-14001/?$ https://certification.vnesenie-v-reestr.ru/certification/sertifikatsiya-gost-r-iso-14001 [R=301,L]
+RewriteRule ^certification/sertifikatsiya-gost-r-iso-22000/?$ https://certification.vnesenie-v-reestr.ru/certification/sertifikatsiya-gost-r-iso-22000 [R=301,L]
+RewriteRule ^certification/sertifikacija-iso-45001/?$ https://certification.vnesenie-v-reestr.ru/certification/sertifikacija-iso-45001 [R=301,L]
+RewriteRule ^certification/deklaracija-tr-ts/?$ https://certification.vnesenie-v-reestr.ru/certification/deklaracija-tr-ts [R=301,L]
+
+# Редирект главной страницы каталога сертификации
+RewriteRule ^certification/?$ https://certification.vnesenie-v-reestr.ru/certification/ [R=301,L]
+
+# =============================================
+# КРИТИЧЕСКИ ВАЖНО: СТАТИЧЕСКИЕ ФАЙЛЫ ПЕРВЫМИ!
+# =============================================
+# Исключаем ВСЕ статические файлы от любых правил rewrite
+RewriteRule \.(css|js|png|jpg|jpeg|gif|webp|svg|ico|woff|woff2|ttf|eot|pdf|zip|rar)$ - [L]
+
+# =============================================
+# ПРАВИЛЬНЫЕ MIME-ТИПЫ (НА ВСЯКИЙ СЛУЧАЙ)
+# =============================================
+<FilesMatch "\.(css)$">
+    Header set Content-Type "text/css; charset=utf-8"
+</FilesMatch>
+
+<FilesMatch "\.(js)$">
+    Header set Content-Type "application/javascript; charset=utf-8"
+</FilesMatch>
+
+# =============================================
+# ПРАВИЛА ДЛЯ RSS ЛЕНТ
+# =============================================
+RewriteRule ^rss-zen\.xml$ rss-zen.php [L,QSA]
+RewriteRule ^rss-zen-advanced\.xml$ rss-zen-advanced.php [L,QSA]
+
+<Files "rss-zen.php">
+    Header set Content-Type "application/rss+xml; charset=utf-8"
+</Files>
+
+<Files "rss-zen-advanced.php">
+    Header set Content-Type "application/rss+xml; charset=utf-8"
+</Files>
+
+# =============================================
+# ПРАВИЛА ДЛЯ ГОРОДСКИХ СТРАНИЦ
+# =============================================
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^vkljuchenie-v-reestr-minpromtorga/([a-z-]+)/?$ /vkljuchenie-v-reestr-minpromtorga/index.php?city=$1 [QSA,L]
+
+RewriteRule ^vkljuchenie-v-reestr-minpromtorga/?$ /404.html [L]
+
+# =============================================
+# ПРАВИЛА ДЛЯ НОВОСТЕЙ
+# =============================================
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^news/?$ /news/index.php [L,QSA]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^news/([a-zA-Z0-9\-]+)/?$ /news/article.php?slug=$1 [L,QSA]
+
+# =============================================
+# УДАЛЕНИЕ .html ИЗ URL (С ИСКЛЮЧЕНИЯМИ)
+# =============================================
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_URI} !^/news/
+RewriteCond %{REQUEST_URI} !^/admin/
+RewriteCond %{REQUEST_URI} !^/certification/
+RewriteCond %{REQUEST_URI} !^/rss-zen
+RewriteCond %{REQUEST_URI} !^/vkljuchenie-v-reestr-minpromtorga/
+RewriteCond %{REQUEST_URI} !\.(xml|php|rss|css|js|png|jpg|jpeg|gif|webp|svg|ico|woff|woff2|ttf|eot|pdf)$ [NC]
+RewriteRule ^([^\.]+)$ $1.html [NC,L]
+
+# Редирект с .html на без .html
+RewriteCond %{THE_REQUEST} /([^.]+)\.html [NC]
+RewriteCond %{REQUEST_URI} !^/news/
+RewriteCond %{REQUEST_URI} !^/admin/
+RewriteCond %{REQUEST_URI} !^/certification/
+RewriteCond %{REQUEST_URI} !^/rss-zen
+RewriteCond %{REQUEST_URI} !^/vkljuchenie-v-reestr-minpromtorga/
+RewriteRule ^ /%1? [NC,L,R=301]
+
+# =============================================
+# ПРАВИЛА ДЛЯ XML ФАЙЛОВ
+# =============================================
+RewriteRule ^sitemap\.xml$ sitemap.php [L]
+
+# =============================================
+# ОБРАБОТКА 404 ОШИБОК
+# =============================================
+ErrorDocument 404 /404.html
+
+# =============================================
+# ЗАГОЛОВКИ БЕЗОПАСНОСТИ И КЭШИРОВАНИЯ
+# =============================================
+<FilesMatch "\.(xml|rss)$">
+    Header set X-Content-Type-Options nosniff
+    Header set Cache-Control "public, max-age=3600"
+</FilesMatch>
+
+<Files "robots.txt">
+    Header set Content-Type "text/plain; charset=utf-8"
+</Files>
+
+<Files "404.html">
+    Order allow,deny
+    Allow from all
+    Header set Cache-Control "no-cache, must-revalidate"
+    Header set Expires "0"
+</Files>
+
+# =============================================
+# ДОПОЛНИТЕЛЬНЫЕ НАСТРОЙКИ БЕЗОПАСНОСТИ
+# =============================================
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+Options -Indexes
+
+Header set X-XSS-Protection "1; mode=block"
+Header always append X-Frame-Options SAMEORIGIN
+Header set X-Content-Type-Options nosniff

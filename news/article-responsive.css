@@ -1,0 +1,656 @@
+/* 
+ * article-responsive.css
+ * Универсальные адаптивные стили для статей сайта
+ * Используется с registry-benefits.css для создания красивых статей
+ */
+
+/* ===== БАЗОВЫЕ СТИЛИ ===== */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    background: #fff;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* ===== АДАПТИВНЫЕ ЗАГОЛОВКИ ===== */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #2c3e50;
+    line-height: 1.3;
+}
+
+h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); }
+h2 { font-size: clamp(1.5rem, 3.5vw, 2rem); }
+h3 { font-size: clamp(1.3rem, 3vw, 1.7rem); }
+h4 { font-size: clamp(1.2rem, 2.5vw, 1.5rem); }
+h5 { font-size: clamp(1.1rem, 2vw, 1.3rem); }
+h6 { font-size: clamp(1rem, 1.8vw, 1.2rem); }
+
+/* ===== АДАПТИВНЫЕ ПАРАГРАФЫ ===== */
+p {
+    margin-bottom: 1.2rem;
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    line-height: 1.7;
+}
+
+/* ===== ОСНОВНАЯ СИСТЕМА КАРТОЧЕК ===== */
+.registry-benefits-expanded {
+    margin: 2rem 0;
+}
+
+/* Заглавный блок */
+.rbe-standalone-block {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: clamp(20px, 4vw, 40px);
+    border-radius: 15px;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.rbe-standalone-title {
+    font-size: clamp(1.3rem, 3vw, 1.8rem);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    color: white !important;
+}
+
+.rbe-standalone-title span {
+    font-size: clamp(1.5rem, 3.5vw, 2rem);
+}
+
+.rbe-standalone-text {
+    font-size: clamp(0.95rem, 2.2vw, 1.1rem);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* ===== СЕКЦИИ С ЗАГОЛОВКАМИ ===== */
+.rbe-benefits-section {
+    margin: 3rem 0;
+}
+
+.rbe-section-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.rbe-section-title {
+    font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+    margin-bottom: 1rem;
+}
+
+.rbe-section-subtitle {
+    font-size: clamp(1rem, 2.2vw, 1.2rem);
+    color: #666;
+    margin: 0;
+}
+
+/* ===== АДАПТИВНАЯ СЕТКА КАРТОЧЕК ===== */
+.rbe-benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: clamp(15px, 3vw, 25px);
+    margin-top: 2rem;
+}
+
+.rbe-benefit-card {
+    background: white;
+    border: 2px solid #e9ecef;
+    border-radius: 15px;
+    padding: clamp(20px, 4vw, 30px);
+    transition: all 0.3s ease;
+    height: fit-content;
+}
+
+.rbe-benefit-card:hover {
+    border-color: #667eea;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+}
+
+.rbe-benefit-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.rbe-benefit-icon {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    flex-shrink: 0;
+}
+
+.rbe-benefit-title {
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    margin: 0;
+    flex: 1;
+    min-width: 150px;
+}
+
+.rbe-benefit-description {
+    color: #666;
+    margin-bottom: 1rem;
+    font-size: clamp(0.9rem, 2vw, 1rem);
+}
+
+.rbe-benefit-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.rbe-benefit-list li {
+    padding: 8px 0;
+    position: relative;
+    padding-left: 25px;
+    font-size: clamp(0.85rem, 1.8vw, 0.95rem);
+    line-height: 1.5;
+}
+
+.rbe-benefit-list li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #667eea;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+/* ===== СТАТИСТИЧЕСКИЕ БЛОКИ ===== */
+.rbe-statistics-showcase {
+    background: #f8f9fa;
+    padding: clamp(30px, 5vw, 50px);
+    border-radius: 15px;
+    margin: 3rem 0;
+    text-align: center;
+}
+
+.rbe-stats-title {
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    margin-bottom: 1rem;
+}
+
+.rbe-stats-subtitle {
+    color: #666;
+    margin-bottom: 2rem;
+    font-size: clamp(0.95rem, 2vw, 1.1rem);
+}
+
+.rbe-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: clamp(15px, 3vw, 20px);
+}
+
+.rbe-stat-item {
+    background: white;
+    padding: clamp(20px, 4vw, 25px);
+    border-radius: 10px;
+    border: 2px solid #e9ecef;
+    transition: all 0.3s ease;
+}
+
+.rbe-stat-item:hover {
+    border-color: #667eea;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
+}
+
+.rbe-stat-number {
+    display: block;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: bold;
+    color: #667eea;
+    margin-bottom: 8px;
+}
+
+.rbe-stat-label {
+    font-size: clamp(0.8rem, 1.8vw, 0.95rem);
+    color: #666;
+    line-height: 1.4;
+}
+
+/* ===== ПРОЦЕССНЫЕ ШАГИ ===== */
+.rbe-process-roadmap {
+    margin: 3rem 0;
+}
+
+.rbe-process-title {
+    text-align: center;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    margin-bottom: 1rem;
+}
+
+.rbe-process-subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 2rem;
+    font-size: clamp(0.95rem, 2vw, 1.1rem);
+}
+
+.rbe-process-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: clamp(20px, 4vw, 30px);
+}
+
+.rbe-process-step {
+    background: white;
+    border: 2px solid #e9ecef;
+    border-radius: 15px;
+    padding: clamp(20px, 4vw, 25px);
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.rbe-process-step:hover {
+    border-color: #667eea;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+}
+
+.rbe-step-number {
+    font-size: clamp(2.5rem, 5vw, 3rem);
+    margin-bottom: 1rem;
+}
+
+.rbe-step-title {
+    font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+    margin-bottom: 1rem;
+}
+
+.rbe-step-description {
+    color: #666;
+    margin-bottom: 1rem;
+    font-size: clamp(0.9rem, 2vw, 1rem);
+}
+
+.rbe-step-details {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: clamp(0.85rem, 1.8vw, 0.9rem);
+    color: #555;
+    border-left: 4px solid #667eea;
+}
+
+/* ===== КЕЙСЫ И ПРИМЕРЫ ===== */
+.rbe-case-studies {
+    margin: 3rem 0;
+}
+
+.rbe-cases-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: clamp(20px, 4vw, 25px);
+    margin-top: 2rem;
+}
+
+.rbe-case-card {
+    background: white;
+    border: 2px solid #e9ecef;
+    border-radius: 15px;
+    padding: clamp(20px, 4vw, 25px);
+    transition: all 0.3s ease;
+}
+
+.rbe-case-card:hover {
+    border-color: #27ae60;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(39, 174, 96, 0.2);
+}
+
+.rbe-case-company {
+    font-weight: bold;
+    color: #2c3e50;
+    font-size: clamp(1rem, 2.2vw, 1.2rem);
+    margin-bottom: 8px;
+}
+
+.rbe-case-industry {
+    color: #666;
+    font-size: clamp(0.85rem, 1.8vw, 0.95rem);
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
+.rbe-case-description {
+    margin-bottom: 1.5rem;
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    line-height: 1.6;
+}
+
+.rbe-case-results h5 {
+    font-size: clamp(1rem, 2vw, 1.1rem);
+    margin-bottom: 1rem;
+    color: #27ae60;
+}
+
+.rbe-case-metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 15px;
+}
+
+.rbe-metric {
+    text-align: center;
+    background: #f8f9fa;
+    padding: 12px 8px;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+}
+
+.rbe-metric-value {
+    display: block;
+    font-weight: bold;
+    color: #27ae60;
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    margin-bottom: 5px;
+}
+
+.rbe-metric-label {
+    font-size: clamp(0.75rem, 1.6vw, 0.85rem);
+    color: #666;
+    line-height: 1.3;
+}
+
+/* ===== ТРЕБОВАНИЯ И ОГРАНИЧЕНИЯ ===== */
+.rbe-requirements-comprehensive {
+    margin: 3rem 0;
+}
+
+.rbe-requirements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: clamp(20px, 4vw, 25px);
+    margin-top: 2rem;
+}
+
+.rbe-requirement-card {
+    background: white;
+    border: 2px solid #e9ecef;
+    border-radius: 15px;
+    padding: clamp(20px, 4vw, 25px);
+    transition: all 0.3s ease;
+}
+
+.rbe-requirement-card:hover {
+    border-color: #e74c3c;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(231, 76, 60, 0.2);
+}
+
+.rbe-requirement-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.rbe-requirement-icon {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    flex-shrink: 0;
+}
+
+.rbe-requirement-title {
+    font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+    margin: 0;
+    flex: 1;
+    min-width: 150px;
+}
+
+.rbe-requirement-text {
+    color: #666;
+    margin-bottom: 1rem;
+    font-size: clamp(0.9rem, 2vw, 1rem);
+}
+
+.rbe-requirement-checklist h6 {
+    font-size: clamp(0.95rem, 2vw, 1.05rem);
+    margin-bottom: 1rem;
+    color: #e74c3c;
+}
+
+.rbe-checklist-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.rbe-checklist-items li {
+    padding: 8px 0;
+    position: relative;
+    padding-left: 25px;
+    font-size: clamp(0.85rem, 1.8vw, 0.95rem);
+    line-height: 1.5;
+}
+
+.rbe-checklist-items li::before {
+    content: "⚠️";
+    position: absolute;
+    left: 0;
+    font-size: 1rem;
+}
+
+/* ===== CTA СЕКЦИЯ ===== */
+.rbe-final-cta {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: clamp(30px, 5vw, 50px);
+    border-radius: 15px;
+    text-align: center;
+    margin: 3rem 0;
+}
+
+.rbe-cta-title {
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    margin-bottom: 1rem;
+    color: white;
+}
+
+.rbe-cta-text {
+    font-size: clamp(0.95rem, 2vw, 1.1rem);
+    margin-bottom: 2rem;
+    opacity: 0.95;
+    line-height: 1.6;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.rbe-cta-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.rbe-cta-button {
+    background: rgba(255,255,255,0.2);
+    color: white;
+    padding: 12px 25px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 2px solid rgba(255,255,255,0.3);
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    display: inline-block;
+    min-width: 200px;
+    text-align: center;
+}
+
+.rbe-cta-button:hover {
+    background: rgba(255,255,255,0.3);
+    transform: translateY(-2px);
+    text-decoration: none;
+    color: white;
+}
+
+.rbe-cta-button.secondary {
+    background: #27ae60;
+    border-color: #27ae60;
+}
+
+.rbe-cta-button.secondary:hover {
+    background: #229954;
+    border-color: #229954;
+}
+
+/* ===== SEO ПОДСВЕТКА ЗАГОЛОВКОВ ===== */
+.seo-extension-header-highlighted {
+    position: relative;
+}
+
+.seo-extension-header-highlighted::after {
+    content: attr(data-heading-tag);
+    position: absolute;
+    top: -8px;
+    right: -25px;
+    background: #667eea;
+    color: white;
+    font-size: 8px;
+    padding: 2px 4px;
+    border-radius: 3px;
+    opacity: 0.7;
+    font-weight: normal;
+}
+
+/* ===== МОБИЛЬНЫЕ УЛУЧШЕНИЯ ===== */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    
+    .rbe-benefit-header,
+    .rbe-requirement-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+    
+    .rbe-benefit-icon,
+    .rbe-requirement-icon {
+        align-self: center;
+    }
+    
+    .rbe-cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .rbe-cta-button {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .rbe-case-metrics {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .seo-extension-header-highlighted::after {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .rbe-stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .rbe-case-metrics {
+        grid-template-columns: 1fr;
+    }
+    
+    .rbe-process-steps {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===== СПЕЦИАЛЬНЫЕ ЦВЕТОВЫЕ СХЕМЫ ===== */
+
+/* Успешные кейсы - зеленая тема */
+.rbe-case-card:hover {
+    border-color: #27ae60;
+    box-shadow: 0 10px 30px rgba(39, 174, 96, 0.2);
+}
+
+.rbe-case-results h5 {
+    color: #27ae60;
+}
+
+.rbe-metric-value {
+    color: #27ae60;
+}
+
+/* Требования и ограничения - красная тема */
+.rbe-requirement-card:hover {
+    border-color: #e74c3c;
+    box-shadow: 0 10px 30px rgba(231, 76, 60, 0.2);
+}
+
+.rbe-requirement-checklist h6 {
+    color: #e74c3c;
+}
+
+/* Процессы - синяя тема */
+.rbe-process-step:hover {
+    border-color: #667eea;
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+}
+
+.rbe-step-details {
+    border-left: 4px solid #667eea;
+}
+
+/* ===== АНИМАЦИИ ===== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.rbe-benefit-card,
+.rbe-process-step,
+.rbe-case-card,
+.rbe-requirement-card {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* ===== ПЕЧАТЬ ===== */
+@media print {
+    .rbe-cta-buttons,
+    .rbe-final-cta {
+        display: none;
+    }
+    
+    .rbe-benefit-card,
+    .rbe-process-step,
+    .rbe-case-card,
+    .rbe-requirement-card {
+        break-inside: avoid;
+        border: 1px solid #ddd;
+        box-shadow: none;
+    }
+}

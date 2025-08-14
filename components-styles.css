@@ -1,0 +1,837 @@
+/* =================================
+   HEADER STYLES - КОМПАКТНАЯ ВЕРСИЯ
+   ================================= */
+
+/* Header - делаем более компактным */
+.header {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    color: white;
+    padding: 0.5rem 0; /* Уменьшили с 1rem до 0.5rem */
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 60px; /* Фиксированная высота */
+}
+
+/* Logo - делаем компактнее */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Уменьшили с 12px */
+    font-size: 20px; /* Уменьшили с 24px */
+    font-weight: bold;
+    color: white;
+}
+
+.logo-icon {
+    width: 35px; /* Уменьшили с 45px */
+    height: 35px; /* Уменьшили с 45px */
+    background: linear-gradient(135deg, #ff6b6b, #ffa500);
+    border-radius: 8px; /* Уменьшили с 10px */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4); /* Уменьшили тень */
+    overflow: hidden;
+}
+
+.logo-icon svg {
+    width: 22px; /* Уменьшили с 28px */
+    height: 22px; /* Уменьшили с 28px */
+    fill: white;
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.2));
+}
+
+/* Основные стили навигации - компактные */
+.main-navigation {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Уменьшили с 30px */
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 20px; /* Уменьшили с 25px */
+    align-items: center;
+}
+
+.nav-menu li {
+    position: relative;
+}
+
+.nav-menu a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px; /* Уменьшили с 16px */
+    padding: 8px 0; /* Уменьшили с 10px */
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 4px; /* Уменьшили с 5px */
+}
+
+.nav-menu a:hover {
+    color: #b8d4ff;
+}
+
+/* Contact info - компактнее */
+.contact-info {
+    display: flex;
+    gap: 15px; /* Уменьшили с 20px */
+    align-items: center;
+}
+
+.phone {
+    font-size: 16px; /* Уменьшили с 18px */
+    font-weight: bold;
+}
+
+.phone a {
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.phone a:hover {
+    color: #b8d4ff;
+    transform: translateY(-1px);
+}
+
+/* Dropdown меню - компактное */
+.nav-dropdown {
+    position: relative;
+}
+
+.dropdown-arrow {
+    font-size: 10px; /* Уменьшили с 12px */
+    transition: transform 0.3s ease;
+    margin-left: 3px;
+}
+
+.nav-dropdown:hover .dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+.nav-submenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    border-radius: 8px; /* Уменьшили с 10px */
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15); /* Уменьшили тень */
+    padding: 10px 0; /* Уменьшили с 15px */
+    min-width: 220px; /* Уменьшили с 250px */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px); /* Уменьшили с -10px */
+    transition: all 0.3s ease;
+    z-index: 1000;
+    list-style: none;
+    margin: 8px 0 0 0; /* Уменьшили с 10px */
+}
+
+.nav-dropdown:hover .nav-submenu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.nav-submenu li {
+    margin: 0;
+}
+
+.nav-submenu a {
+    color: #2c3e50;
+    padding: 10px 18px; /* Уменьшили с 12px 20px */
+    display: block;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 13px; /* Уменьшили с 14px */
+}
+
+.nav-submenu a:hover {
+    background: #f8f9fa;
+    color: #667eea;
+}
+
+.nav-submenu li:last-child a {
+    border-bottom: none;
+}
+
+/* Мобильное меню - компактное */
+.mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 3px; /* Уменьшили с 4px */
+}
+
+.mobile-menu-toggle span {
+    width: 22px; /* Уменьшили с 25px */
+    height: 2px; /* Уменьшили с 3px */
+    background: white;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.mobile-menu-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px); /* Скорректировали с 6px */
+}
+
+.mobile-menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-menu-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px); /* Скорректировали с 6px */
+}
+
+/* =================================
+   FOOTER STYLES
+   ================================= */
+
+.footer {
+    background: #2c3e50;
+    color: white;
+    padding: 60px 0 0;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-bottom: 50px;
+}
+
+.footer-column h4 {
+    color: white;
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.footer-logo .logo-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #ff6b6b, #ffa500);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer-logo svg {
+    width: 24px;
+    height: 24px;
+}
+
+.footer-description {
+    opacity: 0.8;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li {
+    margin-bottom: 12px;
+}
+
+.footer-links a {
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 15px;
+}
+
+.footer-links a:hover {
+    color: white;
+    padding-left: 5px;
+}
+
+.footer-contacts {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.contact-icon {
+    font-size: 20px;
+    margin-top: 2px;
+}
+
+.contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.contact-details a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.contact-details span {
+    color: rgba(255,255,255,0.7);
+    font-size: 14px;
+}
+
+/* Footer CTA */
+.footer-cta {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.footer-cta h3 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: white;
+}
+
+.footer-cta p {
+    opacity: 0.9;
+    margin-bottom: 25px;
+    font-size: 1.1rem;
+}
+
+/* Footer Bottom */
+.footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding: 30px 0;
+}
+
+.footer-bottom-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer-legal {
+    display: flex;
+    gap: 20px;
+}
+
+.footer-legal a {
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+.footer-legal a:hover {
+    color: white;
+}
+
+/* =================================
+   MODAL STYLES
+   ================================= */
+
+.checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.checkbox-label input[type="checkbox"] {
+    display: none;
+}
+
+.checkmark {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #e1e8ed;
+    border-radius: 4px;
+    position: relative;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.checkbox-label input[type="checkbox"]:checked + .checkmark {
+    background: #667eea;
+    border-color: #667eea;
+}
+
+.checkbox-label input[type="checkbox"]:checked + .checkmark::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.checkbox-label a {
+    color: #667eea;
+    text-decoration: none;
+}
+
+.checkbox-label a:hover {
+    text-decoration: underline;
+}
+
+/* =================================
+   СТИЛИ ДЛЯ КЛИКАБЕЛЬНОГО ТЕЛЕФОНА
+   ================================= */
+
+.phone a,
+a.phone {
+    color: white;
+    text-decoration: none;
+    font-size: 16px; /* Скорректировали под компактный дизайн */
+    font-weight: bold;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px; /* Уменьшили с 8px */
+}
+
+.phone a:hover,
+a.phone:hover {
+    color: #b8d4ff;
+    transform: translateY(-1px);
+}
+
+/* Дополнительные стили для иконки телефона */
+.phone-icon {
+    font-size: 14px; /* Уменьшили с 16px */
+    margin-right: 4px; /* Уменьшили с 6px */
+}
+
+/* Эффект нажатия */
+.phone a:active,
+a.phone:active {
+    transform: translateY(1px);
+    opacity: 0.8;
+}
+
+/* =================================
+   RESPONSIVE STYLES - МОБИЛЬНАЯ АДАПТАЦИЯ
+   ================================= */
+
+@media (max-width: 1024px) {
+    .nav-menu {
+        gap: 15px; /* Уменьшили с 20px */
+    }
+    
+    .main-navigation {
+        gap: 15px; /* Уменьшили с 20px */
+    }
+}
+
+@media (max-width: 768px) {
+    /* Компактный header на мобильных */
+    .header {
+        padding: 0.5rem 0;
+    }
+    
+    .header-content {
+        flex-direction: row; /* Оставляем в одну строку */
+        justify-content: space-between;
+        align-items: center;
+        min-height: 50px; /* Еще компактнее на мобильных */
+    }
+    
+    .logo {
+        font-size: 18px;
+        gap: 8px;
+        order: 1;
+    }
+    
+    .logo-icon {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .logo-icon svg {
+        width: 18px;
+        height: 18px;
+    }
+    
+    .main-navigation {
+        order: 2;
+        gap: 15px;
+        position: relative;
+    }
+    
+    .contact-info {
+        order: 3;
+        gap: 8px;
+    }
+    
+    .phone {
+        font-size: 14px;
+    }
+    
+    /* Для мобильных устройств - делаем кнопку телефона более удобной */
+    .phone a,
+    a.phone {
+        padding: 6px 10px; /* Уменьшили с 8px 12px */
+        background: rgba(255,255,255,0.1);
+        border-radius: 6px; /* Уменьшили с 8px */
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255,255,255,0.2);
+        min-height: 36px; /* Уменьшили с 44px */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        font-size: 12px; /* Уменьшили размер текста */
+    }
+    
+    .phone a:hover,
+    a.phone:hover {
+        background: rgba(255,255,255,0.2);
+        border-color: rgba(255,255,255,0.3);
+    }
+    
+    /* ИСПРАВЛЕННОЕ МОБИЛЬНОЕ МЕНЮ */
+    .nav-menu {
+        display: none;
+        position: fixed;
+        top: 50px; /* Высота компактного header */
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(30, 60, 114, 0.98);
+        backdrop-filter: blur(10px);
+        flex-direction: column;
+        padding: 15px; /* Уменьшили с 20px */
+        gap: 12px; /* Уменьшили с 15px */
+        border-radius: 0;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        z-index: 9999;
+        
+        /* Добавляем прокрутку */
+        overflow-y: auto;
+        overflow-x: hidden;
+        max-height: calc(100vh - 50px);
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .nav-menu.active {
+        display: flex;
+    }
+    
+    .mobile-menu-toggle {
+        display: flex;
+        z-index: 10000;
+        position: relative;
+    }
+    
+    /* Основные пункты меню */
+    .nav-menu > li > a {
+        padding: 12px 8px; /* Уменьшили с 15px 10px */
+        font-size: 16px; /* Уменьшили с 18px */
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        width: 100%;
+    }
+    
+    .nav-menu > li:last-child > a {
+        border-bottom: none;
+    }
+    
+    /* Подменю в мобильной версии */
+    .nav-dropdown .nav-submenu {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        background: rgba(255,255,255,0.1);
+        margin: 8px 0 0 0; /* Уменьшили с 10px */
+        border-radius: 6px; /* Уменьшили с 8px */
+        max-height: none;
+        overflow: visible;
+        display: none;
+    }
+    
+    .nav-dropdown.mobile-submenu-active .nav-submenu {
+        display: block;
+        animation: slideDown 0.3s ease;
+    }
+    
+    .nav-submenu a {
+        color: rgba(255,255,255,0.9);
+        border-color: rgba(255,255,255,0.1);
+        padding: 12px 18px; /* Уменьшили с 15px 20px */
+        font-size: 14px; /* Уменьшили с 16px */
+    }
+    
+    .nav-submenu a:hover {
+        background: rgba(255,255,255,0.1);
+        color: white;
+    }
+    
+    /* Стрелка для dropdown в мобильной версии */
+    .nav-dropdown .dropdown-arrow {
+        font-size: 14px; /* Уменьшили с 16px */
+        margin-left: auto;
+        transition: transform 0.3s ease;
+    }
+    
+    .nav-dropdown.mobile-submenu-active .dropdown-arrow {
+        transform: rotate(180deg);
+    }
+    
+    /* Блокируем прокрутку body когда открыто меню */
+    body.menu-open {
+        overflow: hidden;
+        position: fixed;
+        width: 100%;
+    }
+    
+    /* Анимация для подменю */
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-8px); /* Уменьшили с -10px */
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    /* Footer responsive */
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .footer-bottom-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .footer-cta {
+        padding: 30px 20px;
+    }
+    
+    .footer-cta h3 {
+        font-size: 1.5rem;
+    }
+}
+
+/* Дополнительные стили для очень маленьких экранов */
+@media (max-width: 480px) {
+    .header-content {
+        min-height: 45px;
+    }
+    
+    .logo {
+        font-size: 16px;
+    }
+    
+    .contact-info {
+        gap: 6px;
+    }
+    
+    .phone {
+        font-size: 12px;
+    }
+    
+    .phone a,
+    a.phone {
+        min-height: 32px;
+        padding: 4px 8px;
+        font-size: 11px;
+    }
+    
+    .nav-menu {
+        padding: 12px;
+        gap: 8px;
+        top: 45px;
+        max-height: calc(100vh - 45px);
+    }
+    
+    .nav-menu > li > a {
+        padding: 10px 6px;
+        font-size: 15px;
+    }
+    
+    .nav-submenu a {
+        padding: 10px 15px;
+        font-size: 13px;
+    }
+}
+
+/* Дополнительные стили для landscape ориентации на мобильных */
+@media (max-width: 768px) and (orientation: landscape) {
+    .nav-menu {
+        top: 45px;
+        max-height: calc(100vh - 45px);
+        padding: 12px;
+        gap: 6px;
+    }
+    
+    .nav-menu > li > a {
+        padding: 8px 6px;
+        font-size: 14px;
+    }
+    
+    .nav-submenu a {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+}
+
+/* Исправления для контактов в футере */
+.footer-contacts {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.footer .contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 20px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.footer .contact-item:hover {
+    background: rgba(255,255,255,0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+}
+
+.footer .contact-icon {
+    font-size: 20px;
+    margin-top: 2px;
+    flex-shrink: 0;
+    min-width: 24px;
+    opacity: 0.9;
+}
+
+.footer .contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex: 1;
+}
+
+.footer .contact-details a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+.footer .contact-details a:hover {
+    color: #b8d4ff;
+}
+
+.footer .contact-details span {
+    color: rgba(255,255,255,0.7);
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+/* Убираем конфликтующие стили */
+.footer .contact-item::before {
+    display: none !important;
+    content: none !important;
+}
+
+/* Убираем стили псевдоэлементов для email и time классов в футере */
+.footer .contact-item.email::before,
+.footer .contact-item.time::before {
+    display: none !important;
+    content: none !important;
+}
+
+/* Мобильная адаптация для контактов в футере */
+@media (max-width: 768px) {
+    .footer .contact-item {
+        padding: 15px;
+        gap: 10px;
+    }
+    
+    .footer .contact-icon {
+        font-size: 18px;
+    }
+    
+    .footer .contact-details a {
+        font-size: 15px;
+    }
+    
+    .footer .contact-details span {
+        font-size: 13px;
+    }
+}
+/* Многоуровневое меню */
+.nav-submenu-nested {
+    left: 100%;
+    top: 0;
+    margin-left: 10px;
+}
+
+.nav-submenu .nav-dropdown:hover .nav-submenu-nested {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Для мобильной версии */
+@media (max-width: 768px) {
+    .nav-submenu-nested {
+        position: static;
+        margin-left: 20px;
+        background: rgba(255,255,255,0.05);
+        border-radius: 6px;
+    }
+    
+    .nav-submenu-nested a {
+        padding-left: 30px;
+    }
+}

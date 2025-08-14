@@ -1,0 +1,749 @@
+/* Стили для страницы статьи */
+
+.article-content {
+    padding: 40px 0;
+}
+
+.article-layout {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 40px;
+    align-items: start;
+}
+
+/* Показ/скрытие на разных устройствах */
+.desktop-only {
+    display: block;
+}
+
+.mobile-only {
+    display: none;
+}
+
+/* Основная статья */
+.article-main {
+    background: white;
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    border: 1px solid #f0f0f0;
+}
+
+.article-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.article-category {
+    margin-bottom: 15px;
+}
+
+.article-category a {
+    background: #667eea;
+    color: white;
+    padding: 6px 15px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.85rem;
+    transition: background 0.3s ease;
+}
+
+.article-category a:hover {
+    background: #5a67d8;
+}
+
+.article-main h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+.article-meta {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin-bottom: 20px;
+}
+
+.article-views {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.article-excerpt {
+    font-size: 1.1rem;
+    color: #495057;
+    line-height: 1.6;
+    font-style: italic;
+    background: #f8f9fa;
+    padding: 20px;
+    border-left: 4px solid #667eea;
+    border-radius: 0 8px 8px 0;
+}
+
+.article-image {
+    margin: 30px 0;
+    text-align: center;
+}
+
+.article-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.article-body {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #333;
+}
+
+.article-body h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin: 40px 0 20px;
+    line-height: 1.3;
+}
+
+.article-body h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #34495e;
+    margin: 30px 0 15px;
+}
+
+.article-body h4 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #495057;
+    margin: 25px 0 15px;
+}
+
+.article-body p {
+    margin-bottom: 20px;
+    line-height: 1.8;
+}
+
+.article-body ul,
+.article-body ol {
+    margin: 20px 0;
+    padding-left: 30px;
+}
+
+.article-body li {
+    margin-bottom: 10px;
+    line-height: 1.7;
+}
+
+.article-body blockquote {
+    background: #f8f9fa;
+    border-left: 4px solid #667eea;
+    margin: 30px 0;
+    padding: 20px 30px;
+    font-style: italic;
+    color: #495057;
+    border-radius: 0 8px 8px 0;
+}
+
+.article-body img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 20px 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.article-body table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.article-body th,
+.article-body td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.article-body th {
+    background: #f8f9fa;
+    font-weight: 600;
+    color: #495057;
+}
+
+.article-body tr:hover {
+    background: #f8f9fa;
+}
+
+.article-body a {
+    color: #667eea;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.article-body a:hover {
+    color: #5a67d8;
+    border-bottom-color: #5a67d8;
+}
+
+.article-body strong {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.article-body em {
+    font-style: italic;
+    color: #495057;
+}
+
+.article-body code {
+    background: #f8f9fa;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Monaco', 'Consolas', monospace;
+    font-size: 0.9em;
+    color: #e83e8c;
+}
+
+.article-body pre {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 20px 0;
+    border: 1px solid #e9ecef;
+}
+
+.article-body pre code {
+    background: none;
+    padding: 0;
+    color: #495057;
+}
+
+/* Футер статьи */
+.article-footer {
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 1px solid #e9ecef;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.article-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.tag {
+    background: #e9ecef;
+    color: #495057;
+    padding: 6px 12px;
+    border-radius: 15px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.tag:hover {
+    background: #667eea;
+    color: white;
+    text-decoration: none;
+}
+
+.article-share {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.article-share span {
+    font-weight: 500;
+    color: #6c757d;
+}
+
+.share-btn {
+    padding: 8px 15px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.share-btn.vk {
+    background: #4c75a3;
+    color: white;
+}
+
+.share-btn.telegram {
+    background: #0088cc;
+    color: white;
+}
+
+.share-btn.whatsapp {
+    background: #25d366;
+    color: white;
+}
+
+.share-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    text-decoration: none;
+    color: white;
+}
+
+/* Боковая панель */
+.article-sidebar {
+    position: sticky;
+    top: 120px;
+}
+
+.sidebar-widget {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    border: 1px solid #f0f0f0;
+}
+
+.sidebar-widget h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #667eea;
+}
+
+/* CTA виджет */
+.cta-widget {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    text-align: center;
+}
+
+.cta-widget h3 {
+    color: white;
+    border-color: rgba(255,255,255,0.3);
+}
+
+.cta-widget p {
+    margin-bottom: 20px;
+    opacity: 0.9;
+}
+
+.cta-phone, .cta-email {
+    display: block;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    margin-bottom: 10px;
+    padding: 10px 15px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 8px;
+    transition: background 0.3s ease;
+}
+
+.cta-phone:hover, .cta-email:hover {
+    background: rgba(255,255,255,0.3);
+    text-decoration: none;
+    color: white;
+}
+
+/* Мобильный CTA блок */
+.mobile-cta {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px;
+    border-radius: 15px;
+    margin: 30px 0;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}
+
+.mobile-cta-content h3 {
+    margin-bottom: 20px;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.mobile-cta-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.mobile-btn {
+    padding: 15px 20px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+.mobile-btn-phone {
+    background: rgba(255,255,255,0.2);
+    color: white;
+    border: 2px solid rgba(255,255,255,0.3);
+}
+
+.mobile-btn-form {
+    background: white;
+    color: #667eea;
+    border: 2px solid white;
+}
+
+.mobile-btn:hover, .mobile-btn:active {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.mobile-btn-phone:hover {
+    background: rgba(255,255,255,0.3);
+    border-color: rgba(255,255,255,0.5);
+}
+
+.mobile-btn-form:hover {
+    background: #f8f9fa;
+    border-color: #f8f9fa;
+}
+
+/* Похожие новости */
+.related-news {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.related-item {
+    display: flex;
+    gap: 15px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.related-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.related-image {
+    flex-shrink: 0;
+    width: 80px;
+    height: 60px;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.related-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.related-content {
+    flex: 1;
+}
+
+.related-content h4 {
+    margin: 0 0 8px 0;
+    line-height: 1.4;
+}
+
+.related-content h4 a {
+    color: #2c3e50;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: color 0.3s ease;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.related-content h4 a:hover {
+    color: #667eea;
+}
+
+.related-content time {
+    font-size: 0.8rem;
+    color: #6c757d;
+}
+
+/* Адаптивность */
+@media (max-width: 1024px) {
+    .article-layout {
+        grid-template-columns: 1fr 250px;
+        gap: 30px;
+    }
+    
+    .article-main {
+        padding: 30px;
+    }
+    
+    .sidebar-widget {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Переключение видимости блоков */
+    .desktop-only {
+        display: none !important;
+    }
+    
+    .mobile-only {
+        display: block !important;
+    }
+
+    .article-content {
+        padding: 20px 0;
+    }
+    
+    .article-layout {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    /* Sidebar становится горизонтальным на планшетах */
+    .article-sidebar {
+        order: 2;
+        position: static;
+        display: block;
+    }
+    
+    .article-main {
+        order: 1;
+        padding: 25px 20px;
+    }
+    
+    .article-main h1 {
+        font-size: 1.9rem;
+        line-height: 1.2;
+    }
+    
+    .article-body {
+        font-size: 1.05rem;
+        line-height: 1.7;
+    }
+    
+    .article-body h2 {
+        font-size: 1.6rem;
+        margin: 30px 0 15px;
+    }
+    
+    .article-body h3 {
+        font-size: 1.4rem;
+        margin: 25px 0 12px;
+    }
+    
+    .article-excerpt {
+        padding: 15px;
+        font-size: 1.05rem;
+    }
+    
+    .article-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    
+    .article-share {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .share-btn {
+        padding: 10px 15px;
+        font-size: 0.9rem;
+    }
+    
+    /* Похожие новости на планшетах */
+    .related-news {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+    }
+    
+    .related-item {
+        border-bottom: none;
+        background: #f8f9fa;
+        padding: 15px;
+        border-radius: 10px;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .related-image {
+        width: 100%;
+        height: 120px;
+    }
+}
+
+@media (max-width: 580px) {
+    .article-content {
+        padding: 15px 0;
+    }
+    
+    .article-main {
+        padding: 20px 15px;
+        border-radius: 10px;
+    }
+    
+    .article-main h1 {
+        font-size: 1.6rem;
+        line-height: 1.2;
+        margin-bottom: 15px;
+    }
+    
+    .article-body {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+    
+    .article-body h2 {
+        font-size: 1.4rem;
+        margin: 25px 0 12px;
+    }
+    
+    .article-body h3 {
+        font-size: 1.2rem;
+        margin: 20px 0 10px;
+    }
+    
+    .article-excerpt {
+        padding: 12px;
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+    
+    .article-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        font-size: 0.85rem;
+    }
+    
+    .sidebar-widget {
+        padding: 15px;
+        border-radius: 10px;
+    }
+    
+    .sidebar-widget h3 {
+        font-size: 1.1rem;
+        margin-bottom: 15px;
+    }
+    
+    /* Мобильные кнопки на очень маленьких экранах */
+    .mobile-cta-buttons {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .mobile-btn {
+        padding: 12px 15px;
+        font-size: 0.95rem;
+    }
+    
+    /* Похожие новости на мобильных */
+    .related-news {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .related-item {
+        padding: 12px;
+        gap: 8px;
+    }
+    
+    .related-image {
+        height: 100px;
+    }
+    
+    .related-content h4 a {
+        font-size: 0.9rem;
+        -webkit-line-clamp: 3;
+    }
+    
+    .related-content time {
+        font-size: 0.75rem;
+    }
+    
+    /* Улучшения для кнопок шаринга на мобильных */
+    .article-share span {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    
+    .share-btn {
+        flex: 1;
+        text-align: center;
+        padding: 8px 10px;
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 380px) {
+    .article-main {
+        padding: 15px 10px;
+    }
+    
+    .article-main h1 {
+        font-size: 1.4rem;
+    }
+    
+    .article-body {
+        font-size: 0.95rem;
+    }
+    
+    .article-body h2 {
+        font-size: 1.3rem;
+    }
+    
+    .article-body h3 {
+        font-size: 1.1rem;
+    }
+    
+    .mobile-cta {
+        padding: 15px;
+        margin: 20px 0;
+    }
+    
+    .mobile-cta-content h3 {
+        font-size: 1.1rem;
+        margin-bottom: 15px;
+    }
+    
+    .mobile-btn {
+        padding: 10px 12px;
+        font-size: 0.9rem;
+    }
+}

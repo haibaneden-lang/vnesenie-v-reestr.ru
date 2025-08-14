@@ -1,0 +1,26 @@
+# Защита служебных файлов
+<Files "config.php">
+    Order allow,deny
+    Deny from all
+</Files>
+
+<Files "database.php">
+    Order allow,deny
+    Deny from all
+</Files>
+
+<Files "*.db">
+    Order allow,deny
+    Deny from all
+</Files>
+
+<Files "*.log">
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Разрешаем доступ только к основным файлам
+<FilesMatch "^(web_cron|manual_run|setup_cron)\.php$">
+    Order allow,deny
+    Allow from all
+</FilesMatch>
