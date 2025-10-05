@@ -129,8 +129,11 @@
 }
 
 .article-body p {
-    margin-bottom: 20px;
-    line-height: 1.8;
+	margin-bottom: 20px;
+	line-height: 1.8;
+	text-align: justify;
+	text-justify: inter-word;
+	hyphens: auto;
 }
 
 .article-body ul,
@@ -140,8 +143,10 @@
 }
 
 .article-body li {
-    margin-bottom: 10px;
-    line-height: 1.7;
+	margin-bottom: 10px;
+	line-height: 1.7;
+	text-align: justify;
+	hyphens: auto;
 }
 
 .article-body blockquote {
@@ -234,6 +239,168 @@
     padding: 0;
     color: #495057;
 }
+
+/* Таблица, ошибочно обернутая редактором в <pre> */
+.article-body pre:has(table) {
+	background: transparent;
+	padding: 0;
+	border: 0;
+	overflow: visible;
+	white-space: normal;
+}
+.article-body pre:has(table) table {
+	display: table;
+	width: 100%;
+	margin: 0; /* уже есть внешний отступ у таблиц */
+}
+.article-body pre:has(table) code {
+	background: none;
+	padding: 0;
+}
+
+/* ===================== */
+/* Унификация rich-text  */
+/* ===================== */
+
+/* Сбрасываем странные отступы/шрифты от редакторов (Word/Docs) */
+.article-body * {
+	max-width: 100%;
+	box-sizing: border-box;
+}
+
+/* Параграфы и межабзацные отступы */
+.article-body p,
+.article-body div {
+	margin-top: 0;
+	margin-bottom: 1.1em;
+}
+
+/* Подзаголовки внутри контента */
+.article-body h2,
+.article-body h3,
+.article-body h4,
+.article-body h5,
+.article-body h6 {
+	margin-top: 2em;
+	margin-bottom: 0.6em;
+	font-weight: 700;
+	line-height: 1.3;
+}
+
+/* Списки, включая вложенные, и списки из редакторов */
+.article-body ul,
+.article-body ol {
+	margin: 0 0 1.1em 0;
+	padding-left: 1.4em;
+	list-style-position: outside;
+}
+.article-body li > ul,
+.article-body li > ol {
+	margin-top: 0.4em;
+	margin-bottom: 0.4em;
+}
+.article-body ul { list-style-type: disc; }
+.article-body ul ul { list-style-type: circle; }
+.article-body ul ul ul { list-style-type: square; }
+.article-body ol { list-style-type: decimal; }
+.article-body ol ol { list-style-type: lower-alpha; }
+.article-body ol ol ol { list-style-type: lower-roman; }
+
+/* Таблицы: кросс-платформенное оформление и скролл на узких экранах */
+.article-body table {
+	display: block;
+	width: 100%;
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+.article-body thead th {
+	position: sticky;
+	top: 0;
+	background: #f8f9fa;
+}
+.article-body tbody tr:nth-child(even) {
+	background: #fcfcfd;
+}
+.article-body caption {
+	caption-side: bottom;
+	text-align: left;
+	font-size: 0.95rem;
+	color: #6c757d;
+	padding: 8px 0 0;
+}
+
+/* Картинки и медиа */
+.article-body img,
+.article-body svg,
+.article-body video,
+.article-body iframe,
+.article-body embed {
+	display: block;
+	max-width: 100%;
+	height: auto;
+}
+.article-body iframe {
+	width: 100% !important;
+	border: 0;
+	aspect-ratio: 16/9;
+}
+.article-body figure { margin: 1.2em 0; }
+.article-body figcaption {
+	font-size: 0.95rem;
+	color: #6c757d;
+	text-align: center;
+	margin-top: 8px;
+}
+
+/* Выравнивание из редакторов (float) */
+.article-body img[style*="float: left"],
+.article-body .alignleft { float: left; margin: 0.2em 1em 1em 0; }
+.article-body img[style*="float: right"],
+.article-body .alignright { float: right; margin: 0.2em 0 1em 1em; }
+.article-body .aligncenter,
+.article-body p > img:only-child {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/* Цитаты, разделители, акценты */
+.article-body hr {
+	border: 0;
+	border-top: 1px solid #e9ecef;
+	margin: 2rem 0;
+}
+.article-body mark { background: #fff3cd; padding: 0 3px; }
+.article-body kbd {
+	background: #212529;
+	color: #fff;
+	border-radius: 4px;
+	padding: 2px 6px;
+	font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+	font-size: 0.9em;
+}
+.article-body sup { vertical-align: super; font-size: 0.8em; }
+.article-body sub { vertical-align: sub; font-size: 0.8em; }
+
+/* «Мусорные» классы Word/Google Docs */
+.article-body .MsoNormal,
+.article-body .MsoListParagraph,
+.article-body table.MsoTableGrid {
+	margin: 0 0 1.1em 0 !important;
+	font: inherit !important;
+	color: inherit !important;
+}
+.article-body table.MsoTableGrid th,
+.article-body table.MsoTableGrid td {
+	border: 1px solid #dee2e6 !important;
+	padding: 10px 12px !important;
+}
+
+/* Улучшения читаемости в узкой колонке */
+.article-body > *:first-child { margin-top: 0; }
+.article-body > *:last-child { margin-bottom: 0; }
 
 /* Футер статьи */
 .article-footer {
@@ -552,6 +719,11 @@
         font-size: 1.05rem;
         line-height: 1.7;
     }
+
+	/* Мобильные таблицы: более плотные отступы и скролл */
+	.article-body th,
+	.article-body td { padding: 10px 12px; }
+	.article-body table { white-space: nowrap; }
     
     .article-body h2 {
         font-size: 1.6rem;
@@ -627,6 +799,11 @@
         font-size: 1rem;
         line-height: 1.6;
     }
+
+	/* Ещё компактнее на очень узких экранах */
+	.article-body th,
+	.article-body td { padding: 8px 10px; }
+	.article-body table { white-space: nowrap; }
     
     .article-body h2 {
         font-size: 1.4rem;

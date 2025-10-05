@@ -495,6 +495,9 @@ function getHeaderHTML() {
                 <li><a href="/pricing">Стоимость услуг</a></li>
             </ul>
         </li>
+  
+        
+        
         <li class="nav-dropdown">
             <a href="/roskomnadzor-registration" class="nav-dropdown-toggle">Регистрация в РКН <span class="dropdown-arrow">▼</span></a>
             <ul class="nav-submenu nav-submenu-nested">
@@ -502,11 +505,22 @@ function getHeaderHTML() {
                 <li><a href="/roskomnadzor-services">Стоимость регистрации в реестре РКН</a></li>
             </ul>
         </li>
-        <li><a href="/tendernoe-soprovozhdenie">Тендерное сопровождение</a></li>
+                      
         <li><a href="/vnesenie-v-reestr-turoperatorov">Включение в реестр туроператоров</a></li>
+        <li><a href="/news/vklyuchenie-v-reestr-utilizatorov-othodov-polnoe-rukovodstvo-po-registratsii-v-2025-godu">Включение в реестр утилизаторов отходов</a></li>
+        <li><a href="/news/poluchenie-statusa-rezidenta-skolkovo">Получение статуса резидента Сколково</a></li>
+    </ul>
+</li>                       
+     <li class="nav-dropdown">
+    <a href="#" class="nav-dropdown-toggle">Документы <span class="dropdown-arrow">▼</span></a>
+    <ul class="nav-submenu nav-submenu-nested">
+        <li><a href="/news/sertifikat-sootvetstviya-st-1-ot-minpromtorga-polnoe-rukovodstvo-po-polucheniyu-v-2025-godu">Сертификат соответствия СТ-1</a></li>
+        <li><a href="/tendernoe-soprovozhdenie">Тендерное сопровождение для реестра Минпромторга</a></li>
+        <li><a href="/news/tehnologicheskaya-dokumentatsiya-dlya-reestra-minpromtorga">Технологическая документация для реестра Минпромторга</a></li>
+        <li><a href="/news/akt-ekspertizy-dlya-reestra-minpromtorga-i-tpp-poryadok-polucheniya-2025">Акт экспертизы для реестра Минпромторга</a></li>
+        <li><a href="/news/konstruktorskaya-dokumentatsiya-dlya-reestra-minpromtorga-kompleksnoe-rukovodstvo-po-podgotovke-i-ekspertize-kd">Конструкторская документация</a></li>
     </ul>
 </li>
-                           
                             <li><a href="/about">О нас</a></li>
                             <li><a href="/contacts">Контакты</a></li>
                         </ul>
@@ -1498,6 +1512,29 @@ function getFooterHTML() {
         </style>
 
         <!-- Подключение чата и счетчиков -->
+
+        <!-- Marquiz script start -->
+        <script>
+        (function(w, d, s, o){
+          var j = d.createElement(s); j.async = true; j.src = "//script.marquiz.ru/v2.js";j.onload = function() {
+            if (document.readyState !== "loading") Marquiz.init(o);
+            else document.addEventListener("DOMContentLoaded", function() {
+              Marquiz.init(o);
+            });
+          };
+          d.head.insertBefore(j, d.head.firstElementChild);
+        })(window, document, "script", {
+            host: "//quiz.marquiz.ru",
+            region: "ru",
+            id: "68caa40e3c3773001984d834",
+            autoOpen: 10,
+            autoOpenFreq: "once",
+            openOnExit: false,
+            disableOnMobile: false
+          }
+        );
+        </script>
+        <!-- Marquiz script end -->
         <script src="//code.jivo.ru/widget/sheSSFdMoT" async></script>
 
         <!-- Yandex.Metrika counter -->
@@ -1540,6 +1577,19 @@ function initializeCounters() {
         console.log('✅ Yandex Metrika инициализирована');
     } else {
         console.log('⚠️ Yandex Metrika уже загружена');
+    }
+    
+    // Инициализация Microsoft Clarity
+    if (!window.clarity) {
+        console.log('🔍 Загружаем Microsoft Clarity...');
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "tfv8iboni5");
+        console.log('✅ Microsoft Clarity инициализирован');
+    } else {
+        console.log('⚠️ Microsoft Clarity уже загружен');
     }
     
     // Инициализация Jivo Chat

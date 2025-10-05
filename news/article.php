@@ -88,9 +88,10 @@ $meta_description = $news['meta_description'] ?:
     <link rel="stylesheet" href="/styles-new.css">
     <link rel="stylesheet" href="/components-styles.css">
     <link rel="stylesheet" href="/news/news-styles.css">
-    <link rel="stylesheet" href="/news/article-styles.css">
+    <?php $article_css_v = @filemtime(__DIR__ . '/article-styles.css') ?: time(); ?>
+    <link rel="stylesheet" href="/news/article-styles.css?v=<?php echo $article_css_v; ?>">
     <link rel="stylesheet" href="/news/registry-benefits.css">
-     <link rel="stylesheet" href="/news/article-responsive.css">
+     <link rel="stylesheet" href="/news/article-responsive.css?v=<?php echo $article_css_v; ?>">
 </head>
 <body>
     <!-- Подключение шапки -->

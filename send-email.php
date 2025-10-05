@@ -30,8 +30,11 @@ if ($_SERVER["REQUEST_METHOD"] != "POST") {
 $input_data = file_get_contents('php://input');
 $input = json_decode($input_data, true);
 
+// Генерируем уникальный ID для этой заявки
+$request_id = uniqid('lead_', true);
+
 // Логирование для отладки (закомментируйте в продакшене)
-error_log("=== EMAIL DEBUG ===");
+error_log("=== EMAIL DEBUG [$request_id] ===");
 error_log("Received data: " . $input_data);
 error_log("Parsed data: " . print_r($input, true));
 
@@ -174,15 +177,16 @@ if ($mail_sent) {
     
     // Сохраняем lead в базу данных
     try {
+        error_log("🔄 [$request_id] Начинаем сохранение lead в базу данных...");
         require_once __DIR__ . '/models/Lead.php';
         $leadSaved = saveLeadToDatabase($input, $service);
         if ($leadSaved) {
-            error_log("✅ LEAD SAVED: Успешно сохранен в базу данных");
+            error_log("✅ [$request_id] LEAD SAVED: Успешно сохранен в базу данных");
         } else {
-            error_log("⚠️ LEAD SAVE FAILED: Не удалось сохранить в базу данных");
+            error_log("⚠️ [$request_id] LEAD SAVE FAILED: Не удалось сохранить в базу данных");
         }
     } catch (Exception $e) {
-        error_log("❌ LEAD SAVE ERROR: " . $e->getMessage());
+        error_log("❌ [$request_id] LEAD SAVE ERROR: " . $e->getMessage());
     }
     
 } else {
@@ -202,5 +206,5 @@ if ($mail_sent) {
     error_log("❌ EMAIL FAILED: " . ($last_error['message'] ?? 'Unknown error'));
 }
 
-error_log("=== EMAIL DEBUG END ===");
+error_log("=== EMAIL DEBUG [$request_id] END ===");
 ?>

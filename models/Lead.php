@@ -28,6 +28,12 @@ class Lead {
             // Подготавливаем данные
             $leadData = $this->prepareLeadData($data, $service);
             
+            // Проверяем на дублирование
+            if ($this->isDuplicate($leadData)) {
+                error_log("Lead::save: Обнаружен дубликат для " . $leadData['email'] . " - пропускаем сохранение");
+                return true; // Возвращаем true, так как дубликат уже существует
+            }
+            
             $sql = "INSERT INTO leads (
                 name, phone, email, message, 
                 ip_address, user_agent, page_url, utm_source, 
@@ -188,6 +194,41 @@ class Lead {
      */
     public function testConnection() {
         return testDbConnection();
+    }
+    
+    /**
+     * Проверить, является ли lead дубликатом
+     * @param array $leadData Данные lead
+     * @return bool
+     */
+    private function isDuplicate($leadData) {
+        try {
+            // Проверяем наличие lead с теми же данными за последние 5 минут
+            $sql = "SELECT COUNT(*) as count FROM leads 
+                    WHERE (email = :email OR phone = :phone) 
+                    AND date_created >= DATE_SUB(NOW(), INTERVAL 5 MINUTE)
+                    AND site_name = :site_name";
+            
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute([
+                'email' => $leadData['email'],
+                'phone' => $leadData['phone'],
+                'site_name' => $leadData['site_name']
+            ]);
+            
+            $result = $stmt->fetch();
+            $isDuplicate = $result['count'] > 0;
+            
+            if ($isDuplicate) {
+                error_log("Lead::isDuplicate: Найден дубликат для email: {$leadData['email']}, phone: {$leadData['phone']}");
+            }
+            
+            return $isDuplicate;
+            
+        } catch (PDOException $e) {
+            error_log("Lead::isDuplicate: Ошибка проверки дубликата: " . $e->getMessage());
+            return false; // В случае ошибки разрешаем сохранение
+        }
     }
 }
 
