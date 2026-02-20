@@ -1,94 +1,1275 @@
+<!-- СКВОЗНОЕ РЕШЕНИЕ: Стили мобильного меню встроены прямо в header - работают на ВСЕХ страницах -->
+<style id="mobile-menu-inline-styles">
+/* Десктоп версия - чуть шире меню, но отцентровано */
+@media (min-width: 769px) {
+    .header .container {
+        max-width: 1400px !important; /* Чуть шире чем стандартный 1200px */
+        margin: 0 auto !important; /* Центрирование */
+        padding-left: 2rem !important;
+        padding-right: 2rem !important;
+    }
+    
+    .header-content {
+        display: flex !important;
+        justify-content: center !important; /* Центрируем содержимое */
+        align-items: center !important;
+    }
+    
+    .main-navigation {
+        flex: 0 1 auto !important; /* Не растягивается, центрируется */
+        margin: 0 auto !important; /* Центрирование меню */
+    }
+    
+    .nav-menu {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        gap: 0 !important; /* Без зазора между пунктами */
+        margin: 0 auto !important; /* Центрирование */
+        padding: 0 !important;
+        justify-content: center !important; /* Центрируем пункты меню */
+    }
+    
+    .nav-menu > li > a {
+        white-space: nowrap !important;
+        padding: 0.75rem 0.6rem !important; /* Еще меньше padding */
+        font-size: 15px !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 6px !important;
+    }
+    
+    /* ИКОНКИ В ДЕСКТОПНОМ МЕНЮ */
+    .nav-menu > li > a .menu-icon {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 18px !important;
+        height: 18px !important;
+        flex-shrink: 0 !important;
+    }
+    
+    .nav-menu > li > a .menu-icon svg {
+        width: 18px !important;
+        height: 18px !important;
+        stroke: currentColor !important;
+        stroke-width: 1.6 !important;
+        stroke-linecap: round !important;
+        stroke-linejoin: round !important;
+        fill: none !important;
+        color: white !important;
+    }
+    
+    /* Скрываем стрелки в десктопном меню (они не нужны) */
+    .nav-menu > li > a .dropdown-arrow,
+    .nav-menu > li > a .menu-arrow {
+        display: none !important;
+    }
+    
+    /* СКРЫВАЕМ КРЕСТИК ЗАКРЫТИЯ И БУРГЕР НА ДЕСКТОПЕ */
+    .menu-close-button,
+    .menu-close-btn,
+    .menu-close,
+    .mobile-menu-toggle {
+        display: none !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+    }
+    
+    /* Скрываем большой номер телефона на десктоп версии */
+    .header .contact-info .phone {
+        display: none !important;
+    }
+    
+    /* Показываем номер телефона мелко под обоими значками */
+    .header .contact-info {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 0.5rem !important;
+    }
+    
+    .header .contact-info .social-icons {
+        display: flex !important;
+        flex-direction: row !important; /* Иконки в ряд (горизонтально) */
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 0.5rem !important;
+    }
+    
+    .header .contact-info .social-icons .whatsapp,
+    .header .contact-info .social-icons .telegram {
+        display: inline-flex !important;
+        margin: 0 !important;
+    }
+    
+    /* Номер телефона под обоими значками */
+    .header .contact-info .phone-number-small {
+        display: block !important;
+        font-size: 12px !important; /* Увеличен размер */
+        color: white !important;
+        text-decoration: none !important;
+        margin-top: 0.25rem !important;
+        white-space: nowrap !important;
+        text-align: center !important;
+        width: 100% !important;
+        line-height: 1.3 !important;
+        opacity: 1 !important;
+    }
+    
+}
+
+    /* APPLE-STYLE МОБИЛЬНОЕ МЕНЮ - ПРЕМИАЛЬНЫЙ ВИЗУАЛ */
+@media (max-width: 768px) {
+    /* Компактный header - ПРОКРУЧИВАЕТСЯ ВМЕСТЕ С КОНТЕНТОМ */
+    .header {
+        padding: 0.4rem 0 !important;
+        position: relative !important;
+        width: 100% !important;
+        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%) !important;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+    }
+    
+    body {
+        padding-top: 0 !important;
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", Inter, sans-serif !important;
+    }
+
+    .header-content {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        min-height: 45px;
+        gap: 10px;
+        position: relative;
+    }
+    
+    /* Логотип слева */
+    .header-content .logo {
+        flex: 0 0 auto;
+        order: 1;
+    }
+    
+    /* БУРГЕР СПРАВА В САМОМ ПРАВОМ УГЛУ */
+    .header-content .mobile-menu-toggle {
+        flex: 0 0 auto;
+        margin-left: auto !important;
+        order: 999;
+    }
+    
+    /* Навигация скрыта на мобильном в header (показывается как overlay) */
+    .header-content .main-navigation {
+        display: none !important;
+    }
+    
+    /* Контакты скрыты на мобильном в header */
+    .header-content .contact-info {
+        display: none !important;
+    }
+    
+    /* БУРГЕР МЕНЮ - ВИДИМ И РАБОТАЕТ */
+    .mobile-menu-toggle {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-around !important;
+        width: 30px !important;
+        height: 30px !important;
+        background: transparent !important;
+        border: none !important;
+        cursor: pointer !important;
+        padding: 0 !important;
+        z-index: 10003 !important;
+        position: relative !important;
+        flex-shrink: 0 !important;
+        margin: 0 !important;
+    }
+    
+    /* Скрываем бургер когда меню открыто */
+    #mobile-menu-toggle:checked ~ .mobile-menu-toggle,
+    .header:has(#mobile-menu-toggle:checked) .mobile-menu-toggle,
+    body.menu-open .mobile-menu-toggle {
+        opacity: 0 !important;
+        pointer-events: none !important;
+    }
+    
+    .mobile-menu-toggle span {
+        display: block !important;
+        height: 3px !important;
+        width: 100% !important;
+        background: white !important;
+        border-radius: 3px !important;
+        transition: all 0.3s ease !important;
+    }
+    
+    /* НА МОБИЛЬНОМ - ПОКАЗЫВАЕМ НОМЕР ТЕЛЕФОНА И ИКОНКИ */
+    .header .contact-info {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        gap: 0.5rem !important;
+    }
+    
+    /* Номер телефона в мобильной шапке */
+    .header .contact-info .phone {
+        display: flex !important;
+        align-items: center !important;
+        gap: 6px !important;
+    }
+    
+    .header .contact-info .phone a {
+        display: flex !important;
+        align-items: center !important;
+        gap: 6px !important;
+        color: white !important;
+        text-decoration: none !important;
+        font-size: 14px !important;
+        font-weight: 500 !important;
+        white-space: nowrap !important;
+    }
+    
+    .header .contact-info .phone .phone-icon {
+        width: 18px !important;
+        height: 18px !important;
+        flex-shrink: 0 !important;
+    }
+    
+    /* Скрываем дублирующийся номер под иконками */
+    .header .contact-info .phone-number-small {
+        display: none !important;
+    }
+    
+    /* Показываем иконки WhatsApp и Telegram */
+    .header .contact-info .social-icons {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        gap: 0.5rem !important;
+    }
+
+    /* APPLE-STYLE МЕНЮ - СКРЫТО ПО УМОЛЧАНИЮ */
+    .nav-menu {
+        display: none !important;
+        position: fixed !important;
+        inset: 0 !important;
+        background: linear-gradient(180deg, #1e3b6f, #2a5398) !important;
+        flex-direction: column !important;
+        padding: 20px 16px 32px !important;
+        z-index: 10001 !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        opacity: 0 !important;
+        animation: none !important;
+        pointer-events: none !important;
+    }
+
+    /* Показываем меню когда checkbox отмечен - APPLE-STYLE АНИМАЦИЯ */
+    #mobile-menu-toggle:checked ~ .header-content .main-navigation .nav-menu,
+    #mobile-menu-toggle:checked ~ .header-content .nav-menu,
+    .header:has(#mobile-menu-toggle:checked) .nav-menu,
+    .header:has(#mobile-menu-toggle:checked) .main-navigation .nav-menu,
+    .header:has(#mobile-menu-toggle:checked) .header-content .nav-menu,
+    body.menu-open .nav-menu,
+    body.menu-open .header .nav-menu,
+    body.menu-open .main-navigation .nav-menu {
+        display: flex !important;
+        flex-direction: column !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        width: 100% !important;
+        height: 100vh !important;
+        z-index: 10001 !important;
+        padding: 72px 16px 32px 16px !important;
+        margin: 0 !important;
+        animation: fadeIn 0.25s ease !important;
+    }
+    
+    /* APPLE-STYLE КНОПКА ЗАКРЫТИЯ - РЕАЛЬНЫЙ HTML ЭЛЕМЕНТ - ТОЛЬКО ДЛЯ МОБИЛЬНОГО */
+    .menu-close {
+        position: fixed !important;
+        top: 18px !important;
+        right: 18px !important;
+        background: rgba(255, 255, 255, 0.1) !important;
+        backdrop-filter: blur(10px) !important;
+        border: 2px solid rgba(255, 255, 255, 0.2) !important;
+        border-radius: 50% !important;
+        font-size: 24px !important;
+        color: white !important;
+        z-index: 10002 !important;
+        cursor: pointer !important;
+        width: 44px !important;
+        height: 44px !important;
+        display: none !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        line-height: 1 !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+        transition: all 0.3s ease !important;
+        font-weight: 300 !important;
+    }
+    
+    .menu-close:hover {
+        background: rgba(255, 255, 255, 0.2) !important;
+        transform: scale(1.1) !important;
+    }
+    
+    /* Показываем кнопку закрытия когда меню открыто - ТОЛЬКО НА МОБИЛЬНОМ */
+    #mobile-menu-toggle:checked ~ .header-content .main-navigation .menu-close,
+    #mobile-menu-toggle:checked ~ .header-content .menu-close,
+    .header:has(#mobile-menu-toggle:checked) .main-navigation .menu-close,
+    .header:has(#mobile-menu-toggle:checked) .menu-close,
+    body.menu-open .main-navigation .menu-close,
+    body.menu-open .menu-close {
+        display: flex !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+    }
+    
+    /* Убеждаемся что только ОДНА кнопка закрытия видна - УСИЛЕННАЯ ВЕРСИЯ */
+    .menu-close + .menu-close,
+    .main-navigation .menu-close + .menu-close,
+    .header .menu-close ~ .menu-close,
+    .header-content .menu-close ~ .menu-close {
+        display: none !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+        visibility: hidden !important;
+    }
+    
+    /* Убеждаемся что только ОДНА кнопка бургера видна */
+    .mobile-menu-toggle + .mobile-menu-toggle,
+    .header .mobile-menu-toggle ~ .mobile-menu-toggle {
+        display: none !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+        visibility: hidden !important;
+    }
+    
+    /* APPLE-STYLE ПУНКТЫ МЕНЮ - ТОЧНО КАК В ШАБЛОНЕ */
+    body.menu-open .nav-menu > li,
+    #mobile-menu-toggle:checked ~ .header-content .main-navigation .nav-menu > li,
+    .nav-menu > li {
+        list-style: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border-bottom: none !important;
+    }
+
+    body.menu-open .nav-menu > li > a,
+    #mobile-menu-toggle:checked ~ .header-content .main-navigation .nav-menu > li > a,
+    .nav-menu > li > a {
+        display: flex !important;
+        align-items: center !important;
+        gap: 0 !important; /* Убираем gap, используем margin-right у иконки */
+        padding: 14px 16px !important;
+        margin-bottom: 0 !important;
+        font-size: 17px !important;
+        font-weight: 500 !important;
+        color: rgba(255, 255, 255, 0.95) !important;
+        text-decoration: none !important;
+        border-radius: 14px !important;
+        background: transparent !important;
+        transition: background 0.2s ease !important;
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", Inter, sans-serif !important;
+    }
+    
+    /* APPLE-STYLE ИКОНКИ - ФИКСИРОВАННАЯ ШИРИНА, ВСЕ ИКОНКИ В ОДНУ КОЛОНКУ */
+    .nav-menu > li > a .menu-icon {
+        width: 24px !important;
+        min-width: 24px !important;
+        max-width: 24px !important;
+        height: 24px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important; /* Центрирование SVG внутри контейнера */
+        flex-shrink: 0 !important;
+        flex-grow: 0 !important;
+        color: rgba(255, 255, 255, 0.95) !important;
+        margin: 0 !important;
+        margin-right: 14px !important; /* Отступ между иконкой и текстом */
+        padding: 0 !important;
+    }
+    
+    .nav-menu > li > a .menu-icon svg {
+        width: 22px !important;
+        height: 22px !important;
+        stroke: currentColor !important;
+        stroke-width: 1.6 !important;
+        stroke-linecap: round !important;
+        stroke-linejoin: round !important;
+        fill: none !important;
+        color: rgba(255, 255, 255, 0.95) !important;
+        display: block !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    /* ТЕКСТ МЕНЮ - ВСЕ ТЕКСТЫ В ОДНУ КОЛОНКУ, ВЫРОВНЕНЫ ПО ЛЕВОМУ КРАЮ */
+    .nav-menu > li > a .label {
+        flex: 1 !important;
+        color: rgba(255, 255, 255, 0.95) !important;
+        text-align: left !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        line-height: 1.2 !important;
+        min-width: 0 !important;
+    }
+    
+    /* Скрываем весь текст кроме .label и .chevron */
+    .nav-menu > li > a > *:not(.menu-icon):not(.menu-arrow):not(.dropdown-arrow):not(.label):not(.chevron) {
+        display: none !important;
+    }
+    
+    /* CHEVRON - APPLE-STYLE, ВЫРАВНИВАНИЕ ПО ПРАВОМУ КРАЮ */
+    .nav-menu > li > a .chevron {
+        font-size: 20px !important;
+        color: rgba(255, 255, 255, 0.65) !important;
+        opacity: 1 !important;
+        margin-left: auto !important;
+        flex-shrink: 0 !important;
+        flex-grow: 0 !important;
+        padding: 0 !important;
+        margin-right: 0 !important;
+    }
+    
+    .nav-menu > li > a .menu-arrow,
+    .nav-menu > li > a .dropdown-arrow {
+        display: none !important;
+    }
+    
+    /* Контакты без chevron */
+    .nav-menu > li:last-child > a .chevron {
+        display: none !important;
+    }
+
+    /* APPLE-STYLE HOVER/ACTIVE */
+    body.menu-open .nav-menu > li > a:hover,
+    body.menu-open .nav-menu > li > a:active,
+    #mobile-menu-toggle:checked ~ .header-content .main-navigation .nav-menu > li > a:hover,
+    .nav-menu > li > a:hover,
+    .nav-menu > li > a:active {
+        background: rgba(255, 255, 255, 0.12) !important;
+        transform: none !important;
+    }
+    
+    body.menu-open .nav-menu > li > a:active,
+    .nav-menu > li > a:active {
+        background: rgba(255, 255, 255, 0.16) !important;
+    }
+    
+    /* APPLE-STYLE АНИМАЦИЯ */
+    @keyframes fadeIn {
+        from { 
+            opacity: 0; 
+            transform: translateY(-8px);
+        }
+        to { 
+            opacity: 1; 
+            transform: translateY(0);
+        }
+    }
+    
+    /* MICRO-ANIMATION для пунктов меню */
+    .nav-menu > li {
+        animation: fadeInItem 0.3s ease backwards;
+    }
+    
+    .nav-menu > li:nth-child(1) { animation-delay: 0.05s; }
+    .nav-menu > li:nth-child(2) { animation-delay: 0.1s; }
+    .nav-menu > li:nth-child(3) { animation-delay: 0.15s; }
+    .nav-menu > li:nth-child(4) { animation-delay: 0.2s; }
+    .nav-menu > li:nth-child(5) { animation-delay: 0.25s; }
+    .nav-menu > li:nth-child(6) { animation-delay: 0.3s; }
+    .nav-menu > li:nth-child(7) { animation-delay: 0.35s; }
+    
+    @keyframes fadeInItem {
+        from {
+            opacity: 0;
+            transform: translateY(8px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* APPLE-STYLE ПОДМЕНЮ - СКРЫТЫ ПО УМОЛЧАНИЮ (открываются по клику) */
+    .nav-submenu {
+        display: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        background: transparent !important;
+        list-style: none !important;
+        max-height: 0 !important;
+        overflow: hidden !important;
+        transition: max-height 0.3s ease, padding 0.3s ease !important;
+    }
+    
+    /* Показываем подменю когда родитель активен - ПО КЛИКУ */
+    .nav-dropdown.mobile-submenu-active .nav-submenu,
+    .nav-dropdown:focus-within .nav-submenu {
+        display: block !important;
+        max-height: 2000px !important;
+        padding: 8px 0 !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+    
+    /* ВЛОЖЕННЫЕ ПОДМЕНЮ - показываем сразу при открытии родителя */
+    .nav-dropdown.mobile-submenu-active .nav-submenu-nested,
+    .nav-dropdown.mobile-submenu-active .nav-submenu .nav-dropdown.mobile-submenu-active .nav-submenu-nested,
+    .nav-dropdown.mobile-submenu-active .nav-submenu .nav-submenu-nested {
+        display: block !important;
+        max-height: 2000px !important;
+        padding: 8px 0 !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+    
+    /* Вложенные подменю внутри открытого подменю - показываем все сразу */
+    .nav-dropdown.mobile-submenu-active .nav-submenu .nav-submenu-nested {
+        display: block !important;
+        max-height: 2000px !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+    
+    /* НЕ показываем подменю по hover на мобильном - только по клику */
+    @media (max-width: 768px) {
+        .nav-dropdown:hover .nav-submenu {
+            display: none !important;
+        }
+        
+        /* Убираем focus-within на мобильном, используем только класс */
+        .nav-dropdown:focus-within .nav-submenu {
+            display: none !important;
+        }
+        
+        .nav-dropdown.mobile-submenu-active .nav-submenu {
+            display: block !important;
+            max-height: 2000px !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+        
+        /* ВЛОЖЕННЫЕ ПОДМЕНЮ на мобильном - показываем сразу */
+        .nav-dropdown.mobile-submenu-active .nav-submenu-nested {
+            display: block !important;
+            max-height: 2000px !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+        
+        /* Вложенные подменю внутри активного подменю тоже показываем */
+        .nav-dropdown.mobile-submenu-active .nav-submenu .nav-dropdown.mobile-submenu-active .nav-submenu-nested,
+        .nav-dropdown.mobile-submenu-active .nav-submenu .nav-submenu-nested {
+            display: block !important;
+            max-height: 2000px !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+        
+        /* ВСЕ вложенные подменю внутри открытого подменю показываем сразу */
+        .nav-dropdown.mobile-submenu-active .nav-submenu .nav-submenu-nested {
+            display: block !important;
+            max-height: 2000px !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+            padding: 8px 0 !important;
+        }
+    }
+
+    .nav-submenu li {
+        list-style: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border-bottom: none !important;
+    }
+
+    .nav-submenu li a {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        padding: 12px 16px !important;
+        padding-left: 50px !important; /* Выровнено с текстом главных пунктов (16px + 24px иконка + 10px gap) */
+        font-size: 16px !important;
+        font-weight: 400 !important;
+        color: rgba(255, 255, 255, 0.85) !important;
+        text-decoration: none !important;
+        border-radius: 12px !important;
+        margin: 0 0 4px 0 !important;
+        background: transparent !important;
+        transition: background 0.2s ease !important;
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", Inter, sans-serif !important;
+    }
+    
+    /* Стрелка вправо для подменю - APPLE-STYLE */
+    .nav-submenu li a::after {
+        content: '›' !important;
+        font-size: 18px !important;
+        color: rgba(255, 255, 255, 0.65) !important;
+        opacity: 1 !important;
+        margin-left: auto !important;
+        flex-shrink: 0 !important;
+    }
+
+    .nav-submenu li a:hover,
+    .nav-submenu li a:active {
+        background: rgba(255, 255, 255, 0.1) !important;
+        color: rgba(255, 255, 255, 0.95) !important;
+        transform: none !important;
+    }
+    
+    .nav-submenu li a:active {
+        background: rgba(255, 255, 255, 0.14) !important;
+    }
+    
+    /* Активное состояние подменю */
+    .nav-submenu li a.active {
+        background: rgba(255, 255, 255, 0.12) !important;
+        color: rgba(255, 255, 255, 0.95) !important;
+    }
+
+    /* APPLE-STYLE DROPDOWN */
+    .nav-dropdown-toggle {
+        cursor: pointer !important;
+    }
+    
+    .dropdown-arrow {
+        font-size: 18px !important;
+        color: rgba(255, 255, 255, 0.65) !important;
+        transition: transform 0.2s ease !important;
+        margin-left: auto !important;
+        opacity: 1 !important;
+    }
+    
+    /* Подменю открыто - стрелка повернута (если нужно) */
+    .nav-dropdown:focus-within .dropdown-arrow,
+    .nav-dropdown:hover .dropdown-arrow {
+        transform: rotate(90deg) !important;
+    }
+
+    /* Overlay для закрытия меню */
+    .menu-overlay {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 9998;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+    }
+    
+    #mobile-menu-toggle:checked ~ .menu-overlay,
+    .header:has(#mobile-menu-toggle:checked) .menu-overlay,
+    body.menu-open .menu-overlay {
+        display: block;
+        opacity: 1;
+        pointer-events: auto;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100vh;
+        z-index: 10000;
+    }
+}
+</style>
+
+<!-- Fallback для openModal - загружается сразу -->
+<script>
+// Определяем openModal ДО загрузки страницы, чтобы кнопки работали сразу
+(function() {
+    if (typeof window.openModal === 'undefined') {
+        window.openModal = function(type) {
+            console.log('🔥 openModal вызван (fallback):', type);
+            let modal = document.getElementById('consultationModal');
+            if (!modal) {
+                fetch('/forms/lead-modal.html')
+                    .then(r => r.text())
+                    .then(html => {
+                        const wrap = document.createElement('div');
+                        wrap.innerHTML = html;
+                        while (wrap.firstChild) document.body.appendChild(wrap.firstChild);
+                        modal = document.getElementById('consultationModal');
+                        if (modal) {
+                            modal.classList.add('show');
+                            document.body.style.overflow = 'hidden';
+                        }
+                    })
+                    .catch(() => {
+                        alert('Свяжитесь с нами: +7 920-898-17-18 или reestrgarant@mail.ru');
+                    });
+            } else {
+                modal.classList.add('show');
+                document.body.style.overflow = 'hidden';
+            }
+        };
+        window.closeModal = function() {
+            const modal = document.getElementById('consultationModal');
+            if (modal) {
+                modal.classList.remove('show');
+                document.body.style.overflow = 'auto';
+            }
+        };
+    }
+})();
+</script>
+<!-- ПОЛНАЯ ПЕРЕРАБОТКА МЕНЮ С ОТЛАДКОЙ -->
+<script>
+(function() {
+    'use strict';
+    
+    // ОТЛАДОЧНЫЙ ОБЪЕКТ
+    const DEBUG = {
+        enabled: true,
+        log: function(step, message, data) {
+            if (this.enabled) {
+                console.log(`[${step}] ${message}`, data || '');
+            }
+        },
+        error: function(step, message, data) {
+            console.error(`[ERROR ${step}] ${message}`, data || '');
+        },
+        check: function(step, condition, message) {
+            if (condition) {
+                this.log(step, `✅ ${message}`);
+                return true;
+            } else {
+                this.error(step, `❌ ${message}`);
+                return false;
+            }
+        }
+    };
+    
+    DEBUG.log('INIT', '🚀 Начало инициализации меню');
+    
+    function initMenuFix() {
+        DEBUG.log('STEP1', '🔍 Поиск checkbox меню...');
+        const menuToggle = document.getElementById('mobile-menu-toggle');
+        
+        if (!DEBUG.check('STEP1', menuToggle, 'Checkbox найден')) {
+            DEBUG.log('STEP1', '⏳ Checkbox не найден, повтор через 100ms');
+            setTimeout(initMenuFix, 100);
+            return;
+        }
+        
+        DEBUG.log('STEP1', '✅ Checkbox найден:', menuToggle);
+        
+        // Проверяем все элементы
+        DEBUG.log('STEP2', '🔍 Проверка всех элементов меню...');
+        const navMenu = document.querySelector('.nav-menu');
+        const burger = document.querySelector('.mobile-menu-toggle');
+        const closeBtn = document.querySelector('.menu-close');
+        const nav = document.querySelector('.main-navigation');
+        
+        DEBUG.check('STEP2', navMenu, 'nav-menu найден');
+        DEBUG.check('STEP2', burger, 'бургер найден');
+        DEBUG.check('STEP2', closeBtn, 'кнопка закрытия найдена');
+        DEBUG.check('STEP2', nav, 'навигация найдена');
+        
+        if (!navMenu) {
+            DEBUG.error('STEP2', 'nav-menu не найден! Меню не будет работать!');
+            return;
+        }
+        
+        // ФУНКЦИЯ ОТКРЫТИЯ/ЗАКРЫТИЯ МЕНЮ С ОТЛАДКОЙ
+        function handleMenuChange() {
+            DEBUG.log('MENU_CHANGE', '🔄 Изменение состояния меню', { checked: menuToggle.checked });
+            
+            if (!navMenu) {
+                DEBUG.error('MENU_CHANGE', 'nav-menu не найден!');
+                return;
+            }
+            
+            if (menuToggle.checked) {
+                DEBUG.log('MENU_OPEN', '📂 ОТКРЫТИЕ меню...');
+                
+                // 1. Блокируем body
+                DEBUG.log('MENU_OPEN', '1️⃣ Блокировка body...');
+                document.body.classList.add('menu-open');
+                document.body.style.setProperty('overflow', 'hidden', 'important');
+                document.body.style.setProperty('position', 'fixed', 'important');
+                document.body.style.setProperty('width', '100%', 'important');
+                document.body.style.setProperty('height', '100%', 'important');
+                DEBUG.check('MENU_OPEN', document.body.classList.contains('menu-open'), 'body заблокирован');
+                
+                // 2. Показываем навигацию
+                DEBUG.log('MENU_OPEN', '2️⃣ Показ навигации...');
+                if (nav) {
+                    nav.style.setProperty('display', 'block', 'important');
+                    nav.style.setProperty('position', 'fixed', 'important');
+                    nav.style.setProperty('top', '0', 'important');
+                    nav.style.setProperty('left', '0', 'important');
+                    nav.style.setProperty('right', '0', 'important');
+                    nav.style.setProperty('bottom', '0', 'important');
+                    nav.style.setProperty('width', '100%', 'important');
+                    nav.style.setProperty('height', '100vh', 'important');
+                    nav.style.setProperty('z-index', '10001', 'important');
+                    nav.style.setProperty('background', 'linear-gradient(180deg, #1e3b6f, #2a5398)', 'important');
+                    nav.style.setProperty('padding', '72px 16px 32px 16px', 'important');
+                    nav.style.setProperty('overflow-y', 'auto', 'important');
+                }
+                
+                // 3. Показываем меню
+                DEBUG.log('MENU_OPEN', '3️⃣ Показ nav-menu...');
+                navMenu.style.setProperty('display', 'flex', 'important');
+                navMenu.style.setProperty('flex-direction', 'column', 'important');
+                navMenu.style.setProperty('opacity', '1', 'important');
+                navMenu.style.setProperty('pointer-events', 'auto', 'important');
+                navMenu.style.setProperty('position', 'relative', 'important');
+                DEBUG.check('MENU_OPEN', navMenu.style.display === 'flex', 'nav-menu отображается');
+                
+                // 4. Показываем кнопку закрытия
+                DEBUG.log('MENU_OPEN', '4️⃣ Показ кнопки закрытия...');
+                if (closeBtn) {
+                    closeBtn.style.setProperty('display', 'flex', 'important');
+                    closeBtn.style.setProperty('opacity', '1', 'important');
+                    closeBtn.style.setProperty('pointer-events', 'auto', 'important');
+                    DEBUG.check('MENU_OPEN', closeBtn.style.display === 'flex', 'кнопка закрытия видна');
+                }
+                
+                // 5. Скрываем бургер
+                DEBUG.log('MENU_OPEN', '5️⃣ Скрытие бургера...');
+                if (burger) {
+                    burger.style.setProperty('opacity', '0', 'important');
+                    burger.style.setProperty('pointer-events', 'none', 'important');
+                }
+                
+                DEBUG.log('MENU_OPEN', '✅ МЕНЮ ОТКРЫТО');
+            } else {
+                DEBUG.log('MENU_CLOSE', '📕 ЗАКРЫТИЕ меню...');
+                
+                // 1. Разблокируем body
+                DEBUG.log('MENU_CLOSE', '1️⃣ Разблокировка body...');
+                document.body.classList.remove('menu-open');
+                document.body.style.removeProperty('overflow');
+                document.body.style.removeProperty('position');
+                document.body.style.removeProperty('width');
+                document.body.style.removeProperty('height');
+                DEBUG.check('MENU_CLOSE', !document.body.classList.contains('menu-open'), 'body разблокирован');
+                
+                // 2. Скрываем навигацию
+                DEBUG.log('MENU_CLOSE', '2️⃣ Скрытие навигации...');
+                if (nav) {
+                    nav.style.removeProperty('display');
+                    nav.style.removeProperty('position');
+                    nav.style.removeProperty('top');
+                    nav.style.removeProperty('left');
+                    nav.style.removeProperty('right');
+                    nav.style.removeProperty('bottom');
+                    nav.style.removeProperty('width');
+                    nav.style.removeProperty('height');
+                    nav.style.removeProperty('z-index');
+                    nav.style.removeProperty('background');
+                    nav.style.removeProperty('padding');
+                    nav.style.removeProperty('overflow-y');
+                }
+                
+                // 3. Скрываем меню
+                DEBUG.log('MENU_CLOSE', '3️⃣ Скрытие nav-menu...');
+                navMenu.style.setProperty('display', 'none', 'important');
+                navMenu.style.removeProperty('opacity');
+                navMenu.style.removeProperty('pointer-events');
+                DEBUG.check('MENU_CLOSE', navMenu.style.display === 'none', 'nav-menu скрыт');
+                
+                // 4. Скрываем кнопку закрытия
+                DEBUG.log('MENU_CLOSE', '4️⃣ Скрытие кнопки закрытия...');
+                if (closeBtn) {
+                    closeBtn.style.setProperty('display', 'none', 'important');
+                    closeBtn.style.setProperty('opacity', '0', 'important');
+                    closeBtn.style.setProperty('pointer-events', 'none', 'important');
+                }
+                
+                // 5. Показываем бургер
+                DEBUG.log('MENU_CLOSE', '5️⃣ Показ бургера...');
+                if (burger) {
+                    burger.style.removeProperty('opacity');
+                    burger.style.removeProperty('pointer-events');
+                }
+                
+                DEBUG.log('MENU_CLOSE', '✅ МЕНЮ ЗАКРЫТО');
+            }
+        }
+        
+        // ОБРАБОТЧИКИ С ОТЛАДКОЙ
+        
+        // 1. Обработчик изменения checkbox
+        DEBUG.log('STEP3', '🔧 Настройка обработчика change для checkbox...');
+        menuToggle.addEventListener('change', function(e) {
+            DEBUG.log('CHECKBOX_CHANGE', '🔄 Checkbox изменен', { checked: menuToggle.checked });
+            handleMenuChange();
+        });
+        DEBUG.check('STEP3', true, 'Обработчик change установлен');
+        
+        // 2. Обработчик клика на бургер (label)
+        DEBUG.log('STEP4', '🔧 Настройка обработчиков для бургера...');
+        const labels = document.querySelectorAll('label[for="mobile-menu-toggle"]');
+        DEBUG.log('STEP4', `Найдено label элементов: ${labels.length}`);
+        
+        labels.forEach(function(label, index) {
+            DEBUG.log('STEP4', `Настройка label #${index + 1}...`);
+            label.addEventListener('click', function(e) {
+                DEBUG.log('BURGER_CLICK', '🍔 Бургер (label) кликнут!', { 
+                    currentState: menuToggle.checked,
+                    target: e.target 
+                });
+                e.preventDefault();
+                e.stopPropagation();
+                menuToggle.checked = !menuToggle.checked;
+                DEBUG.log('BURGER_CLICK', 'Новое состояние checkbox', { checked: menuToggle.checked });
+                handleMenuChange();
+            }, true);
+        });
+        
+        // 3. Обработчик клика на сам бургер (класс)
+        if (burger) {
+            DEBUG.log('STEP5', '🔧 Настройка обработчика для .mobile-menu-toggle...');
+            burger.addEventListener('click', function(e) {
+                DEBUG.log('BURGER_CLICK', '🍔 Бургер (.mobile-menu-toggle) кликнут!');
+                e.preventDefault();
+                e.stopPropagation();
+                menuToggle.checked = !menuToggle.checked;
+                DEBUG.log('BURGER_CLICK', 'Переключение checkbox', { checked: menuToggle.checked });
+                handleMenuChange();
+            }, true);
+            DEBUG.check('STEP5', true, 'Обработчик для бургера установлен');
+        } else {
+            DEBUG.error('STEP5', 'Бургер не найден!');
+        }
+        
+        // 4. Обработчик кнопки закрытия
+        DEBUG.log('STEP6', '🔧 Настройка обработчика для кнопки закрытия...');
+        function setupCloseButton() {
+            const closeBtn = document.querySelector('.menu-close');
+            if (!closeBtn) {
+                DEBUG.log('STEP6', '⏳ Кнопка закрытия не найдена, повтор через 100ms');
+                setTimeout(setupCloseButton, 100);
+                return;
+            }
+            
+            DEBUG.check('STEP6', closeBtn, 'Кнопка закрытия найдена');
+            
+            // Удаляем старые обработчики через клонирование
+            const newCloseBtn = closeBtn.cloneNode(true);
+            closeBtn.parentNode.replaceChild(newCloseBtn, closeBtn);
+            
+            // Обработчик click
+            newCloseBtn.addEventListener('click', function(e) {
+                DEBUG.log('CLOSE_CLICK', '❌ Кнопка закрытия кликнута (click)');
+                e.preventDefault();
+                e.stopPropagation();
+                e.stopImmediatePropagation();
+                menuToggle.checked = false;
+                DEBUG.log('CLOSE_CLICK', 'Checkbox установлен в false');
+                handleMenuChange();
+            }, true);
+            
+            // Обработчик touchend
+            newCloseBtn.addEventListener('touchend', function(e) {
+                DEBUG.log('CLOSE_TOUCH', '❌ Кнопка закрытия кликнута (touch)');
+                e.preventDefault();
+                e.stopPropagation();
+                e.stopImmediatePropagation();
+                menuToggle.checked = false;
+                DEBUG.log('CLOSE_TOUCH', 'Checkbox установлен в false');
+                handleMenuChange();
+            }, true);
+            
+            DEBUG.check('STEP6', true, 'Обработчики для кнопки закрытия установлены');
+        }
+        
+        setupCloseButton();
+        
+        // 5. Обработка раскрытия подменю
+        DEBUG.log('STEP7', '🔧 Настройка обработчиков для подменю...');
+        function setupMobileDropdowns() {
+            if (window.innerWidth > 768) {
+                DEBUG.log('STEP7', '⏭️ Десктоп режим, подменю пропускаем');
+                return;
+            }
+            
+            DEBUG.log('STEP7', '📱 Мобильный режим, настройка подменю...');
+            const dropdownToggles = document.querySelectorAll('.nav-dropdown-toggle');
+            DEBUG.log('STEP7', `Найдено dropdown элементов: ${dropdownToggles.length}`);
+            
+            dropdownToggles.forEach(function(toggle, index) {
+                DEBUG.log('STEP7', `Настройка dropdown #${index + 1}...`);
+                
+                // Удаляем старые обработчики
+                const newToggle = toggle.cloneNode(true);
+                toggle.parentNode.replaceChild(newToggle, toggle);
+                
+                // Обработчик click
+                newToggle.addEventListener('click', function(e) {
+                    const dropdown = newToggle.closest('.nav-dropdown');
+                    if (!dropdown) {
+                        DEBUG.error('DROPDOWN_CLICK', 'Dropdown не найден');
+                        return;
+                    }
+                    
+                    const hasSubmenu = dropdown.querySelector('.nav-submenu') !== null;
+                    const href = newToggle.getAttribute('href');
+                    const isActive = dropdown.classList.contains('mobile-submenu-active');
+                    
+                    DEBUG.log('DROPDOWN_CLICK', 'Клик по dropdown', {
+                        hasSubmenu,
+                        href,
+                        isActive,
+                        text: newToggle.textContent.trim().substring(0, 30)
+                    });
+                    
+                    if (hasSubmenu) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        
+                        // Закрываем другие подменю
+                        const parent = dropdown.parentElement;
+                        if (parent) {
+                            const siblings = parent.querySelectorAll('.nav-dropdown');
+                            siblings.forEach(function(sibling) {
+                                if (sibling !== dropdown) {
+                                    sibling.classList.remove('mobile-submenu-active');
+                                    DEBUG.log('DROPDOWN_CLICK', 'Закрыто другое подменю');
+                                }
+                            });
+                        }
+                        
+                        // Переключаем текущее
+                        if (isActive) {
+                            dropdown.classList.remove('mobile-submenu-active');
+                            DEBUG.log('DROPDOWN_CLICK', '✅ Подменю ЗАКРЫТО');
+                        } else {
+                            dropdown.classList.add('mobile-submenu-active');
+                            DEBUG.log('DROPDOWN_CLICK', '✅ Подменю ОТКРЫТО');
+                        }
+                    } else if (href === '#' || !href) {
+                        e.preventDefault();
+                        DEBUG.log('DROPDOWN_CLICK', 'Предотвращен переход по #');
+                    }
+                }, true);
+                
+                // Обработчик touchend
+                newToggle.addEventListener('touchend', function(e) {
+                    const dropdown = newToggle.closest('.nav-dropdown');
+                    if (!dropdown) return;
+                    
+                    const hasSubmenu = dropdown.querySelector('.nav-submenu') !== null;
+                    const href = newToggle.getAttribute('href');
+                    const isActive = dropdown.classList.contains('mobile-submenu-active');
+                    
+                    DEBUG.log('DROPDOWN_TOUCH', 'Touch по dropdown', { hasSubmenu, isActive });
+                    
+                    if (hasSubmenu) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        
+                        const parent = dropdown.parentElement;
+                        if (parent) {
+                            const siblings = parent.querySelectorAll('.nav-dropdown');
+                            siblings.forEach(function(sibling) {
+                                if (sibling !== dropdown) {
+                                    sibling.classList.remove('mobile-submenu-active');
+                                }
+                            });
+                        }
+                        
+                        if (isActive) {
+                            dropdown.classList.remove('mobile-submenu-active');
+                            DEBUG.log('DROPDOWN_TOUCH', '✅ Подменю ЗАКРЫТО');
+                        } else {
+                            dropdown.classList.add('mobile-submenu-active');
+                            DEBUG.log('DROPDOWN_TOUCH', '✅ Подменю ОТКРЫТО');
+                        }
+                    } else if (href === '#' || !href) {
+                        e.preventDefault();
+                    }
+                }, true);
+            });
+            
+            DEBUG.check('STEP7', true, 'Обработчики для подменю установлены');
+        }
+        
+        setupMobileDropdowns();
+        window.addEventListener('resize', function() {
+            DEBUG.log('RESIZE', '🔄 Изменение размера окна, переинициализация подменю...');
+            setTimeout(setupMobileDropdowns, 100);
+        });
+        
+        // Проверяем начальное состояние
+        if (menuToggle.checked) {
+            DEBUG.log('INIT_STATE', '⚠️ Меню уже открыто при загрузке');
+            handleMenuChange();
+        }
+        
+        DEBUG.log('INIT', '✅ ИНИЦИАЛИЗАЦИЯ ЗАВЕРШЕНА');
+    }
+    
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initMenuFix);
+    } else {
+        setTimeout(initMenuFix, 50);
+    }
+})();
+</script>
 <!-- Header -->
 <header class="header">
     <div class="container">
+        <!-- Скрытый checkbox для управления меню (чистый CSS без JS) -->
+        <input type="checkbox" id="mobile-menu-toggle" aria-label="Открыть мобильное меню" style="position: absolute; opacity: 0; pointer-events: none; width: 0; height: 0;">
+
         <div class="header-content">
             <div class="logo">
-                <div class="logo-icon">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Документ/реестр -->
-                        <rect x="4" y="3" width="12" height="16" rx="1" fill="white" opacity="0.9"/>
-                        <!-- Строки реестра -->
-                        <line x1="6" y1="7" x2="14" y2="7" stroke="#667eea" stroke-width="0.8"/>
-                        <line x1="6" y1="9" x2="14" y2="9" stroke="#667eea" stroke-width="0.8"/>
-                        <line x1="6" y1="11" x2="14" y2="11" stroke="#667eea" stroke-width="0.8"/>
-                        <line x1="6" y1="13" x2="14" y2="13" stroke="#667eea" stroke-width="0.8"/>
-                        <!-- Галочка гарантии -->
-                        <circle cx="18" cy="6" r="3" fill="#27ae60"/>
-                        <path d="M16.5 6l1 1 2-2" stroke="white" stroke-width="1.2" fill="none" stroke-linecap="round"/>
-                        <!-- Щит защиты/гарантии -->
-                        <path d="M2 12c0-2 1-3 2-3s2 1 2 3c0 2-1 4-2 4s-2-2-2-4z" fill="#ffa500" opacity="0.8"/>
-                    </svg>
-                </div>
-                <a href="/" style="color: white; text-decoration: none;">
+                <a href="/" style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: white;">
+                    <img src="/logo.svg" alt="Реестр Гарант" class="logo-icon">
                     <span>Реестр Гарант</span>
                 </a>
             </div>
-            
+
+            <!-- Мобильное меню кнопка (label для checkbox - чистый CSS) -->
+            <label for="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Открыть меню">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </label>
+
             <!-- Навигационное меню -->
-            <nav class="main-navigation">
-                <ul class="nav-menu">
-                    <li><a href="/">Главная</a></li>
-                   <li class="nav-dropdown">
-    <a href="#" class="nav-dropdown-toggle">Реестры <span class="dropdown-arrow">▼</span></a>
-    <ul class="nav-submenu">
-        <li class="nav-dropdown">
-            <a href="/gisp-minpromtorg" class="nav-dropdown-toggle">Включение в Минпромторг <span class="dropdown-arrow">▼</span></a>
-            <ul class="nav-submenu nav-submenu-nested">
-                <li><a href="/industrial">Промышленная продукция</a></li>
-                <li><a href="/software">Программное обеспечение</a></li>
-                <li><a href="/radioelectronic">Радиоэлектронная продукция</a></li>
-                <li><a href="/medical-devices">Медицинские изделия</a></li>
-                <li><a href="/telecom-equipment">Телекоммуникационное оборудование</a></li>
-                <li><a href="/oil-gas-equipment">Нефтегазовое оборудование</a></li>
-                <li><a href="/paketnoe-predlozhenie-dlya-ekonomii-vremeni-i-usiliy">Пакетное предложение</a></li>
-                <li><a href="/pricing">Стоимость услуг</a></li>
+            <nav class="main-navigation" role="navigation" aria-label="Основная навигация">
+                <!-- Кнопка закрытия меню (только для мобильного) -->
+                <button class="menu-close" aria-label="Закрыть меню" type="button">×</button>
+                <ul class="nav-menu" role="menubar" id="nav-menu">
+                    <li class="nav-dropdown" role="none">
+    <a href="#" class="nav-dropdown-toggle" role="menuitem" aria-haspopup="true" aria-expanded="false"><span class="menu-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.8 3.6 3 8 3s8-1.2 8-3V5"/><path d="M4 11v6c0 1.8 3.6 3 8 3s8-1.2 8-3v-6"/></svg></span><span class="label">Гранты</span><span class="chevron">›</span></a>
+    <ul class="nav-submenu" role="menu" aria-label="Подменю Гранты">
+        <li role="none"><a href="/start" role="menuitem">Старт</a></li>
+        <li role="none"><a href="/razvitie" role="menuitem">Развитие</a></li>
+        <li role="none"><a href="/commertsializatsia" role="menuitem">Коммерциализация</a></li>
+        <li role="none"><a href="/granti-v-ramkah-767-pprf" role="menuitem">Гранты на доработку и внедрение решений в сфере ИТ</a></li>
+        <li role="none"><a href="/granti-v-ramkah-550-555-pprf" role="menuitem">Гранты на доработку и внедрение решений на базе ИИ</a></li>
+    </ul>
+</li>
+                   <li class="nav-dropdown" role="none">
+    <a href="#" class="nav-dropdown-toggle" role="menuitem" aria-haspopup="true" aria-expanded="false"><span class="menu-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="3"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M3 12h18"/></svg></span><span class="label">Услуги</span><span class="chevron">›</span></a>
+    <ul class="nav-submenu" role="menu" aria-label="Подменю Услуги">
+        <li class="nav-dropdown" role="none">
+            <a href="/gisp-minpromtorg" class="nav-dropdown-toggle" role="menuitem" aria-haspopup="true" aria-expanded="false">Включение в Минпромторг <span class="dropdown-arrow" aria-hidden="true">▼</span></a>
+            <ul class="nav-submenu nav-submenu-nested" role="menu" aria-label="Включение в Минпромторг">
+                <li role="none"><a href="/industrial" role="menuitem">Промышленная продукция</a></li>
+                <li role="none"><a href="/software" role="menuitem">Программное обеспечение</a></li>
+                <li role="none"><a href="/radioelectronic" role="menuitem">Радиоэлектронная продукция</a></li>
+                <li role="none"><a href="/medical-devices" role="menuitem">Медицинские изделия</a></li>
+                <li role="none"><a href="/telecom-equipment" role="menuitem">Телекоммуникационное оборудование</a></li>
+                <li role="none"><a href="/oil-gas-equipment" role="menuitem">Нефтегазовое оборудование</a></li>
+                <li role="none"><a href="/paketnoe-predlozhenie-dlya-ekonomii-vremeni-i-usiliy" role="menuitem">Пакетное предложение</a></li>
+                <li role="none"><a href="/pricing" role="menuitem">Стоимость услуг</a></li>
             </ul>
         </li>
-        <li class="nav-dropdown">
-            <a href="/roskomnadzor-registration" class="nav-dropdown-toggle">Регистрация в РКН <span class="dropdown-arrow">▼</span></a>
-            <ul class="nav-submenu nav-submenu-nested">
-                <li><a href="/roskomnadzor-preparation-expanded">Подготовка к проверке Роскомнадзора</a></li>
-                <li><a href="/roskomnadzor-services">Стоимость регистрации в реестре РКН</a></li>
+        <li class="nav-dropdown" role="none">
+            <a href="/roskomnadzor-registration" class="nav-dropdown-toggle" role="menuitem" aria-haspopup="true" aria-expanded="false">Регистрация в РКН <span class="dropdown-arrow" aria-hidden="true">▼</span></a>
+            <ul class="nav-submenu nav-submenu-nested" role="menu" aria-label="Регистрация в РКН">
+                <li role="none"><a href="/roskomnadzor-preparation-expanded" role="menuitem">Подготовка к проверке Роскомнадзора</a></li>
+                <li role="none"><a href="/roskomnadzor-services" role="menuitem">Стоимость регистрации в реестре РКН</a></li>
             </ul>
         </li>
-        <li><a href="/tendernoe-soprovozhdenie">Тендерное сопровождение</a></li>
-        <li><a href="/vnesenie-v-reestr-turoperatorov">Включение в реестр туроператоров</a></li>
+        <li role="none"><a href="/tendernoe-soprovozhdenie" role="menuitem">Тендерное сопровождение</a></li>
+        <li role="none"><a href="/vnesenie-v-reestr-turoperatorov" role="menuitem">Включение в реестр туроператоров</a></li>
+        <li role="none"><a href="/news/vklyuchenie-v-tamozhennyy-reestr-brokerov-i-perevozchikov" role="menuitem">Включение в таможенный реестр</a></li>
+        <li role="none"><a href="/news/vklyuchenie-v-reestr-svh-pod-klyuch" role="menuitem">Включение в Реестр владельцев СВХ</a></li>
+        <li role="none"><a href="/status-rezidenta-skolkovo" role="menuitem">Статус резидента Сколково</a></li>
+        <li role="none"><a href="/vklyuchenie-v-reestr-utilizatorov" role="menuitem">Включение в реестр утилизаторов</a></li>
+        <li role="none"><a href="/vklyuchenie-v-reestr-mtk" role="menuitem">Включение в реестр МТК</a></li>
+        <li role="none"><a href="/akkreditatsiya-it-kompaniy" role="menuitem">Аккредитация IT-компаний</a></li>
+        <li role="none"><a href="/doverennoe-po" role="menuitem">Получение статуса доверенного ПО</a></li>
     </ul>
 </li>
                            
-                    <li><a href="/about">О нас</a></li>
-                    <li><a href="/contacts">Контакты</a></li>
+                    <li role="none"><a href="/price-list" role="menuitem"><span class="menu-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13l-7 7-11-11V2h7l11 11z"/><path d="M7.5 7.5h.01"/></svg></span><span class="label">Прайс</span><span class="chevron">›</span></a></li>
+
+                    <li class="nav-dropdown" role="none">
+    <a href="#" class="nav-dropdown-toggle" role="menuitem" aria-haspopup="true" aria-expanded="false"><span class="menu-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 10a2.5 2.5 0 0 1 5 0c0 2.5-5 2-5 4"/><path d="M12 17h.01"/></svg></span><span class="label">Займы</span><span class="chevron">›</span></a>
+    <ul class="nav-submenu" role="menu" aria-label="Подменю Займы">
+        <li role="none"><a href="/vysokotekh" role="menuitem">Высокотех</a></li>
+        <li role="none"><a href="/promyshlennaya-ipoteka" role="menuitem">Промышленная ипотека</a></li>
+        <li role="none"><a href="/programma-1764-minekonomrazvitiya" role="menuitem">Программа 1764 Минэкономразвития</a></li>
+        <li role="none"><a href="/programma-proekty-razvitiya" role="menuitem">Программа "Проекты развития"</a></li>
+        <li role="none"><a href="/programma-psk-1764" role="menuitem">Программа «ПСК» + Программа 1764</a></li>
+        <li role="none"><a href="/selkhoz-zaymy" role="menuitem">Сельхоз</a></li>
+    </ul>
+</li>
+                    
+                    <li role="none"><a href="/news/obuchenie-vklyucheniyu-v-reestr-minpromtorga-kursy-dlya-proizvoditeley-akademiya-ekspertov-po-lokalizatsii-ekonom-te-ot-200-000-na-kazhdom-vklyuchenii" role="menuitem"><span class="menu-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9l10-5 10 5-10 5-10-5z"/><path d="M6 12v4c0 1.5 6 4 6 4s6-2.5 6-4v-4"/></svg></span><span class="label">Обучение</span><span class="chevron">›</span></a></li>
+                    
+                    <li class="nav-dropdown" role="none">
+    <a href="#" class="nav-dropdown-toggle" role="menuitem" aria-haspopup="true" aria-expanded="false"><span class="menu-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 2h7l5 5v15a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6"/></svg></span><span class="label">Документы</span><span class="chevron">›</span></a>
+    <ul class="nav-submenu" role="menu" aria-label="Подменю Документы">
+        <li role="none"><a href="/sertifikat-sootvetstviya-st-1" role="menuitem">Сертификат соответствия СТ-1</a></li>
+        <li role="none"><a href="/tehnologicheskaya-dokumentatsiya" role="menuitem">Технологическая документация для реестра Минпромторга</a></li>
+        <li role="none"><a href="/akt-ekspertizy-tpp" role="menuitem">Акт экспертизы для реестра Минпромторга</a></li>
+        <li role="none"><a href="/razrabotka-konstruktorskoy-dokumentatsii" role="menuitem">Конструкторская документация</a></li>
+        <li role="none"><a href="/ekspluatatsionnaya-dokumentatsiya" role="menuitem">Эксплуатационная документация</a></li>
+    </ul>
+</li>
+                    
+                    <li class="nav-dropdown" role="none">
+    <a href="#" class="nav-dropdown-toggle" role="menuitem" aria-haspopup="true" aria-expanded="false"><span class="menu-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 6.5a4.5 4.5 0 0 0-6 6l-5.5 5.5 2.5 2.5 5.5-5.5a4.5 4.5 0 0 0 6-6z"/><circle cx="12" cy="12" r="1.3"/></svg></span><span class="label">Инструменты</span><span class="chevron">›</span></a>
+    <ul class="nav-submenu" role="menu" aria-label="Подменю Инструменты">
+        <li role="none"><a href="/reestry-i-bazy/" role="menuitem">Реестры и базы</a></li>
+        <li role="none"><a href="/okpd2/" role="menuitem">ОКПД2</a></li>
+        <li role="none"><a href="/calculators/" role="menuitem">Калькуляторы</a></li>
+        <li role="none"><a href="/navigator-mer-podderzhki-gisp" role="menuitem">Навигатор мер поддержки ГИСП</a></li>
+    </ul>
+</li>
+                    <li role="none"><a href="/contacts" role="menuitem"><span class="menu-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.5v3a2.5 2.5 0 0 1-2.7 2.5 20 20 0 0 1-8.7-3.2 20 20 0 0 1-6.1-6.1 20 20 0 0 1-3.2-8.7 A2.5 2.5 0 0 1 3.8 1h3.2 a2 2 0 0 1 2 1.7 13 13 0 0 0 .7 2.9 2 2 0 0 1-.5 2.1L8 9.5 a16 16 0 0 0 6.5 6.5l1.5-1.2 a2 2 0 0 1 2.1-.5 13 13 0 0 0 2.9.7 a2 2 0 0 1 1.7 2z"/></svg></span><span class="label">Контакты</span></a></li>
                 </ul>
-                
-                <!-- Мобильное меню кнопка -->
-                <div class="mobile-menu-toggle">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
             </nav>
             
             <div class="contact-info">
                 <div class="phone">
-                    <a href="tel:+79208981718">+7 920-898-17-18</a>
-                </div>
-                <div class="whatsapp">
-                    <a href="https://wa.me/79208981718" target="_blank" title="Написать в WhatsApp" style="color: white; text-decoration: none; display: flex; align-items: center; gap: 5px;">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893A11.821 11.821 0 0020.465 3.516" fill="white"/>
+                    <a href="tel:+79208981718" onclick="trackEvent('phone_click', {source: 'header'})">
+                        <svg class="phone-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" fill="white"/>
                         </svg>
-                        <span>WhatsApp</span>
+                        +7 920-898-17-18
                     </a>
                 </div>
-                <div class="telegram">
-                    <a href="https://t.me/reestr_garant" target="_blank" title="Наш канал в Telegram" style="color: white; text-decoration: none; display: flex; align-items: center; gap: 5px;">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.11.02-1.91 1.21-5.4 3.56-.51.35-.97.52-1.38.51-.45-.01-1.32-.26-1.97-.47-.8-.26-1.43-.4-1.38-.85.03-.23.36-.47.99-.72 3.88-1.69 6.48-2.81 7.82-3.35 3.73-1.55 4.5-1.82 5.01-1.83.11 0 .36.03.52.17.13.12.17.27.19.38-.01.06-.01.24-.01.24z" fill="white"/>
-                        </svg>
-                        <span>Telegram</span>
-                    </a>
+                <div class="social-icons">
+                    <div class="whatsapp">
+                        <a href="https://wa.me/79208981718" target="_blank" title="Написать в WhatsApp" style="color: white; text-decoration: none; display: flex; align-items: center;">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893A11.821 11.821 0 0020.465 3.516" fill="white"/>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="telegram">
+                        <a href="https://t.me/+79208981718" target="_blank" title="Написать в Telegram" style="color: white; text-decoration: none; display: flex; align-items: center;">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.11.02-1.91 1.21-5.4 3.56-.51.35-.97.52-1.38.51-.45-.01-1.32-.26-1.97-.47-.8-.26-1.43-.4-1.38-.85.03-.23.36-.47.99-.72 3.88-1.69 6.48-2.81 7.82-3.35 3.73-1.55 4.5-1.82 5.01-1.83.11 0 .36.03.52.17.13.12.17.27.19.38-.01.06-.01.24-.01.24z" fill="white"/>
+                            </svg>
+                        </a>
+                    </div>
                 </div>
+                <span class="phone-number-small" style="font-size: 12px; color: white; white-space: nowrap; text-align: center; display: block; margin-top: 0.25rem; line-height: 1.3; opacity: 1;">+7 920-898-17-18</span>
             </div>
         </div>
+
+        <!-- Оверлей для закрытия меню при клике вне его -->
+        <label for="mobile-menu-toggle" class="menu-overlay" aria-label="Закрыть меню"></label>
     </div>
 </header>
