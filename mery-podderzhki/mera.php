@@ -122,19 +122,30 @@ $intro = mb_substr(strip_tags(str_replace(["\n", '**'], [' ', ''], $measure['ful
         .mera-contacts-block .contacts-pre { white-space: pre-line; font-size: 0.9375rem; color: #334155; line-height: 1.7; margin: 0 0 16px; }
         .mera-contacts-block a { color: #1e3c72; font-weight: 500; }
 
-        /* ----- Сайдбар ----- */
-        .mera-aside { position: sticky; top: 24px; height: fit-content; }
-        .mera-form-box { background: linear-gradient(180deg, #f0f7ff 0%, #e0effe 100%); border: 1px solid #93c5fd; border-radius: 20px; padding: 28px; margin-bottom: 24px; box-shadow: 0 4px 20px rgba(30, 60, 114, 0.08); }
-        .mera-form-box h3 { margin: 0 0 16px; font-size: 1.125rem; color: #1e3c72; font-weight: 700; }
-        .mera-form-box .price { font-size: 1.125rem; font-weight: 700; color: #0f172a; margin: 12px 0; }
-        .mera-form-box input, .mera-form-box textarea { width: 100%; padding: 12px 14px; margin-bottom: 12px; border: 1px solid #cbd5e1; border-radius: 10px; box-sizing: border-box; font-size: 0.9375rem; transition: border-color 0.2s, box-shadow 0.2s; }
-        .mera-form-box input:focus, .mera-form-box textarea:focus { outline: none; border-color: #1e3c72; box-shadow: 0 0 0 3px rgba(30, 60, 114, 0.12); }
-        .mera-aside-cta { width: 100%; padding: 14px 20px; margin-bottom: 14px; background: linear-gradient(135deg, #059669 0%, #047857 100%); color: #fff; border: 0; border-radius: 12px; font-weight: 600; font-size: 1rem; cursor: pointer; transition: opacity 0.2s, transform 0.05s; }
-        .mera-aside-cta:hover { opacity: 0.95; }
-        .mera-form-box button[type="submit"] { width: 100%; padding: 16px; background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: #fff; border: 0; border-radius: 12px; font-weight: 600; font-size: 1rem; cursor: pointer; transition: opacity 0.2s, transform 0.05s; }
-        .mera-form-box button[type="submit"]:hover { opacity: 0.95; }
-        .mera-form-box .contacts { margin-top: 20px; padding-top: 20px; border-top: 1px solid #bfdbfe; font-size: 0.9rem; color: #475569; line-height: 1.6; }
-        .mera-form-box .contacts p { margin: 0 0 6px; }
+        /* ----- Сайдбар: два раздельных блока ----- */
+        .mera-aside { position: sticky; top: 24px; height: fit-content; display: flex; flex-direction: column; gap: 24px; }
+        /* Блок 1: консультация и ключевые цифры */
+        .mera-aside-cta-box { background: linear-gradient(165deg, #ecfdf5 0%, #d1fae5 50%, #a7f3d0 100%); border: 1px solid #6ee7b7; border-radius: 20px; padding: 28px 26px; box-shadow: 0 4px 24px rgba(5, 150, 105, 0.12), 0 1px 3px rgba(0,0,0,0.04); }
+        .mera-aside-cta-title { margin: 0 0 12px; font-size: 1.125rem; color: #065f46; font-weight: 700; letter-spacing: -0.01em; }
+        .mera-aside-cta-desc { margin: 0 0 20px; font-size: 0.9rem; color: #047857; line-height: 1.45; }
+        .mera-aside-cta-meta { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 10px; padding: 10px 14px; background: rgba(255,255,255,0.7); border-radius: 10px; }
+        .mera-aside-cta-label { font-size: 0.8125rem; color: #047857; }
+        .mera-aside-cta-value { font-size: 1rem; font-weight: 700; color: #064e3b; }
+        .mera-aside-cta-time { margin: 0 0 20px; font-size: 0.8125rem; color: #059669; }
+        .mera-aside-cta { width: 100%; padding: 16px 20px; margin: 0; background: linear-gradient(135deg, #059669 0%, #047857 100%); color: #fff; border: 0; border-radius: 12px; font-weight: 600; font-size: 1rem; cursor: pointer; box-shadow: 0 4px 14px rgba(5, 150, 105, 0.35); transition: opacity 0.2s, transform 0.05s; }
+        .mera-aside-cta:hover { opacity: 0.95; transform: translateY(-1px); }
+        /* Блок 2: форма заявки и контакты */
+        .mera-aside-form-box { background: #fff; border: 1px solid #e2e8f0; border-radius: 20px; padding: 26px 26px 28px; box-shadow: 0 4px 24px rgba(30, 60, 114, 0.06), 0 1px 3px rgba(0,0,0,0.04); }
+        .mera-aside-form-title { margin: 0 0 20px; font-size: 1.0625rem; color: #1e3c72; font-weight: 700; padding-bottom: 12px; border-bottom: 2px solid #e2e8f0; }
+        .mera-aside-form-box input, .mera-aside-form-box textarea { width: 100%; padding: 12px 14px; margin-bottom: 12px; border: 1px solid #cbd5e1; border-radius: 10px; box-sizing: border-box; font-size: 0.9375rem; transition: border-color 0.2s, box-shadow 0.2s; }
+        .mera-aside-form-box input:focus, .mera-aside-form-box textarea:focus { outline: none; border-color: #1e3c72; box-shadow: 0 0 0 3px rgba(30, 60, 114, 0.12); }
+        .mera-aside-form-box button[type="submit"] { width: 100%; padding: 16px; background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: #fff; border: 0; border-radius: 12px; font-weight: 600; font-size: 1rem; cursor: pointer; margin-top: 4px; transition: opacity 0.2s; }
+        .mera-aside-form-box button[type="submit"]:hover { opacity: 0.95; }
+        .mera-aside-contacts { margin-top: 22px; padding-top: 20px; border-top: 1px solid #e2e8f0; }
+        .mera-aside-contact-item { margin: 0 0 10px; font-size: 0.9375rem; color: #334155; font-weight: 500; display: flex; align-items: center; gap: 8px; }
+        .mera-aside-contact-icon { font-size: 1rem; }
+        .mera-aside-contact-list { margin: 14px 0 0; padding: 0 0 0 1.2em; font-size: 0.875rem; color: #64748b; line-height: 1.7; }
+        .mera-aside-contact-list li { margin-bottom: 4px; }
         .mera-why { background: #fff; border-radius: 16px; padding: 24px; margin-top: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); border: 1px solid #e2e8f0; }
         .mera-why h3 { margin: 0 0 16px; font-size: 1rem; color: #1e3c72; font-weight: 700; }
         .mera-why ul { margin: 0; padding: 0; list-style: none; }
@@ -235,14 +246,25 @@ $intro = mb_substr(strip_tags(str_replace(["\n", '**'], [' ', ''], $measure['ful
         </main>
 
         <aside class="mera-aside">
-            <div class="mera-form-box" id="form">
-                <h3>Получить помощь в получении</h3>
-                <p><?php echo htmlspecialchars(mb_substr($measure['title_normal'] ?? '', 0, 45)); ?>…</p>
-                <p class="price">Размер поддержки: <?php echo htmlspecialchars($measure['amount_formatted'] ?? '—'); ?></p>
-                <p style="font-size:0.9rem; color:#475569;">Стоимость консалтинга по рынку: <strong><?php echo htmlspecialchars($price_label); ?></strong></p>
-                <p style="font-size:0.85rem; color:#64748b;">Среднее время подготовки: 14–21 день</p>
+            <!-- Блок 1: Консультация и ключевые цифры -->
+            <div class="mera-aside-cta-box">
+                <h3 class="mera-aside-cta-title">Получить помощь в получении</h3>
+                <p class="mera-aside-cta-desc"><?php echo htmlspecialchars(mb_substr($measure['title_normal'] ?? '', 0, 45)); ?>…</p>
+                <div class="mera-aside-cta-meta">
+                    <span class="mera-aside-cta-label">Размер поддержки</span>
+                    <span class="mera-aside-cta-value"><?php echo htmlspecialchars($measure['amount_formatted'] ?? '—'); ?></span>
+                </div>
+                <div class="mera-aside-cta-meta">
+                    <span class="mera-aside-cta-label">Консалтинг по рынку</span>
+                    <span class="mera-aside-cta-value"><?php echo htmlspecialchars($price_label); ?></span>
+                </div>
+                <p class="mera-aside-cta-time">Среднее время подготовки: 14–21 день</p>
                 <button type="button" class="mera-aside-cta" onclick="typeof openModal === 'function' && openModal('consultation')">Получить консультацию</button>
-                <form action="/send-email.php" method="post" id="meraLeadForm" style="margin-top:16px;">
+            </div>
+            <!-- Блок 2: Форма заявки и контакты -->
+            <div class="mera-aside-form-box" id="form">
+                <h3 class="mera-aside-form-title">Оставить заявку</h3>
+                <form action="/send-email.php" method="post" id="meraLeadForm">
                     <input type="hidden" name="service" value="<?php echo htmlspecialchars($measure['title_normal'] ?? 'Консультация'); ?>">
                     <input type="hidden" name="page_url" value="<?php echo htmlspecialchars($canonical); ?>">
                     <input type="hidden" name="source" value="navigator-mera">
@@ -253,12 +275,14 @@ $intro = mb_substr(strip_tags(str_replace(["\n", '**'], [' ', ''], $measure['ful
                     <textarea name="message" rows="3" placeholder="Комментарий"></textarea>
                     <button type="submit">Оставить заявку</button>
                 </form>
-                <div class="contacts">
-                    <p>📞 +7 920-898-17-18</p>
-                    <p>✉️ reestrgarant@mail.ru</p>
-                    <p>Бесплатная первичная консультация</p>
-                    <p>Оценка шансов на получение</p>
-                    <p>Подготовка документов под ключ</p>
+                <div class="mera-aside-contacts">
+                    <p class="mera-aside-contact-item"><span class="mera-aside-contact-icon">📞</span> +7 920-898-17-18</p>
+                    <p class="mera-aside-contact-item"><span class="mera-aside-contact-icon">✉️</span> reestrgarant@mail.ru</p>
+                    <ul class="mera-aside-contact-list">
+                        <li>Бесплатная первичная консультация</li>
+                        <li>Оценка шансов на получение</li>
+                        <li>Подготовка документов под ключ</li>
+                    </ul>
                 </div>
             </div>
             <div class="mera-why">
