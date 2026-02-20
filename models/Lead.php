@@ -71,17 +71,21 @@ class Lead {
         // Получаем UTM метки из URL
         $utm = $this->getUtmParams();
         
-        // Получаем информацию о странице
-        $pageInfo = $this->getPageInfo();
+        // URL страницы отправки: из формы (откуда пришла заявка), иначе текущий запрос
+        $pageUrl = trim($data['page_url'] ?? '');
+        if ($pageUrl === '' || strpos($pageUrl, 'send-email') !== false) {
+            $pageInfo = $this->getPageInfo();
+            $pageUrl = $pageInfo['url'];
+        }
         
         return [
             'name' => $data['name'] ?? '',
             'phone' => $data['phone'] ?? '',
             'email' => $data['email'] ?? '',
-            'message' => ($data['message'] ?? '') . ($data['company'] ? ' | Компания: ' . $data['company'] : '') . ($service ? ' | Услуга: ' . $service : ''),
+            'message' => ($data['message'] ?? '') . ($data['company'] ? ' | Компания: ' . ($data['company'] ?? '') : '') . ($service ? ' | Услуга: ' . $service : ''),
             'ip_address' => $this->getClientIp(),
             'user_agent' => $_SERVER['HTTP_USER_AGENT'] ?? '',
-            'page_url' => $pageInfo['url'],
+            'page_url' => $pageUrl,
             'utm_source' => $utm['utm_source'] ?? '',
             'utm_medium' => $utm['utm_medium'] ?? '',
             'utm_campaign' => $utm['utm_campaign'] ?? '',

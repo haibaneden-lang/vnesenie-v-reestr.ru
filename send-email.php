@@ -28,7 +28,7 @@ function respond($ok, $message, $extra = [], $statusCode = 200) {
     }
     $title = $ok ? 'Заявка принята' : 'Ошибка отправки';
     $body = $ok
-        ? '✅ Заявка принята! Мы свяжемся с вами в течение 15 минут в рабочее время.'
+        ? '✅ Заявка принята! Мы свяжемся с вами в течение 30 минут в рабочее время.'
         : ('❌ Ошибка отправки: ' . htmlspecialchars($message));
     $back = $_SERVER['HTTP_REFERER'] ?? '/';
     echo '<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>' . $title . '</title></head><body style="font-family:Arial,sans-serif;padding:24px;">';

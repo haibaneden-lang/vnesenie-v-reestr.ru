@@ -1,0 +1,64 @@
+<!-- Единая модальная форма лида для всего сайта -->
+<div id="consultationModal" class="modal" aria-hidden="true">
+  <div class="modal-content">
+    <span class="modal-close" onclick="closeModal()" aria-label="Закрыть">&times;</span>
+    <h3 id="modalTitle">Получить консультацию</h3>
+    <p id="modalDescription">Заполните форму и мы свяжемся с вами в течение 30 минут</p>
+
+    <!-- БАЗОВЫЙ режим: обычный POST, работает без JS -->
+    <form id="leadForm" action="/send-email.php" method="POST" novalidate aria-label="Форма обратной связи">
+      <input type="hidden" name="service" id="lead_service" value="Консультация">
+      <input type="hidden" name="page_url" id="lead_page_url" value="">
+      <input type="hidden" name="source" id="lead_source" value="modal">
+
+      <div class="form-group">
+        <label for="lead_name">Имя *</label>
+        <input type="text" id="lead_name" name="name" required autocomplete="name" aria-required="true" aria-describedby="name-help">
+        <small id="name-help" class="sr-only">Обязательное поле для заполнения</small>
+      </div>
+
+      <div class="form-group">
+        <label for="lead_phone">Телефон</label>
+        <input type="tel" id="lead_phone" name="phone" autocomplete="tel" aria-describedby="phone-help">
+        <small id="phone-help" class="sr-only">Укажите телефон для связи (необязательно, если указан email)</small>
+      </div>
+
+      <div class="form-group">
+        <label for="lead_email">Email</label>
+        <input type="email" id="lead_email" name="email" autocomplete="email" aria-describedby="email-help">
+        <small id="email-help" class="sr-only">Укажите email для связи (необязательно, если указан телефон)</small>
+      </div>
+
+      <div class="form-group">
+        <label for="lead_company">Название компании</label>
+        <input type="text" id="lead_company" name="company" autocomplete="organization" aria-required="false">
+      </div>
+
+      <div class="form-group">
+        <label for="lead_message">Сообщение</label>
+        <textarea id="lead_message" name="message" rows="3" placeholder="Опишите вашу задачу..." aria-required="false"></textarea>
+      </div>
+
+      <div class="form-group privacy-notice">
+        <p>Отправляя форму, вы соглашаетесь с <a href="/privacy" target="_blank">политикой конфиденциальности</a></p>
+      </div>
+
+      <button type="submit" class="submit-btn" id="leadSubmitBtn" aria-label="Отправить заявку">Отправить заявку</button>
+
+      <div class="success-message" id="leadSuccessMessage" role="status" aria-live="polite" aria-atomic="true" style="display: none;">
+        <div style="text-align: center; padding: 24px;">
+          <strong style="font-size: 20px; color: #27ae60;">✅ Заявка отправлена</strong><br><br>
+          <span style="font-size: 15px; color: #333;">С вами свяжутся в течение <strong>30 минут</strong> в рабочее время<br>(Пн–Пт: 9:00–18:00)</span>
+        </div>
+      </div>
+      
+      <div class="error-message" id="leadErrorMessage" role="alert" aria-live="assertive" aria-atomic="true" style="display: none;">
+        <div style="text-align: center; padding: 15px; background: #f8d7da; border: 2px solid #dc3545; border-radius: 8px; margin: 20px 0;">
+          <strong style="color: #721c24;">❌ Ошибка отправки</strong><br>
+          <span style="font-size: 14px; color: #721c24;">Произошла ошибка при отправке. Попробуйте еще раз или свяжитесь с нами по телефону: <strong>+7 920-898-17-18</strong></span>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
