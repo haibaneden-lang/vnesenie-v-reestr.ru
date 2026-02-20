@@ -79,58 +79,117 @@
     <link rel="stylesheet" href="/cert.css">
 
     <style>
-    .dp-hero {
-        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-        color: #ffffff;
-        padding: 80px 0 70px;
-        text-align: center;
-    }
-    .dp-hero h1 { font-size: 2.5rem; margin-bottom: 18px; }
-    .dp-hero p { max-width: 760px; margin: 0 auto 28px; font-size: 1.1rem; opacity: 0.95; }
-    .dp-hero-meta { display: flex; justify-content: center; flex-wrap: wrap; gap: 14px; font-size: 0.95rem; opacity: 0.9; }
-    .dp-hero-meta span { padding: 6px 12px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.35); background: rgba(15,23,42,0.18); }
+    /* ——— Кросс-платформенная база ——— */
+    .nav-gisp-page { min-height: 100vh; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; box-sizing: border-box; }
+    @media (max-width: 768px) { .container { padding: 0 16px; } }
+    @media (max-width: 480px) { .container { padding: 0 12px; } }
 
-    .dp-main { padding: 56px 0 40px; background: #ffffff; }
-    .dp-layout { display: grid; grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.2fr); gap: 40px; }
-    .dp-article h2 { font-size: 1.7rem; margin: 40px 0 16px; padding: 0 0 0 18px; border-left: 4px solid #1e3c72; color: #1e3c72; line-height: 1.35; }
+    /* ——— Hero ——— */
+    .dp-hero {
+        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #1e40af 100%);
+        color: #fff;
+        padding: 64px 0 56px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+    .dp-hero::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(255,255,255,0.12) 0%, transparent 50%);
+        pointer-events: none;
+    }
+    .dp-hero .container { position: relative; z-index: 1; }
+    .dp-hero h1 { font-size: clamp(1.75rem, 5vw, 2.5rem); margin-bottom: 16px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; text-shadow: 0 1px 2px rgba(0,0,0,0.1); }
+    .dp-hero p { max-width: 720px; margin: 0 auto 24px; font-size: clamp(0.9375rem, 2.2vw, 1.1rem); opacity: 0.96; line-height: 1.6; }
+    .dp-hero .cta-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 24px; }
+    .dp-hero .cta-buttons .btn { min-height: 48px; padding: 12px 24px; font-size: 1rem; font-weight: 600; border-radius: 12px; transition: transform 0.15s, box-shadow 0.2s; }
+    .dp-hero .cta-buttons .btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+    .dp-hero .cta-buttons .btn-primary { background: rgba(255,255,255,0.95); color: #1e3c72; border: none; }
+    .dp-hero .cta-buttons .btn-secondary { background: rgba(255,255,255,0.15); color: #fff; border: 2px solid rgba(255,255,255,0.5); }
+    .dp-hero .cta-buttons .btn-secondary:hover { background: rgba(255,255,255,0.25); border-color: rgba(255,255,255,0.8); }
+    .dp-hero .cta-buttons .btn-outline-light { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.7); text-decoration: none; }
+    .dp-hero .cta-buttons .btn-outline-light:hover { background: rgba(255,255,255,0.15); border-color: #fff; color: #fff; }
+    .dp-hero-meta { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-top: 28px; font-size: 0.875rem; opacity: 0.92; }
+    .dp-hero-meta span { padding: 8px 14px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.4); background: rgba(15,23,42,0.2); -webkit-tap-highlight-color: transparent; }
+    @media (max-width: 480px) {
+        .dp-hero { padding: 48px 0 44px; }
+        .dp-hero .cta-buttons { flex-direction: column; width: 100%; }
+        .dp-hero .cta-buttons .btn { width: 100%; }
+    }
+
+    .dp-main { padding: 48px 0 40px; background: #fff; }
+    .dp-layout { display: grid; grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.2fr); gap: 40px; align-items: start; }
+    .dp-article { min-width: 0; }
+    .dp-article h2 { font-size: clamp(1.35rem, 3vw, 1.7rem); margin: 36px 0 14px; padding: 0 0 0 20px; border-left: 4px solid #1e3c72; color: #1e3c72; line-height: 1.35; font-weight: 700; }
     .dp-article h2:first-child { margin-top: 0; }
-    .dp-article p { margin: 0 0 14px; line-height: 1.7; color: #374151; font-size: 0.98rem; }
-    .dp-article ul { margin: 0 0 14px; padding-left: 1.4em; color: #374151; line-height: 1.7; }
-    .dp-callout { background: #f0f7ff; border-left: 4px solid #1e3c72; padding: 14px 18px; margin: 18px 0; border-radius: 0 8px 8px 0; font-size: 0.95rem; color: #1e293b; }
-    .dp-list { margin: 0 0 14px; padding-left: 1.4em; }
-    .dp-list li { margin-bottom: 6px; }
-    .dp-aside-card { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
-    .dp-aside-card h3 { font-size: 1.05rem; margin: 0 0 10px; color: #1e3c72; display: flex; align-items: center; gap: 8px; }
-    .dp-aside-card p, .dp-aside-card ul { margin: 0; font-size: 0.9rem; line-height: 1.6; color: #475569; }
+    .dp-article p { margin: 0 0 14px; line-height: 1.75; color: #374151; font-size: 0.9875rem; }
+    .dp-article ul { margin: 0 0 14px; padding-left: 1.5em; color: #374151; line-height: 1.75; }
+    .dp-article a { color: #1e3c72; font-weight: 500; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.15s; }
+    .dp-article a:hover { border-bottom-color: #1e3c72; }
+    .dp-callout { background: linear-gradient(90deg, #f0f7ff 0%, #e8f4ff 100%); border-left: 4px solid #1e3c72; padding: 18px 20px; margin: 20px 0; border-radius: 0 12px 12px 0; font-size: 0.95rem; color: #1e293b; line-height: 1.6; box-shadow: 0 2px 8px rgba(30,60,114,0.06); }
+    .dp-list { margin: 0 0 14px; padding-left: 1.5em; }
+    .dp-list li { margin-bottom: 8px; }
+    .dp-aside { position: sticky; top: 24px; }
+    .dp-aside-card { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 16px; padding: 22px; margin-bottom: 20px; transition: box-shadow 0.2s, border-color 0.2s; }
+    .dp-aside-card:hover { border-color: #cbd5e1; box-shadow: 0 4px 16px rgba(30,60,114,0.08); }
+    .dp-aside-card h3 { font-size: 1.05rem; margin: 0 0 10px; color: #1e3c72; display: flex; align-items: center; gap: 10px; font-weight: 600; }
+    .dp-aside-card p, .dp-aside-card ul { margin: 0; font-size: 0.9rem; line-height: 1.65; color: #475569; }
     .dp-aside-card ul { padding-left: 1.2em; }
+    .dp-aside-card a { color: #1e3c72; font-weight: 500; }
     .dp-aside-icon { display: inline-flex; }
     .dp-aside-icon svg { width: 20px; height: 20px; flex-shrink: 0; }
-    .dp-section { padding: 48px 0 56px; background: #f8fafc; }
-    .dp-section h2 { text-align: center; font-size: 1.8rem; margin-bottom: 12px; color: #1e3c72; }
-    .dp-section .section-subtitle { text-align: center; max-width: 640px; margin: 0 auto 32px; color: #64748b; }
-    .dp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-    .dp-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; transition: box-shadow 0.2s, border-color 0.2s; }
-    .dp-card:hover { border-color: #1e3c72; box-shadow: 0 4px 12px rgba(30,60,114,0.12); }
-    .dp-card-header { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 12px; }
-    .dp-icon-circle { width: 44px; height: 44px; min-width: 44px; border-radius: 50%; background: #e0e7ff; color: #1e3c72; display: flex; align-items: center; justify-content: center; }
-    .dp-icon-circle svg { width: 22px; height: 22px; }
-    .dp-card-title { font-size: 1.05rem; margin: 0; color: #1e293b; line-height: 1.35; }
-    .dp-card p { margin: 0; font-size: 0.92rem; line-height: 1.6; color: #64748b; }
-    .gisp-official { background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 12px; padding: 20px; margin: 24px 0; }
+    .dp-section { padding: 52px 0 60px; background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%); }
+    .dp-section h2 { text-align: center; font-size: clamp(1.5rem, 3.5vw, 1.8rem); margin-bottom: 12px; color: #1e3c72; font-weight: 700; }
+    .dp-section .section-subtitle { text-align: center; max-width: 600px; margin: 0 auto 36px; color: #64748b; font-size: 0.9875rem; line-height: 1.6; }
+    .dp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+    .dp-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 26px; transition: box-shadow 0.25s, border-color 0.25s, transform 0.2s; display: block; text-decoration: none; color: inherit; }
+    .dp-card:hover { border-color: #1e3c72; box-shadow: 0 8px 24px rgba(30,60,114,0.14); transform: translateY(-2px); }
+    .dp-card-header { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 14px; }
+    .dp-icon-circle { width: 48px; height: 48px; min-width: 48px; border-radius: 14px; background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%); color: #1e3c72; display: flex; align-items: center; justify-content: center; }
+    .dp-icon-circle svg { width: 24px; height: 24px; }
+    .dp-card-title { font-size: 1.08rem; margin: 0; color: #1e293b; line-height: 1.35; font-weight: 600; }
+    .dp-card p { margin: 0; font-size: 0.9375rem; line-height: 1.6; color: #64748b; }
+    .gisp-official { background: linear-gradient(90deg, #ecfdf5 0%, #d1fae5 100%); border: 1px solid #a7f3d0; border-radius: 14px; padding: 22px; margin: 26px 0; box-shadow: 0 2px 8px rgba(16,185,129,0.08); }
     .gisp-official a { color: #047857; font-weight: 600; }
-    @media (max-width: 900px) { .dp-layout { grid-template-columns: 1fr; } }
+    @media (max-width: 900px) {
+        .dp-layout { grid-template-columns: 1fr; gap: 32px; }
+        .dp-aside { position: static; }
+    }
+    @media (max-width: 480px) {
+        .dp-main { padding: 32px 0 28px; }
+        .dp-section { padding: 40px 0 48px; }
+        .dp-grid { grid-template-columns: 1fr; }
+    }
     /* Каталог мер (таблица с фильтрами) */
     .mp-catalog { padding: 48px 0 56px; background: #f8fafc; }
     .mp-catalog h2 { text-align: center; font-size: 1.8rem; margin-bottom: 8px; color: #1e3c72; }
     .mp-catalog .mp-sub { text-align: center; color: #64748b; margin-bottom: 24px; }
-    .mp-layout { display: grid; grid-template-columns: 220px 1fr; gap: 32px; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-    @media (max-width: 900px) { .mp-layout { grid-template-columns: 1fr; } }
-    .mp-filters { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; height: fit-content; position: sticky; top: 20px; }
-    .mp-filters h3 { font-size: 1rem; margin: 0 0 12px; color: #1e3c72; }
-    .mp-filters input, .mp-filters select { width: 100%; padding: 8px 10px; margin-bottom: 12px; border: 1px solid #cbd5e1; border-radius: 6px; }
-    .mp-filters label { display: block; margin-bottom: 6px; font-size: 0.9rem; color: #475569; cursor: pointer; }
-    .mp-filters .reset { margin-top: 12px; }
-    .mp-filters .reset a { color: #64748b; font-size: 0.9rem; }
+    .mp-layout { display: grid; grid-template-columns: 260px 1fr; gap: 32px; max-width: 1200px; margin: 0 auto; padding: 0 20px; align-items: start; }
+    @media (max-width: 900px) { .mp-layout { grid-template-columns: 1fr; gap: 24px; } }
+    .mp-filters { background: #fff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 24px; height: fit-content; position: sticky; top: 24px; box-shadow: 0 4px 20px rgba(30, 60, 114, 0.06); }
+    .mp-filters form { display: flex; flex-direction: column; gap: 0; }
+    .mp-filters h3 { font-size: 0.8125rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: #1e3c72; margin: 0 0 10px; padding-bottom: 6px; border-bottom: 1px solid #e2e8f0; }
+    .mp-filters h3:not(:first-child) { margin-top: 20px; }
+    .mp-filters input[type="text"] { width: 100%; padding: 12px 14px; margin-bottom: 4px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 0.9375rem; color: #1e293b; background: #fff; transition: border-color 0.2s, box-shadow 0.2s; }
+    .mp-filters input[type="text"]::placeholder { color: #94a3b8; }
+    .mp-filters input[type="text"]:focus { outline: none; border-color: #1e3c72; box-shadow: 0 0 0 3px rgba(30, 60, 114, 0.15); }
+    .mp-filters select { width: 100%; padding: 12px 36px 12px 14px; margin-bottom: 4px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 0.9375rem; color: #1e293b; background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23475569' d='M6 8L1 3h10z'/%3E%3C/svg%3E") no-repeat right 12px center; appearance: none; cursor: pointer; transition: border-color 0.2s, box-shadow 0.2s; }
+    .mp-filters select:focus { outline: none; border-color: #1e3c72; box-shadow: 0 0 0 3px rgba(30, 60, 114, 0.15); }
+    .mp-filters .filter-radios { display: flex; flex-direction: column; gap: 8px; margin-bottom: 4px; }
+    .mp-filters label { display: flex; align-items: center; gap: 10px; margin-bottom: 0; font-size: 0.9375rem; color: #475569; cursor: pointer; padding: 8px 10px; border-radius: 8px; transition: background 0.15s, color 0.15s; }
+    .mp-filters label:hover { background: #f1f5f9; color: #1e293b; }
+    .mp-filters label input[type="radio"] { width: 18px; height: 18px; margin: 0; accent-color: #1e3c72; cursor: pointer; flex-shrink: 0; }
+    .mp-filters button[type="submit"], .mp-filters .mp-filters-submit { width: 100%; margin-top: 20px; padding: 14px 20px; background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: #fff; border: 0; border-radius: 10px; font-size: 0.9375rem; font-weight: 600; cursor: pointer; transition: opacity 0.2s, transform 0.1s; }
+    .mp-filters button[type="submit"]:hover, .mp-filters .mp-filters-submit:hover { opacity: 0.95; }
+    .mp-filters button[type="submit"]:active, .mp-filters .mp-filters-submit:active { transform: scale(0.99); }
+    .mp-filters button[type="submit"]:focus-visible, .mp-filters .mp-filters-submit:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(30, 60, 114, 0.4); }
+    .mp-filters .reset { margin-top: 14px; text-align: center; }
+    .mp-filters .reset a { color: #64748b; font-size: 0.875rem; text-decoration: none; padding: 6px 12px; border-radius: 8px; transition: color 0.15s, background 0.15s; }
+    .mp-filters .reset a:hover { color: #1e3c72; background: #f1f5f9; }
+    @media (max-width: 900px) { .mp-filters { position: static; } }
     .mp-table-wrap { overflow-x: auto; }
     .mp-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
     .mp-table th, .mp-table td { padding: 12px 14px; text-align: left; border-bottom: 1px solid #e2e8f0; }
@@ -146,6 +205,24 @@
     .mp-badge-other { background: #64748b; color: #fff; }
     .mp-count { color: #64748b; font-size: 0.95rem; margin-bottom: 16px; }
     #navigator-catalog-content { min-height: 120px; }
+    /* Каталог и таблица — адаптив */
+    .mp-catalog { padding: 40px 0 48px; }
+    .mp-catalog h2 { font-size: clamp(1.4rem, 3.5vw, 1.8rem); }
+    @media (max-width: 768px) {
+        .mp-layout { padding: 0 16px; gap: 24px; }
+        .mp-catalog { padding: 32px 0 40px; }
+        .mp-table { font-size: 0.8125rem; }
+        .mp-table th, .mp-table td { padding: 10px 8px; }
+        .mp-table-wrap { margin: 0 -16px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+        .mp-table-wrap table { min-width: 680px; }
+    }
+    @media (max-width: 480px) {
+        .mp-layout { padding: 0 12px; }
+        .mp-filters { padding: 18px; border-radius: 14px; }
+    }
+    /* Плавный скролл для якоря */
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
     </style>
 </head>
 <body>
@@ -155,11 +232,12 @@
         <div class="container">
             <h1>Навигатор мер поддержки ГИСП</h1>
             <p>Удобный способ найти подходящие меры государственной поддержки для российских производителей через единый портал ГИСП Минпромторга — субсидии, льготы, реестры и программы.</p>
-            <div class="cta-buttons" style="margin-top: 24px;">
+            <div class="cta-buttons">
                 <button type="button" class="btn btn-primary" onclick="typeof openModal === 'function' && openModal('consultation')">Получить консультацию</button>
                 <a href="#katalog-mer" class="btn btn-secondary">Таблица мер поддержки (171)</a>
+                <a href="#katalog-mer" class="btn btn-outline-light">Подробнее</a>
             </div>
-            <div class="dp-hero-meta" style="margin-top: 28px;">
+            <div class="dp-hero-meta">
                 <span>Официальный портал Минпромторга</span>
                 <span>Реестры и меры поддержки в одном месте</span>
                 <span>Помощь во включении в реестры с 2015 года</span>

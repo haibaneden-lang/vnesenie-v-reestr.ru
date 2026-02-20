@@ -106,14 +106,30 @@ $catalog_action = '/navigator-mer-podderzhki-gisp';
     .mp-catalog { padding: 48px 0 56px; background: #f8fafc; }
     .mp-catalog h2 { text-align: center; font-size: 1.8rem; margin-bottom: 8px; color: #1e3c72; }
     .mp-catalog .sub { text-align: center; color: #64748b; margin-bottom: 24px; }
-    .mp-layout { display: grid; grid-template-columns: 220px 1fr; gap: 32px; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-    @media (max-width: 900px) { .mp-layout { grid-template-columns: 1fr; } }
-    .mp-filters { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; height: fit-content; position: sticky; top: 20px; }
-    .mp-filters h3 { font-size: 1rem; margin: 0 0 12px; color: #1e3c72; }
-    .mp-filters input, .mp-filters select { width: 100%; padding: 8px 10px; margin-bottom: 12px; border: 1px solid #cbd5e1; border-radius: 6px; }
-    .mp-filters label { display: block; margin-bottom: 6px; font-size: 0.9rem; color: #475569; cursor: pointer; }
-    .mp-filters .reset { margin-top: 12px; }
-    .mp-filters .reset a { color: #64748b; font-size: 0.9rem; }
+    .mp-layout { display: grid; grid-template-columns: 260px 1fr; gap: 32px; max-width: 1200px; margin: 0 auto; padding: 0 20px; align-items: start; }
+    @media (max-width: 900px) { .mp-layout { grid-template-columns: 1fr; gap: 24px; } }
+    /* Блок фильтров — современный вид в стилистике сайта */
+    .mp-filters { background: #fff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 24px; height: fit-content; position: sticky; top: 24px; box-shadow: 0 4px 20px rgba(30, 60, 114, 0.06); }
+    .mp-filters form { display: flex; flex-direction: column; gap: 0; }
+    .mp-filters h3 { font-size: 0.8125rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: #1e3c72; margin: 0 0 10px; padding-bottom: 6px; border-bottom: 1px solid #e2e8f0; }
+    .mp-filters h3:not(:first-child) { margin-top: 20px; }
+    .mp-filters input[type="text"] { width: 100%; padding: 12px 14px; margin-bottom: 4px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 0.9375rem; color: #1e293b; background: #fff; transition: border-color 0.2s, box-shadow 0.2s; }
+    .mp-filters input[type="text"]::placeholder { color: #94a3b8; }
+    .mp-filters input[type="text"]:focus { outline: none; border-color: #1e3c72; box-shadow: 0 0 0 3px rgba(30, 60, 114, 0.15); }
+    .mp-filters select { width: 100%; padding: 12px 36px 12px 14px; margin-bottom: 4px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 0.9375rem; color: #1e293b; background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23475569' d='M6 8L1 3h10z'/%3E%3C/svg%3E") no-repeat right 12px center; appearance: none; cursor: pointer; transition: border-color 0.2s, box-shadow 0.2s; }
+    .mp-filters select:focus { outline: none; border-color: #1e3c72; box-shadow: 0 0 0 3px rgba(30, 60, 114, 0.15); }
+    .mp-filters .filter-radios { display: flex; flex-direction: column; gap: 8px; margin-bottom: 4px; }
+    .mp-filters label { display: flex; align-items: center; gap: 10px; margin-bottom: 0; font-size: 0.9375rem; color: #475569; cursor: pointer; padding: 8px 10px; border-radius: 8px; transition: background 0.15s, color 0.15s; }
+    .mp-filters label:hover { background: #f1f5f9; color: #1e293b; }
+    .mp-filters label input[type="radio"] { width: 18px; height: 18px; margin: 0; accent-color: #1e3c72; cursor: pointer; flex-shrink: 0; }
+    .mp-filters button[type="submit"] { width: 100%; margin-top: 20px; padding: 14px 20px; background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: #fff; border: 0; border-radius: 10px; font-size: 0.9375rem; font-weight: 600; cursor: pointer; transition: opacity 0.2s, transform 0.1s; }
+    .mp-filters button[type="submit"]:hover { opacity: 0.95; }
+    .mp-filters button[type="submit"]:active { transform: scale(0.99); }
+    .mp-filters button[type="submit"]:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(30, 60, 114, 0.4); }
+    .mp-filters .reset { margin-top: 14px; text-align: center; }
+    .mp-filters .reset a { color: #64748b; font-size: 0.875rem; text-decoration: none; padding: 6px 12px; border-radius: 8px; transition: color 0.15s, background 0.15s; }
+    .mp-filters .reset a:hover { color: #1e3c72; background: #f1f5f9; }
+    @media (max-width: 900px) { .mp-filters { position: static; } }
     .mp-table-wrap { overflow-x: auto; }
     .mp-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
     .mp-table th, .mp-table td { padding: 12px 14px; text-align: left; border-bottom: 1px solid #e2e8f0; }
@@ -139,6 +155,9 @@ $catalog_action = '/navigator-mer-podderzhki-gisp';
     .dp-icon-circle svg { width: 22px; height: 22px; }
     .dp-card-title { font-size: 1.05rem; margin: 0; color: #1e293b; }
     .dp-card p { margin: 0; font-size: 0.92rem; line-height: 1.6; color: #64748b; }
+    html { scroll-behavior: smooth; }
+    @media (max-width: 768px) { .container { padding: 0 16px; } .dp-hero { padding: 52px 0 48px; } .dp-hero h1 { font-size: 1.75rem; } }
+    @media (max-width: 480px) { .container { padding: 0 12px; } .cta-buttons { flex-direction: column; } .cta-buttons .btn { width: 100%; } }
     </style>
 </head>
 <body>
@@ -148,9 +167,10 @@ $catalog_action = '/navigator-mer-podderzhki-gisp';
         <div class="container">
             <h1>Навигатор мер поддержки ГИСП</h1>
             <p>Удобный способ найти подходящие меры государственной поддержки для российских производителей через единый портал ГИСП Минпромторга — субсидии, льготы, реестры и программы. Ниже — каталог из 171 актуальной меры с фильтрами.</p>
-            <div class="cta-buttons" style="margin-top: 24px;">
+            <div class="cta-buttons" style="margin-top: 24px; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px;">
                 <button type="button" class="btn btn-primary" onclick="typeof openModal === 'function' && openModal('consultation')">Получить консультацию</button>
                 <a href="#katalog-mer" class="btn btn-secondary">Таблица мер поддержки (171)</a>
+                <a href="#katalog-mer" class="btn btn-secondary">Подробнее</a>
             </div>
             <div class="dp-hero-meta" style="margin-top: 28px;">
                 <span>Официальный портал Минпромторга</span>
@@ -180,10 +200,12 @@ $catalog_action = '/navigator-mer-podderzhki-gisp';
                     <h3>Поиск</h3>
                     <input type="text" name="q" value="<?php echo htmlspecialchars($q); ?>" placeholder="Название или отрасль...">
                     <h3>Источник</h3>
+                    <div class="filter-radios">
                     <label><input type="radio" name="source" value="" <?php echo $filter_source === '' ? 'checked' : ''; ?>> Все</label>
                     <label><input type="radio" name="source" value="minpromtorg" <?php echo $filter_source === 'minpromtorg' ? 'checked' : ''; ?>> Минпромторг (<?php echo count($by_source['minpromtorg']); ?>)</label>
                     <label><input type="radio" name="source" value="frp_federal" <?php echo $filter_source === 'frp_federal' ? 'checked' : ''; ?>> ФРП федеральные (<?php echo count($by_source['frp_federal']); ?>)</label>
                     <label><input type="radio" name="source" value="frp_regional" <?php echo $filter_source === 'frp_regional' ? 'checked' : ''; ?>> ФРП региональные (<?php echo count($by_source['frp_regional']); ?>)</label>
+                    </div>
                     <h3>Отрасль</h3>
                     <select name="section">
                         <option value="">Все отрасли</option>
@@ -198,7 +220,7 @@ $catalog_action = '/navigator-mer-podderzhki-gisp';
                         <option value="<?php echo htmlspecialchars($st); ?>" <?php echo $filter_type === $st ? 'selected' : ''; ?>><?php echo htmlspecialchars($st); ?> (<?php echo $cnt; ?>)</option>
                         <?php endforeach; ?>
                     </select>
-                    <button type="submit" style="width:100%; padding:10px; background:#1e3c72; color:#fff; border:0; border-radius:8px; cursor:pointer;">Показать</button>
+                    <button type="submit" class="mp-filters-submit">Показать</button>
                     <div class="reset"><a href="/navigator-mer-podderzhki-gisp">Сбросить фильтры</a></div>
                 </form>
             </aside>
