@@ -1,7 +1,7 @@
 <?php
 /**
  * Детальная SEO-страница одной меры поддержки
- * URL: /mery-podderzhki/{slug}
+ * URL: /navigator-mer-podderzhki-gisp/{slug}
  */
 $slug = isset($_GET['slug']) ? trim($_GET['slug']) : '';
 if ($slug === '') {
@@ -44,7 +44,7 @@ $same_section = array_slice($same_section, 0, 3);
 
 $title = $measure['seo_title'] ?? ($measure['title_normal'] ?? '') . ' | РеестрГарант';
 $description = $measure['seo_description'] ?? '';
-$canonical = 'https://vnesenie-v-reestr.ru' . ($measure['url_path'] ?? '/mery-podderzhki/' . $slug);
+$canonical = 'https://vnesenie-v-reestr.ru/navigator-mer-podderzhki-gisp/' . $slug;
 $price_label = $measure['consulting_price']['label'] ?? 'по запросу';
 $steps = $measure['how_to_get_steps'] ?? [];
 $why_us = $measure['why_us_points'] ?? [];
@@ -112,7 +112,7 @@ $intro = mb_substr(strip_tags(str_replace(["\n", '**'], [' ', ''], $measure['ful
     <div data-include="/header.html"></div>
 
     <div class="container mera-bread">
-        <a href="/">Главная</a> → <a href="/mery-podderzhki/">Меры поддержки</a> → <?php echo htmlspecialchars($measure['section'] ?? ''); ?> → <span><?php echo htmlspecialchars(mb_substr($measure['title_normal'] ?? '', 0, 50)); ?>…</span>
+        <a href="/">Главная</a> → <a href="/navigator-mer-podderzhki-gisp">Навигатор мер поддержки ГИСП</a> → <?php echo htmlspecialchars($measure['section'] ?? ''); ?> → <span><?php echo htmlspecialchars(mb_substr($measure['title_normal'] ?? '', 0, 50)); ?>…</span>
     </div>
 
     <div class="mera-layout">
@@ -159,7 +159,7 @@ $intro = mb_substr(strip_tags(str_replace(["\n", '**'], [' ', ''], $measure['ful
                 <?php endforeach; ?>
             </ul>
             <p><strong>Подсказка:</strong> Подготовка заявки требует знания специфики требований администратора программы. Специалисты РеестрГарант помогут пройти весь путь — от проверки соответствия до подписания соглашения.</p>
-            <p><a href="#form" style="display:inline-block; padding:12px 24px; background:#1e3c72; color:#fff; text-decoration:none; border-radius:8px; font-weight:500;">Заказать подготовку заявки под ключ →</a></p>
+            <p><button type="button" onclick="typeof openModal === 'function' && openModal('consultation')" style="display:inline-block; padding:12px 24px; background:#1e3c72; color:#fff; border:0; border-radius:8px; font-weight:500; cursor:pointer;">Заказать подготовку заявки под ключ →</button></p>
 
             <h2>Контакты для подачи заявки</h2>
             <div class="contacts-pre"><?php echo nl2br(htmlspecialchars($measure['contacts'] ?? '—')); ?></div>
@@ -172,7 +172,7 @@ $intro = mb_substr(strip_tags(str_replace(["\n", '**'], [' ', ''], $measure['ful
                 <div class="mera-cards">
                     <?php foreach ($same_section as $other): ?>
                     <div class="mera-card">
-                        <a href="/mery-podderzhki/<?php echo htmlspecialchars($other['slug'] ?? ''); ?>"><?php echo htmlspecialchars(mb_substr($other['title_normal'] ?? '', 0, 80)); ?>…</a>
+                        <a href="/navigator-mer-podderzhki-gisp/<?php echo htmlspecialchars($other['slug'] ?? ''); ?>"><?php echo htmlspecialchars(mb_substr($other['title_normal'] ?? '', 0, 80)); ?>…</a>
                         <div class="amount"><?php echo htmlspecialchars($other['amount_formatted'] ?? '—'); ?></div>
                     </div>
                     <?php endforeach; ?>
@@ -188,14 +188,17 @@ $intro = mb_substr(strip_tags(str_replace(["\n", '**'], [' ', ''], $measure['ful
                 <p class="price">Размер поддержки: <?php echo htmlspecialchars($measure['amount_formatted'] ?? '—'); ?></p>
                 <p style="font-size:0.9rem; color:#475569;">Стоимость консалтинга по рынку: <strong><?php echo htmlspecialchars($price_label); ?></strong></p>
                 <p style="font-size:0.85rem; color:#64748b;">Среднее время подготовки: 14–21 день</p>
-                <form action="/send-email.php" method="post" style="margin-top:16px;">
-                    <input type="hidden" name="measure_title" value="<?php echo htmlspecialchars($measure['title_normal'] ?? ''); ?>">
+                <button type="button" style="width:100%; padding:12px; margin-bottom:12px; background:#059669; color:#fff; border:0; border-radius:8px; font-weight:600; cursor:pointer;" onclick="typeof openModal === 'function' && openModal('consultation')">Получить консультацию</button>
+                <form action="/send-email.php" method="post" id="meraLeadForm" style="margin-top:16px;">
+                    <input type="hidden" name="service" value="<?php echo htmlspecialchars($measure['title_normal'] ?? 'Консультация'); ?>">
+                    <input type="hidden" name="page_url" value="<?php echo htmlspecialchars($canonical); ?>">
+                    <input type="hidden" name="source" value="navigator-mera">
                     <input type="text" name="name" placeholder="Имя *" required>
                     <input type="tel" name="phone" placeholder="Телефон *" required>
-                    <input type="email" name="email" placeholder="Email *" required>
+                    <input type="email" name="email" placeholder="Email">
                     <input type="text" name="company" placeholder="Компания">
-                    <textarea name="comment" rows="3" placeholder="Комментарий"></textarea>
-                    <button type="submit">Получить консультацию</button>
+                    <textarea name="message" rows="3" placeholder="Комментарий"></textarea>
+                    <button type="submit">Оставить заявку</button>
                 </form>
                 <div class="contacts">
                     <p>📞 +7 920-898-17-18</p>
@@ -217,6 +220,9 @@ $intro = mb_substr(strip_tags(str_replace(["\n", '**'], [' ', ''], $measure['ful
     </div>
 
     <div data-include="/footer.html"></div>
+    <script src="/js/modal.js"></script>
+    <script>(function(){ var orig = window.openModal; if (orig) { window.openModal = function(type) { orig(type); setTimeout(function(){ var s = document.getElementById('lead_service'); if (s) s.value = <?php echo json_encode($measure['title_normal'] ?? 'Консультация'); ?>; }, 200); }; } })();</script>
     <script src="/include.js"></script>
+    <script src="/js/lead-form.js"></script>
 </body>
 </html>

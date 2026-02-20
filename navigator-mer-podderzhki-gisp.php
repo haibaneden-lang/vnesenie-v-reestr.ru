@@ -149,8 +149,7 @@ $catalog_action = '/navigator-mer-podderzhki-gisp';
             <h1>Навигатор мер поддержки ГИСП</h1>
             <p>Удобный способ найти подходящие меры государственной поддержки для российских производителей через единый портал ГИСП Минпромторга — субсидии, льготы, реестры и программы. Ниже — каталог из 171 актуальной меры с фильтрами.</p>
             <div class="cta-buttons" style="margin-top: 24px;">
-                <a href="https://gisp.gov.ru" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Перейти на gisp.gov.ru</a>
-                <button type="button" class="btn btn-secondary" onclick="typeof openModal === 'function' && openModal('consultation')">Получить консультацию</button>
+                <button type="button" class="btn btn-primary" onclick="typeof openModal === 'function' && openModal('consultation')">Получить консультацию</button>
                 <a href="#katalog-mer" class="btn btn-secondary">Таблица мер поддержки (171)</a>
             </div>
             <div class="dp-hero-meta" style="margin-top: 28px;">
@@ -309,6 +308,7 @@ $catalog_action = '/navigator-mer-podderzhki-gisp';
     <div data-include="footer.html"></div>
     <script src="/js/modal.js"></script>
     <script src="/include.js"></script>
+    <script src="/js/lead-form.js"></script>
     <script src="/script.js"></script>
 </body>
 </html>

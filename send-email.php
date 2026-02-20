@@ -4,10 +4,38 @@
 // ini_set('display_errors', 1);
 
 // Устанавливаем заголовки для CORS
-header('Content-Type: application/json; charset=utf-8');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
+
+// Определяем формат ответа (JSON для fetch/AJAX, HTML для обычного submit)
+$accept = $_SERVER['HTTP_ACCEPT'] ?? '';
+$contentType = $_SERVER['CONTENT_TYPE'] ?? '';
+$wantsJson = (stripos($accept, 'application/json') !== false) || (stripos($contentType, 'application/json') !== false) || (($_SERVER['HTTP_X_REQUESTED_WITH'] ?? '') === 'XMLHttpRequest');
+
+if ($wantsJson) {
+    header('Content-Type: application/json; charset=utf-8');
+} else {
+    header('Content-Type: text/html; charset=utf-8');
+}
+
+function respond($ok, $message, $extra = [], $statusCode = 200) {
+    global $wantsJson;
+    http_response_code($statusCode);
+    if ($wantsJson) {
+        echo json_encode(array_merge(['success' => $ok], $extra, $ok ? ['message' => $message] : ['error' => $message]), JSON_UNESCAPED_UNICODE);
+        exit;
+    }
+    $title = $ok ? 'Заявка принята' : 'Ошибка отправки';
+    $body = $ok
+        ? '✅ Заявка принята! Мы свяжемся с вами в течение 15 минут в рабочее время.'
+        : ('❌ Ошибка отправки: ' . htmlspecialchars($message));
+    $back = $_SERVER['HTTP_REFERER'] ?? '/';
+    echo '<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>' . $title . '</title></head><body style="font-family:Arial,sans-serif;padding:24px;">';
+    echo '<h2>' . $title . '</h2><p>' . $body . '</p><p><a href="' . htmlspecialchars($back) . '">Вернуться назад</a></p>';
+    echo '</body></html>';
+    exit;
+}
 
 // Обрабатываем preflight запросы
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
@@ -17,18 +45,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 
 // Проверяем метод запроса
 if ($_SERVER["REQUEST_METHOD"] != "POST") {
-    http_response_code(405);
-    echo json_encode([
-        'success' => false, 
-        'error' => 'Method not allowed',
-        'debug' => 'Только POST запросы разрешены'
-    ]);
-    exit;
+    respond(false, 'Method not allowed', ['debug' => 'Только POST запросы разрешены'], 405);
 }
 
-// Получаем данные
+// Получаем данные (поддержка JSON и обычного POST)
+$contentType = $_SERVER['CONTENT_TYPE'] ?? '';
 $input_data = file_get_contents('php://input');
-$input = json_decode($input_data, true);
+$input = null;
+
+if (stripos($contentType, 'application/json') !== false) {
+    $input = json_decode($input_data, true);
+} else {
+    // Классический POST (form submit)
+    $input = $_POST;
+    $input_data = json_encode($input, JSON_UNESCAPED_UNICODE);
+}
+
+// Генерируем уникальный ID для этой заявки
+$request_id = uniqid('lead_', true);
+
+// Дополнительное логирование в файл для отладки
+$logfile = sys_get_temp_dir() . '/send-email.log';
+$logLine = sprintf(
+    "[%s] %s | ip=%s | ua=%s | referer=%s | page_url=%s | raw=%s\n",
+    date('Y-m-d H:i:s'),
+    $request_id,
+    $_SERVER['REMOTE_ADDR'] ?? '-',
+    $_SERVER['HTTP_USER_AGENT'] ?? '-',
+    $_SERVER['HTTP_REFERER'] ?? '-',
+    $input['page_url'] ?? '-',
+    substr($input_data, 0, 500)
+);
+@file_put_contents($logfile, $logLine, FILE_APPEND);
 
 // Генерируем уникальный ID для этой заявки
 $request_id = uniqid('lead_', true);
@@ -39,18 +87,12 @@ error_log("Received data: " . $input_data);
 error_log("Parsed data: " . print_r($input, true));
 
 // Проверяем, что данные получены
-if (!$input) {
-    http_response_code(400);
-    echo json_encode([
-        'success' => false, 
-        'error' => 'No data received',
-        'debug' => 'Данные не получены или неверный JSON'
-    ]);
-    exit;
+if (!$input || !is_array($input)) {
+    respond(false, 'No data received', ['debug' => 'Данные не получены или неверный JSON'], 400);
 }
 
-// Обязательные поля
-$required_fields = ['name', 'phone', 'email'];
+// Обязательные поля: имя, и хотя бы один из phone/email
+$required_fields = ['name'];
 $missing_fields = [];
 
 foreach ($required_fields as $field) {
@@ -59,54 +101,42 @@ foreach ($required_fields as $field) {
     }
 }
 
+// Дополнительная проверка: телефон или email должен быть заполнен хотя бы один
+if (empty($input['phone']) && empty($input['email'])) {
+    $missing_fields[] = 'phone_or_email';
+}
+
 if (!empty($missing_fields)) {
-    http_response_code(400);
-    echo json_encode([
-        'success' => false, 
-        'error' => 'Missing required fields: ' . implode(', ', $missing_fields),
-        'debug' => 'Не заполнены обязательные поля'
-    ]);
-    exit;
+    respond(false, 'Не заполнены обязательные поля: ' . implode(', ', $missing_fields), ['debug' => 'Нужно указать имя и хотя бы телефон или email'], 400);
 }
 
 // Очистка и валидация данных
 $name = strip_tags(trim($input['name']));
 $phone = strip_tags(trim($input['phone']));
-$email = filter_var(trim($input['email']), FILTER_SANITIZE_EMAIL);
+$email = filter_var(trim($input['email'] ?? ''), FILTER_SANITIZE_EMAIL);
 $company = strip_tags(trim($input['company'] ?? ''));
 $message = strip_tags(trim($input['message'] ?? ''));
 $service = strip_tags(trim($input['service'] ?? 'Консультация'));
+// Получаем URL страницы откуда отправлена форма (исправление для правильного сохранения в БД)
+$page_url = strip_tags(trim($input['page_url'] ?? ($_SERVER['HTTP_REFERER'] ?? '')));
+if (empty($page_url) || strpos($page_url, 'send-email') !== false) {
+    // Если URL содержит send-email или пустой, используем referer
+    $page_url = $_SERVER['HTTP_REFERER'] ?? 'https://vnesenie-v-reestr.ru/';
+}
 
-// Проверка email
-if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    http_response_code(400);
-    echo json_encode([
-        'success' => false, 
-        'error' => 'Invalid email format',
-        'debug' => 'Неверный формат email'
-    ]);
-    exit;
+// Проверка email (если указан)
+if (!empty($email) && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    respond(false, 'Invalid email format', ['debug' => 'Неверный формат email'], 400);
 }
 
 // Дополнительная валидация
 if (strlen($name) < 2) {
-    http_response_code(400);
-    echo json_encode([
-        'success' => false, 
-        'error' => 'Name too short',
-        'debug' => 'Имя слишком короткое'
-    ]);
-    exit;
+    respond(false, 'Name too short', ['debug' => 'Имя слишком короткое'], 400);
 }
 
-if (strlen($phone) < 10) {
-    http_response_code(400);
-    echo json_encode([
-        'success' => false, 
-        'error' => 'Phone too short',
-        'debug' => 'Телефон слишком короткий'
-    ]);
-    exit;
+// Телефон проверяем только если указан
+if (!empty($phone) && strlen($phone) < 10) {
+    respond(false, 'Phone too short', ['debug' => 'Телефон слишком короткий'], 400);
 }
 
 // Настройки письма
@@ -131,7 +161,7 @@ $email_body .= "Referer: " . ($_SERVER['HTTP_REFERER'] ?? 'неизвестен'
 // Заголовки письма
 $headers = array();
 $headers[] = "From: noreply@vnesenie-v-reestr.ru";
-$headers[] = "Reply-To: " . $email;
+$headers[] = "Reply-To: " . ($email ?: 'noreply@vnesenie-v-reestr.ru');
 $headers[] = "Content-Type: text/plain; charset=UTF-8";
 $headers[] = "Content-Transfer-Encoding: 8bit";
 $headers[] = "X-Mailer: PHP/" . phpversion();
@@ -146,12 +176,27 @@ error_log("To: " . $to);
 error_log("Subject: " . $subject);
 error_log("Headers: " . $headers_string);
 
-// Отправка письма
-$mail_sent = mail($to, $subject, $email_body, $headers_string);
+// Отправка письма с указанием envelope-from (некоторые почтовики требуют)
+$mail_sent = mail($to, $subject, $email_body, $headers_string, '-f noreply@vnesenie-v-reestr.ru');
 
 // Детальное логирование результата
 error_log("Mail function result: " . ($mail_sent ? 'TRUE' : 'FALSE'));
-error_log("Error get last message: " . error_get_last()['message'] ?? 'no error');
+$lastErr = error_get_last();
+error_log("Error get last message: " . (is_array($lastErr) ? ($lastErr['message'] ?? 'no error') : 'no error'));
+
+// Дополнительный лог в файл
+$mailLog = sprintf(
+    "[%s] %s | mail_sent=%s | to=%s | from=%s | reply=%s | subject=%s | err=%s\n",
+    date('Y-m-d H:i:s'),
+    $request_id,
+    $mail_sent ? 'YES' : 'NO',
+    $to,
+    'noreply@vnesenie-v-reestr.ru',
+    $email,
+    $subject,
+    is_array(error_get_last()) ? (error_get_last()['message'] ?? 'no error') : 'no error'
+);
+@file_put_contents($logfile, $mailLog, FILE_APPEND);
 
 // Проверяем настройки PHP для почты
 $smtp_settings = [
@@ -164,46 +209,37 @@ $smtp_settings = [
 error_log("PHP Mail settings: " . print_r($smtp_settings, true));
 
 if ($mail_sent) {
-    // Успешная отправка
-    http_response_code(200);
-    echo json_encode([
-        'success' => true, 
-        'message' => 'Email sent successfully',
-        'debug' => 'Письмо успешно отправлено'
-    ]);
-    
-    // Логируем успех
     error_log("✅ EMAIL SUCCESS: Sent to " . $to . " from " . $email);
-    
-    // Сохраняем lead в базу данных
-    try {
-        error_log("🔄 [$request_id] Начинаем сохранение lead в базу данных...");
-        require_once __DIR__ . '/models/Lead.php';
-        $leadSaved = saveLeadToDatabase($input, $service);
-        if ($leadSaved) {
-            error_log("✅ [$request_id] LEAD SAVED: Успешно сохранен в базу данных");
-        } else {
-            error_log("⚠️ [$request_id] LEAD SAVE FAILED: Не удалось сохранить в базу данных");
-        }
-    } catch (Exception $e) {
-        error_log("❌ [$request_id] LEAD SAVE ERROR: " . $e->getMessage());
-    }
-    
 } else {
-    // Ошибка отправки
     $last_error = error_get_last();
-    
-    http_response_code(500);
-    echo json_encode([
-        'success' => false, 
-        'error' => 'Failed to send email',
-        'debug' => 'Не удалось отправить письмо. Возможные причины: настройки SMTP, блокировка провайдера, неверные заголовки',
-        'php_error' => $last_error['message'] ?? 'Unknown error',
-        'smtp_settings' => $smtp_settings
-    ]);
-    
-    // Логируем ошибку
     error_log("❌ EMAIL FAILED: " . ($last_error['message'] ?? 'Unknown error'));
+}
+
+// Сохраняем lead в базу данных ВСЕГДА (даже если письмо не отправилось)
+try {
+    error_log("🔄 [$request_id] Начинаем сохранение lead в базу данных...");
+    error_log("🔄 [$request_id] Page URL для сохранения: " . $page_url);
+    require_once __DIR__ . '/models/Lead.php';
+    $input['page_url'] = $page_url;
+    $leadSaved = saveLeadToDatabase($input, $service);
+    if ($leadSaved) {
+        error_log("✅ [$request_id] LEAD SAVED: Успешно сохранен в базу данных с URL: " . $page_url);
+    } else {
+        error_log("⚠️ [$request_id] LEAD SAVE FAILED: Не удалось сохранить в базу данных");
+    }
+} catch (Exception $e) {
+    error_log("❌ [$request_id] LEAD SAVE ERROR: " . $e->getMessage());
+}
+
+if ($mail_sent) {
+    respond(true, 'Email sent successfully', ['debug' => 'Письмо успешно отправлено'], 200);
+} else {
+    $last_error = error_get_last();
+    respond(false, 'Failed to send email', [
+        'debug' => 'Не удалось отправить письмо. Возможные причины: настройки SMTP, блокировка провайдера, неверные заголовки',
+        'php_error' => is_array($last_error) ? ($last_error['message'] ?? 'Unknown error') : 'Unknown error',
+        'smtp_settings' => $smtp_settings
+    ], 500);
 }
 
 error_log("=== EMAIL DEBUG [$request_id] END ===");
