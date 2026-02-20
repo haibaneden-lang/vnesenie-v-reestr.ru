@@ -112,7 +112,9 @@ if (!empty($missing_fields)) {
 
 // Очистка и валидация данных
 $name = strip_tags(trim($input['name']));
-$phone = strip_tags(trim($input['phone']));
+$phone_raw = strip_tags(trim($input['phone'] ?? ''));
+$phone_digits = preg_replace('/\D/', '', $phone_raw);
+$phone = $phone_raw;
 $email = filter_var(trim($input['email'] ?? ''), FILTER_SANITIZE_EMAIL);
 $company = strip_tags(trim($input['company'] ?? ''));
 $message = strip_tags(trim($input['message'] ?? ''));
@@ -126,17 +128,19 @@ if (empty($page_url) || strpos($page_url, 'send-email') !== false) {
 
 // Проверка email (если указан)
 if (!empty($email) && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    respond(false, 'Invalid email format', ['debug' => 'Неверный формат email'], 400);
+    respond(false, 'Укажите корректный email', ['debug' => 'Неверный формат email'], 400);
 }
 
 // Дополнительная валидация
 if (strlen($name) < 2) {
-    respond(false, 'Name too short', ['debug' => 'Имя слишком короткое'], 400);
+    respond(false, 'Имя слишком короткое (минимум 2 символа)', ['debug' => 'Имя слишком короткое'], 400);
 }
 
-// Телефон проверяем только если указан
-if (!empty($phone) && strlen($phone) < 10) {
-    respond(false, 'Phone too short', ['debug' => 'Телефон слишком короткий'], 400);
+// Телефон: проверяем только если указан; считаем по количеству цифр (нормализация скобок, пробелов, дефисов)
+if (!empty($phone_raw)) {
+    if (strlen($phone_digits) < 10) {
+        respond(false, 'Укажите номер телефона полностью (минимум 10 цифр)', ['debug' => 'Телефон слишком короткий'], 400);
+    }
 }
 
 // Настройки письма
