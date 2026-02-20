@@ -73,9 +73,9 @@
     }
     </script>
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="styles-new.css">
-    <link rel="stylesheet" href="components-styles.css">
+    <!-- CSS (пути от корня — страница открывается по URL без .html) -->
+    <link rel="stylesheet" href="/styles-new.css">
+    <link rel="stylesheet" href="/components-styles.css">
     <link rel="stylesheet" href="/cert.css">
 
     <style>
@@ -119,10 +119,37 @@
     .gisp-official { background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 12px; padding: 20px; margin: 24px 0; }
     .gisp-official a { color: #047857; font-weight: 600; }
     @media (max-width: 900px) { .dp-layout { grid-template-columns: 1fr; } }
+    /* Каталог мер (таблица с фильтрами) */
+    .mp-catalog { padding: 48px 0 56px; background: #f8fafc; }
+    .mp-catalog h2 { text-align: center; font-size: 1.8rem; margin-bottom: 8px; color: #1e3c72; }
+    .mp-catalog .mp-sub { text-align: center; color: #64748b; margin-bottom: 24px; }
+    .mp-layout { display: grid; grid-template-columns: 220px 1fr; gap: 32px; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+    @media (max-width: 900px) { .mp-layout { grid-template-columns: 1fr; } }
+    .mp-filters { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; height: fit-content; position: sticky; top: 20px; }
+    .mp-filters h3 { font-size: 1rem; margin: 0 0 12px; color: #1e3c72; }
+    .mp-filters input, .mp-filters select { width: 100%; padding: 8px 10px; margin-bottom: 12px; border: 1px solid #cbd5e1; border-radius: 6px; }
+    .mp-filters label { display: block; margin-bottom: 6px; font-size: 0.9rem; color: #475569; cursor: pointer; }
+    .mp-filters .reset { margin-top: 12px; }
+    .mp-filters .reset a { color: #64748b; font-size: 0.9rem; }
+    .mp-table-wrap { overflow-x: auto; }
+    .mp-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+    .mp-table th, .mp-table td { padding: 12px 14px; text-align: left; border-bottom: 1px solid #e2e8f0; }
+    .mp-table th { background: #1e3c72; color: #fff; font-weight: 600; }
+    .mp-table tr:hover td { background: #f1f5f9; }
+    .mp-table a { color: #1e3c72; text-decoration: none; font-weight: 500; }
+    .mp-table a:hover { text-decoration: underline; }
+    .mp-badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; margin-right: 4px; }
+    .mp-badge-subs { background: #059669; color: #fff; }
+    .mp-badge-grant { background: #2563eb; color: #fff; }
+    .mp-badge-frp { background: #ea580c; color: #fff; }
+    .mp-badge-credit { background: #6d28d9; color: #fff; }
+    .mp-badge-other { background: #64748b; color: #fff; }
+    .mp-count { color: #64748b; font-size: 0.95rem; margin-bottom: 16px; }
+    #navigator-catalog-content { min-height: 120px; }
     </style>
 </head>
 <body>
-    <div data-include="header.html"></div>
+    <div data-include="/header.html"></div>
 
     <section class="dp-hero">
         <div class="container">
@@ -131,6 +158,7 @@
             <div class="cta-buttons" style="margin-top: 24px;">
                 <a href="https://gisp.gov.ru" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Перейти на gisp.gov.ru</a>
                 <button class="btn btn-secondary" onclick="typeof openModal === 'function' && openModal('consultation')">Получить консультацию</button>
+                <a href="#katalog-mer" class="btn btn-secondary">Таблица мер поддержки (171)</a>
             </div>
             <div class="dp-hero-meta" style="margin-top: 28px;">
                 <span>Официальный портал Минпромторга</span>
@@ -151,6 +179,14 @@
                         <p style="margin: 0 0 8px;"><strong>Официальный портал ГИСП:</strong></p>
                         <p style="margin: 0;"><a href="https://gisp.gov.ru" target="_blank" rel="noopener noreferrer">https://gisp.gov.ru</a> — здесь размещены реестры, меры поддержки, сервисы подачи заявлений и актуальная информация Минпромторга.</p>
                     </div>
+
+                    <section class="mp-catalog" id="katalog-mer">
+                        <h2>Каталог мер поддержки промышленности — 171 программа</h2>
+                        <p class="mp-sub">Минпромторг, ФРП федеральные и региональные. Клик по названию — отдельная страница с описанием и заявкой.</p>
+                        <div id="navigator-catalog-content">
+                            <p style="text-align:center; color:#64748b;">Загрузка каталога…</p>
+                        </div>
+                    </section>
 
                     <h2>Для кого полезен навигатор мер поддержки</h2>
                     <p>Инструмент ориентирован на:</p>
@@ -252,12 +288,12 @@
                     <p>Калькуляторы для расчёта критериев и проверки соответствия реестрам.</p>
                 </a>
 
-                <a href="/mery-podderzhki/" class="dp-card" style="text-decoration: none; color: inherit;">
+                <a href="#katalog-mer" class="dp-card" style="text-decoration: none; color: inherit;">
                     <div class="dp-card-header">
                         <span class="dp-icon-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
                         <h3 class="dp-card-title">Каталог мер поддержки (171)</h3>
                     </div>
-                    <p>Субсидии, гранты и займы ФРП: таблица с фильтрами и отдельная страница по каждой мере.</p>
+                    <p>Субсидии, гранты и займы ФРП: таблица с фильтрами на этой странице и отдельная страница по каждой мере.</p>
                 </a>
 
                 <a href="/reestry-i-bazy/" class="dp-card" style="text-decoration: none; color: inherit;">
@@ -271,10 +307,28 @@
         </div>
     </section>
 
-    <div data-include="footer.html"></div>
+    <div data-include="/footer.html"></div>
 
-    <script src="js/modal.js"></script>
-    <script src="include.js"></script>
-    <script src="script.js"></script>
+    <script src="/js/modal.js"></script>
+    <script src="/include.js"></script>
+    <script src="/script.js"></script>
+    <script>
+    (function() {
+        var el = document.getElementById('navigator-catalog-content');
+        if (!el) return;
+        var params = new URLSearchParams(window.location.search);
+        var url = '/api/navigator-mer-catalog.php?' + params.toString();
+        fetch(url, { headers: { 'X-Requested-With': 'XMLHttpRequest' }, cache: 'no-store' })
+            .then(function(r) { return r.text(); })
+            .then(function(html) {
+                el.innerHTML = html;
+                // Все ссылки на меры — только /navigator-mer-podderzhki-gisp/ (без редиректов)
+                el.querySelectorAll('a[href*="/mery-podderzhki/"]').forEach(function(a) {
+                    a.href = a.getAttribute('href').replace(/\/mery-podderzhki\//g, '/navigator-mer-podderzhki-gisp/');
+                });
+            })
+            .catch(function() { el.innerHTML = '<p style="text-align:center; color:#dc2626;">Не удалось загрузить каталог. Попробуйте обновить страницу.</p>'; });
+    })();
+    </script>
 </body>
 </html>
