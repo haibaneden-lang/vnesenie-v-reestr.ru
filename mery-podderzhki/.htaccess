@@ -1,0 +1,14 @@
+# Каталог мер поддержки: /mery-podderzhki/ — каталог, /mery-podderzhki/slug — страница меры
+RewriteEngine On
+RewriteBase /mery-podderzhki/
+
+# Если запрошен существующий файл или каталог — не перезаписывать
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Детальная страница меры по slug (латиница, цифры, дефисы)
+RewriteRule ^([a-z0-9-]+)/?$ mera.php?slug=$1 [L,QSA]
+
+# Главная каталога
+RewriteRule ^$ index.php [L,QSA]

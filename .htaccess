@@ -2,6 +2,40 @@ RewriteEngine On
 RewriteBase /
 
 # =============================================
+# ОБХОД WAF/MODSECURITY ДЛЯ БОТОВ И AI-КРАУЛЕРОВ
+# =============================================
+# HostiMan использует ModSecurity, который может блокировать ботов
+# Эти правила помогают разрешить доступ для легитимных ботов
+<IfModule mod_security.c>
+    SecRuleRemoveById 300000-999999
+    SecRuleRemoveByTag "OWASP_CRS"
+    SecRuleRemoveByTag "OWASP_CRS/PROTOCOL_VIOLATION"
+    SecRuleRemoveByTag "OWASP_CRS/REQUEST_HEADERS"
+</IfModule>
+
+# Разрешаем доступ для всех User-Agent (не блокируем ботов)
+<IfModule mod_rewrite.c>
+    # Убираем любые ограничения по User-Agent
+    RewriteCond %{HTTP_USER_AGENT} ^$ [OR]
+    RewriteCond %{HTTP_USER_AGENT} .*
+    RewriteRule .* - [E=ALLOW_BOT:1]
+</IfModule>
+
+# Принудительный HTTPS
+# 1) если прокси передаёт X-Forwarded-Proto
+RewriteCond %{HTTP:X-Forwarded-Proto} !https [NC]
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+# 2) если заголовок отсутствует (прямое подключение)
+RewriteCond %{HTTP:X-Forwarded-Proto} ^$
+RewriteCond %{SERVER_PORT} !=443
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+# Убираем завершающий слеш у несуществующих директорий
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} .+/$
+RewriteRule ^(.+?)/$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+# =============================================
 # 301 РЕДИРЕКТЫ НА НОВЫЙ ДОМЕН
 # =============================================
 # Редиректы страниц сертификации на поддомен
@@ -46,6 +80,14 @@ RewriteRule ^certification/deklaracija-tr-ts/?$ https://certification.vnesenie-v
 RewriteRule ^certification/?$ https://certification.vnesenie-v-reestr.ru/certification/ [R=301,L]
 
 # =============================================
+# OG-картинка для новостей (статика + ленивая генерация для VK)
+# =============================================
+# Если файла нет — генерируем через PHP и сохраняем в images/og/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^images/og/([a-z0-9-]+)\.jpg$ /news/og-image.php?slug=$1 [L,QSA]
+RewriteRule ^news/og/([a-z0-9-]+)\.(jpg|jpeg)$ /news/og-image.php?slug=$1 [L,QSA]
+
+# =============================================
 # КРИТИЧЕСКИ ВАЖНО: СТАТИЧЕСКИЕ ФАЙЛЫ ПЕРВЫМИ!
 # =============================================
 # Исключаем ВСЕ статические файлы от любых правил rewrite
@@ -77,6 +119,11 @@ RewriteRule ^rss-zen-advanced\.xml$ rss-zen-advanced.php [L,QSA]
 </Files>
 
 # =============================================
+# МЕРЫ ПОДДЕРЖКИ (каталог + детальные страницы)
+# =============================================
+RewriteRule ^mery-podderzhki$ https://%{HTTP_HOST}/mery-podderzhki/ [R=301,L]
+
+# =============================================
 # ПРАВИЛА ДЛЯ ГОРОДСКИХ СТРАНИЦ
 # =============================================
 RewriteCond %{REQUEST_FILENAME} !-f
@@ -86,15 +133,146 @@ RewriteRule ^vkljuchenie-v-reestr-minpromtorga/([a-z-]+)/?$ /vkljuchenie-v-reest
 RewriteRule ^vkljuchenie-v-reestr-minpromtorga/?$ /404.html [L]
 
 # =============================================
+# МУЛЬТИГЕО: ВКЛЮЧЕНИЕ В РЕЕСТР УТИЛИЗАТОРОВ (по городам)
+# =============================================
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^vklyuchenie-v-reestr-utilizatorov/([a-z0-9-]+)/?$ /vklyuchenie-v-reestr-utilizatorov/index.php?city=$1 [QSA,L]
+
+# Корень раздела — рабочая страница «Россия» по умолчанию
+RewriteRule ^vklyuchenie-v-reestr-utilizatorov/?$ /vklyuchenie-v-reestr-utilizatorov/index.php [L]
+
+# =============================================
+# МУЛЬТИГЕО: СТАТУС РЕЗИДЕНТА СКОЛКОВО (по городам)
+# =============================================
+RewriteRule ^status-rezidenta-skolkovo\.html$ https://%{HTTP_HOST}/status-rezidenta-skolkovo/ [R=301,L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^status-rezidenta-skolkovo/([a-z0-9-]+)/?$ /status-rezidenta-skolkovo/index.php?city=$1 [QSA,L]
+RewriteRule ^status-rezidenta-skolkovo/?$ /status-rezidenta-skolkovo/index.php [L]
+
+# =============================================
+# МУЛЬТИГЕО: ВКЛЮЧЕНИЕ В РЕЕСТР МТК (по городам)
+# =============================================
+RewriteRule ^vklyuchenie-v-reestr-mtk\.html$ https://%{HTTP_HOST}/vklyuchenie-v-reestr-mtk/ [R=301,L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^vklyuchenie-v-reestr-mtk/([a-z0-9-]+)/?$ /vklyuchenie-v-reestr-mtk/index.php?city=$1 [QSA,L]
+RewriteRule ^vklyuchenie-v-reestr-mtk/?$ /vklyuchenie-v-reestr-mtk/index.php [L]
+
+# =============================================
+# МУЛЬТИГЕО: АККРЕДИТАЦИЯ IT-КОМПАНИЙ (по городам)
+# =============================================
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^akkreditatsiya-it-kompaniy/([a-z0-9-]+)/?$ /akkreditatsiya-it-kompaniy/index.php?city=$1 [QSA,L]
+RewriteRule ^akkreditatsiya-it-kompaniy/?$ /akkreditatsiya-it-kompaniy/index.php [L]
+
+# =============================================
+# МУЛЬТИГЕО: ТЕНДЕРНОЕ СОПРОВОЖДЕНИЕ (по городам)
+# =============================================
+RewriteRule ^tendernoe-soprovozhdenie\.html$ https://%{HTTP_HOST}/tendernoe-soprovozhdenie/ [R=301,L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^tendernoe-soprovozhdenie/([a-z0-9-]+)/?$ /tendernoe-soprovozhdenie/index.php?city=$1 [QSA,L]
+RewriteRule ^tendernoe-soprovozhdenie/?$ /tendernoe-soprovozhdenie/index.php [L]
+
+# =============================================
+# РЕДИРЕКТ reestr-minpromtorg -> gisp-minpromtorg
+# =============================================
+RewriteRule ^reestr-minpromtorg/?$ https://%{HTTP_HOST}/gisp-minpromtorg [R=301,L]
+
+# =============================================
+# РЕДИРЕКТЫ СТАРЫХ/НЕКОРРЕКТНЫХ URL
+# =============================================
+RewriteRule ^reestr-minpromtorg/?$ https://%{HTTP_HOST}/gisp-minpromtorg [R=301,L]
+
+# =============================================
+# СТРАНИЦА ГИСП МИНПРОМТОРГ
+# =============================================
+RewriteCond %{THE_REQUEST} \s/+gisp-minpromtorg\.php[?\s]
+RewriteRule ^gisp-minpromtorg\.php$ https://%{HTTP_HOST}/gisp-minpromtorg [R=301,L]
+RewriteRule ^gisp-minpromtorg/?$ /gisp-minpromtorg.php [QSA,L]
+RewriteRule ^gosp2026/?$ /gisp-minpromtorg.php [R=301,L]
+
+# =============================================
+# РЕЕСТР ЛИЦЕНЗИЙ (ПРОИЗВОДСТВО ЛЕКАРСТВ)
+# =============================================
+RewriteCond %{THE_REQUEST} \s/+reestr-licenziy-proizvodstvo-lekarstvennyh-sredstv\.php[?\s]
+RewriteRule ^reestr-licenziy-proizvodstvo-lekarstvennyh-sredstv\.php$ https://%{HTTP_HOST}/reestr-licenziy-proizvodstvo-lekarstvennyh-sredstv [R=301,L]
+RewriteRule ^reestr-licenziy-proizvodstvo-lekarstvennyh-sredstv/?$ /reestr-licenziy-proizvodstvo-lekarstvennyh-sredstv.php [QSA,L]
+
+# =============================================
+# РЕЕСТР КРУПНЕЙШИХ ПРОИЗВОДИТЕЛЕЙ КТС
+# =============================================
+RewriteCond %{THE_REQUEST} \s/+reestr-krupneyshih-proizvoditeley-kts\.php[?\s]
+RewriteRule ^reestr-krupneyshih-proizvoditeley-kts\.php$ https://%{HTTP_HOST}/reestr-krupneyshih-proizvoditeley-kts [R=301,L]
+RewriteRule ^reestr-krupneyshih-proizvoditeley-kts/?$ /reestr-krupneyshih-proizvoditeley-kts.php [QSA,L]
+
+# =============================================
+# РЕЕСТР РЕЗИДЕНТОВ СКОЛКОВО (архив)
+# =============================================
+RewriteCond %{THE_REQUEST} \s/+reestr-rezidentov-skolkovo\.php[?\s]
+RewriteRule ^reestr-rezidentov-skolkovo\.php$ https://%{HTTP_HOST}/reestr-rezidentov-skolkovo [R=301,L]
+RewriteRule ^reestr-rezidentov-skolkovo/?$ /reestr-rezidentov-skolkovo.php [QSA,L]
+
+# =============================================
+# РЕЕСТР ЛИЦЕНЗИЙ (ВНЕШНЯЯ ТОРГОВЛЯ)
+# =============================================
+RewriteCond %{THE_REQUEST} \s/+reestr-licenziy-vneshnyaya-torgovlya\.php[?\s]
+RewriteRule ^reestr-licenziy-vneshnyaya-torgovlya\.php$ https://%{HTTP_HOST}/reestr-licenziy-vneshnyaya-torgovlya [R=301,L]
+RewriteRule ^reestr-licenziy-vneshnyaya-torgovlya/?$ /reestr-licenziy-vneshnyaya-torgovlya.php [QSA,L]
+
+# =============================================
+# ПРОИЗВОДИТЕЛИ ПРОМЫШЛЕННОЙ ПРОДУКЦИИ (РФ)
+# =============================================
+RewriteCond %{THE_REQUEST} \s/+proizvoditeli-promyshlennoy-produkcii-rf\.php[?\s]
+RewriteRule ^proizvoditeli-promyshlennoy-produkcii-rf\.php$ https://%{HTTP_HOST}/proizvoditeli-promyshlennoy-produkcii-rf [R=301,L]
+RewriteRule ^proizvoditeli-promyshlennoy-produkcii-rf/?$ /proizvoditeli-promyshlennoy-produkcii-rf.php [QSA,L]
+
+# =============================================
+# TAX FREE — ПЕРЕЧЕНЬ УЧАСТНИКОВ (РОЗНИЦА)
+# =============================================
+RewriteCond %{THE_REQUEST} \s/+perechen-uchastnikov-tax-free\.php[?\s]
+RewriteRule ^perechen-uchastnikov-tax-free\.php$ https://%{HTTP_HOST}/perechen-uchastnikov-tax-free [R=301,L]
+RewriteRule ^perechen-uchastnikov-tax-free/?$ /perechen-uchastnikov-tax-free.php [QSA,L]
+
+# =============================================
+# СЕРТИФИКАТЫ GMP (ВЫДАЧА/ОТКАЗ)
+# =============================================
+RewriteCond %{THE_REQUEST} \s/+sertifikaty-gmp\.php[?\s]
+RewriteRule ^sertifikaty-gmp\.php$ https://%{HTTP_HOST}/sertifikaty-gmp [R=301,L]
+RewriteRule ^sertifikaty-gmp/?$ /sertifikaty-gmp.php [QSA,L]
+
+# =============================================
+# СВЕДЕНИЯ О ВЫДАННЫХ ДОКУМЕНТАХ СРР (CPP)
+# =============================================
+RewriteCond %{THE_REQUEST} \s/+svedeniya-o-vydannyh-dokumentah-srr\.php[?\s]
+RewriteRule ^svedeniya-o-vydannyh-dokumentah-srr\.php$ https://%{HTTP_HOST}/svedeniya-o-vydannyh-dokumentah-srr [R=301,L]
+RewriteRule ^svedeniya-o-vydannyh-dokumentah-srr/?$ /svedeniya-o-vydannyh-dokumentah-srr.php [QSA,L]
+
+# =============================================
+# ГОСУДАРСТВЕННЫЙ РЕЕСТР ЗАКЛЮЧЕНИЙ GMP
+# =============================================
+RewriteCond %{THE_REQUEST} \s/+gosudarstvennyy-reestr-zaklyucheniy-gmp\.php[?\s]
+RewriteRule ^gosudarstvennyy-reestr-zaklyucheniy-gmp\.php$ https://%{HTTP_HOST}/gosudarstvennyy-reestr-zaklyucheniy-gmp [R=301,L]
+RewriteRule ^gosudarstvennyy-reestr-zaklyucheniy-gmp/?$ /gosudarstvennyy-reestr-zaklyucheniy-gmp.php [QSA,L]
+
+# =============================================
 # ПРАВИЛА ДЛЯ НОВОСТЕЙ
 # =============================================
+
+# Точный 301-редирект со старой статьи про СТ-1 на новую посадочную
+RewriteRule ^news/sertifikat-sootvetstviya-st-1-ot-minpromtorga-polnoe-rukovodstvo-po-polucheniyu-v-2025-godu/?$ /sertifikat-sootvetstviya-st-1 [R=301,L]
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^news/?$ /news/index.php [L,QSA]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^news/([a-zA-Z0-9\-]+)/?$ /news/article.php?slug=$1 [L,QSA]
+# Разрешаем slug с любыми символами (в т.ч. кириллица), чтобы старые ссылки типа ...-pод-klyuch доходили до article.php и редиректились на латинский slug
+RewriteRule ^news/([^/]+)/?$ /news/article.php?slug=$1 [L,QSA]
 
 # =============================================
 # УДАЛЕНИЕ .html ИЗ URL (С ИСКЛЮЧЕНИЯМИ)
@@ -116,12 +294,15 @@ RewriteCond %{REQUEST_URI} !^/admin/
 RewriteCond %{REQUEST_URI} !^/certification/
 RewriteCond %{REQUEST_URI} !^/rss-zen
 RewriteCond %{REQUEST_URI} !^/vkljuchenie-v-reestr-minpromtorga/
+RewriteCond %{REQUEST_URI} !^/header\.html$ [NC]
+RewriteCond %{REQUEST_URI} !^/footer\.html$ [NC]
 RewriteRule ^ /%1? [NC,L,R=301]
 
 # =============================================
-# ПРАВИЛА ДЛЯ XML ФАЙЛОВ
+# ПРАВИЛА ДЛЯ XML ФАЙЛОВ И КАРТЫ САЙТА
 # =============================================
 RewriteRule ^sitemap\.xml$ sitemap.php [L]
+RewriteRule ^sitemap/?$ sitemap.html [L]
 
 # =============================================
 # ОБРАБОТКА 404 ОШИБОК
@@ -160,3 +341,13 @@ Options -Indexes
 Header set X-XSS-Protection "1; mode=block"
 Header always append X-Frame-Options SAMEORIGIN
 Header set X-Content-Type-Options nosniff
+
+# =============================================
+# РАЗРЕШЕНИЕ ДОСТУПА ДЛЯ ВСЕХ БОТОВ И AI-КРАУЛЕРОВ
+# =============================================
+# Явно разрешаем доступ для всех ботов, включая AI-краулеры
+# Это предотвращает блокировку на уровне WAF/защиты сервера
+<IfModule mod_rewrite.c>
+    # НЕ блокируем запросы по User-Agent - разрешаем всем
+    # Убираем любые правила, которые могут блокировать ботов
+</IfModule>
