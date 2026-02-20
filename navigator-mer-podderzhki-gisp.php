@@ -137,6 +137,9 @@ $catalog_action = '/navigator-mer-podderzhki-gisp';
     .mp-table tr:hover td { background: #f1f5f9; }
     .mp-table a { color: #1e3c72; text-decoration: none; font-weight: 500; }
     .mp-table a:hover { text-decoration: underline; }
+    /* Кнопка «Подробнее» в последней колонке таблицы */
+    .mp-btn-detail { display: inline-block; padding: 8px 14px; background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: #fff !important; font-size: 0.875rem; font-weight: 600; border-radius: 8px; text-decoration: none !important; white-space: nowrap; transition: opacity 0.2s, transform 0.1s, box-shadow 0.2s; }
+    .mp-btn-detail:hover { opacity: 0.95; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(30, 60, 114, 0.35); text-decoration: none !important; color: #fff !important; }
     .mp-badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; margin-right: 4px; }
     .mp-badge-subs { background: #059669; color: #fff; }
     .mp-badge-grant { background: #2563eb; color: #fff; }
@@ -258,7 +261,7 @@ $catalog_action = '/navigator-mer-podderzhki-gisp';
                                 <td><?php echo htmlspecialchars($m['section'] ?? '—'); ?></td>
                                 <td><?php echo htmlspecialchars($m['amount_formatted'] ?? '—'); ?></td>
                                 <td><?php echo htmlspecialchars($price_label); ?></td>
-                                <td><a href="<?php echo $url; ?>">Подробнее →</a></td>
+                                <td><a href="<?php echo $url; ?>" class="mp-btn-detail">Подробнее →</a></td>
                             </tr>
                             <?php endforeach; ?>
                         </tbody>
