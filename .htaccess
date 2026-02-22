@@ -119,9 +119,27 @@ RewriteRule ^rss-zen-advanced\.xml$ rss-zen-advanced.php [L,QSA]
 </Files>
 
 # =============================================
-# МЕРЫ ПОДДЕРЖКИ (каталог + детальные страницы)
+# МЕРЫ ПОДДЕРЖКИ (каталог и пагинация отдаются сразу из PHP)
 # =============================================
-RewriteRule ^mery-podderzhki$ https://%{HTTP_HOST}/mery-podderzhki/ [R=301,L]
+# Отдаём PHP для чистого URL — таблица и пагинация в первой отрисовке
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^navigator-mer-podderzhki-gisp/?$ /navigator-mer-podderzhki-gisp.php [L]
+# Страницы разделов: /navigator-mer-podderzhki-gisp/razdel/slug → razdel.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^navigator-mer-podderzhki-gisp/razdel/([a-z0-9-]+)/?$ /mery-podderzhki/razdel.php?section_slug=$1 [L,QSA]
+# Внутренние страницы мер: /navigator-mer-podderzhki-gisp/slug → mera.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^navigator-mer-podderzhki-gisp/([a-z0-9-]+)/?$ /mery-podderzhki/mera.php?slug=$1 [L,QSA]
+# Редирект с .html на чистый URL навигатора
+RewriteCond %{THE_REQUEST} \s/+navigator-mer-podderzhki-gisp\.html[?\s]
+RewriteRule ^navigator-mer-podderzhki-gisp\.html$ https://%{HTTP_HOST}/navigator-mer-podderzhki-gisp [R=301,L]
+# Редирект старых URL мер на новый: /mery-podderzhki/slug → /navigator-mer-podderzhki-gisp/slug (все страницы каталога только от navigator-mer-podderzhki-gisp)
+RewriteRule ^mery-podderzhki/([a-z0-9-]+)/?$ https://%{HTTP_HOST}/navigator-mer-podderzhki-gisp/$1 [R=301,L]
+# Редирект каталога мер на страницу навигатора (таблица на той же странице, якорь #katalog-mer)
+RewriteRule ^mery-podderzhki/?$ https://%{HTTP_HOST}/navigator-mer-podderzhki-gisp [R=301,L]
 
 # =============================================
 # ПРАВИЛА ДЛЯ ГОРОДСКИХ СТРАНИЦ
@@ -284,6 +302,7 @@ RewriteCond %{REQUEST_URI} !^/admin/
 RewriteCond %{REQUEST_URI} !^/certification/
 RewriteCond %{REQUEST_URI} !^/rss-zen
 RewriteCond %{REQUEST_URI} !^/vkljuchenie-v-reestr-minpromtorga/
+RewriteCond %{REQUEST_URI} !^/navigator-mer-podderzhki-gisp$ [NC]
 RewriteCond %{REQUEST_URI} !\.(xml|php|rss|css|js|png|jpg|jpeg|gif|webp|svg|ico|woff|woff2|ttf|eot|pdf)$ [NC]
 RewriteRule ^([^\.]+)$ $1.html [NC,L]
 
@@ -296,6 +315,7 @@ RewriteCond %{REQUEST_URI} !^/rss-zen
 RewriteCond %{REQUEST_URI} !^/vkljuchenie-v-reestr-minpromtorga/
 RewriteCond %{REQUEST_URI} !^/header\.html$ [NC]
 RewriteCond %{REQUEST_URI} !^/footer\.html$ [NC]
+RewriteCond %{REQUEST_URI} !^/navigator-mer-podderzhki-gisp\.html$ [NC]
 RewriteRule ^ /%1? [NC,L,R=301]
 
 # =============================================

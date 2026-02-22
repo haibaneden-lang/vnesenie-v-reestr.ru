@@ -446,6 +446,54 @@ $page_title = $news['title'] . ' | Реестр Гарант';
 $meta_description = $news['meta_description'] ?: 
     (mb_strlen($news['excerpt']) > 0 ? $news['excerpt'] : 
     mb_substr(strip_tags($news['content']), 0, 160));
+
+// --- SEO Content Hub: время чтения, TOC, контент с вставками CTA ---
+$content_raw = $news['content'];
+$word_count = str_word_count(strip_tags($content_raw), 0, 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя');
+$reading_minutes = max(1, (int) ceil($word_count / 200));
+$article_reading_time = $reading_minutes;
+
+// Извлечь H2/H3 для оглавления и добавить id к заголовкам
+$toc_items = [];
+$slugify = function ($text) {
+    $text = strip_tags($text);
+    $text = preg_replace('/[^\p{L}\p{N}\s-]/u', '', $text);
+    $text = preg_replace('/[\s-]+/', '-', trim($text));
+    return mb_strtolower($text);
+};
+$content_with_ids = preg_replace_callback(
+    '/<h([23])\s*([^>]*)>([^<]+)<\/h\1>/iu',
+    function ($m) use (&$toc_items, $slugify) {
+        $level = (int) $m[1];
+        $attrs = $m[2];
+        $title = $m[3];
+        $id = $slugify($title);
+        if (strlen($id) > 80) $id = substr($id, 0, 80);
+        if (strlen($id) < 2) $id = 'h-' . (count($toc_items) + 1);
+        $toc_items[] = ['level' => $level, 'title' => trim($title), 'id' => $id];
+        $has_id = preg_match('/\bid\s*=/i', $attrs);
+        $new_attrs = $has_id ? $attrs : $attrs . ' id="' . htmlspecialchars($id) . '"';
+        return '<h' . $level . ' ' . $new_attrs . '>' . $title . '</h' . $level . '>';
+    },
+    $content_raw
+);
+
+// Разбивка контента для inline CTA (~25%) и mid-article CTA (~50%)
+$len = mb_strlen($content_with_ids);
+$pos_inline = $len > 0 ? (int) round($len * 0.25) : 0;
+$pos_mid    = $len > 0 ? (int) round($len * 0.55) : 0;
+$find_break = function ($html, $from) {
+    $p = mb_strpos($html, '</p>', $from);
+    return $p !== false ? $p + 4 : $from;
+};
+$break_inline = $find_break($content_with_ids, $pos_inline);
+$break_mid    = $find_break($content_with_ids, $pos_mid);
+$content_part1 = mb_substr($content_with_ids, 0, $break_inline);
+$content_part2 = mb_substr($content_with_ids, $break_inline, $break_mid - $break_inline);
+$content_part3 = mb_substr($content_with_ids, $break_mid);
+
+$news_updated_at = !empty($news['updated_at']) ? $news['updated_at'] : $news['published_at'];
+$show_updated = ($news_updated_at && strtotime($news_updated_at) > strtotime($news['published_at']));
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -494,6 +542,22 @@ $meta_description = $news['meta_description'] ?:
         <?php endif; ?>
     }
     </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://vnesenie-v-reestr.ru/"},
+            {"@type": "ListItem", "position": 2, "name": "Новости", "item": "https://vnesenie-v-reestr.ru/news/"}
+            <?php if (!empty($news['category_name'])): ?>,
+            {"@type": "ListItem", "position": 3, "name": "<?php echo addslashes($news['category_name']); ?>", "item": "https://vnesenie-v-reestr.ru/news/?category=<?php echo (int)$news['category_id']; ?>"},
+            {"@type": "ListItem", "position": 4, "name": "<?php echo addslashes($news['title']); ?>"}
+            <?php else: ?>,
+            {"@type": "ListItem", "position": 3, "name": "<?php echo addslashes($news['title']); ?>"}
+            <?php endif; ?>
+        ]
+    }
+    </script>
     
     <!-- Фавиконы -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -509,10 +573,14 @@ $meta_description = $news['meta_description'] ?:
     <link rel="stylesheet" href="/news/registry-benefits.css">
     <link rel="stylesheet" href="/news/article-responsive.css?v=<?php echo $article_css_v; ?>">
     <link rel="stylesheet" href="/news/article-content-styles.css?v=<?php echo $article_css_v; ?>">
+    <link rel="stylesheet" href="/news/article-seo-hub.css?v=<?php echo $article_css_v; ?>">
 </head>
 <body>
     <!-- Подключение шапки -->
     <div data-include="../header.html"></div>
+
+    <!-- Прогресс чтения (SEO Hub) -->
+    <div class="article-read-progress" id="articleReadProgress" role="progressbar" aria-label="Прогресс чтения" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
 
     <!-- Breadcrumbs -->
     <div class="breadcrumbs">
@@ -550,10 +618,14 @@ $meta_description = $news['meta_description'] ?:
                         
                         <div class="article-meta">
                             <time datetime="<?php echo date('c', strtotime($news['published_at'])); ?>">
-                                <?php echo date('d.m.Y в H:i', strtotime($news['published_at'])); ?>
+                                <?php echo date('d.m.Y', strtotime($news['published_at'])); ?>
                             </time>
+                            <?php if ($show_updated): ?>
+                                <span class="article-updated"> · Обновлено <?php echo date('d.m.Y', strtotime($news_updated_at)); ?></span>
+                            <?php endif; ?>
+                            <span class="article-reading-time" title="Время чтения"> · <?php echo $article_reading_time; ?> <?php echo $article_reading_time === 1 ? 'мин' : ($article_reading_time < 5 ? 'мин' : 'мин'); ?> чтения</span>
                             <span class="article-views">
-                                👁 <?php echo number_format($news['views_count']); ?>
+                                · 👁 <?php echo number_format($news['views_count']); ?>
                             </span>
                         </div>
                         
@@ -682,7 +754,33 @@ $meta_description = $news['meta_description'] ?:
                             </div>
                         </div>
                         <?php endif; ?>
-                        <?php echo $news['content']; ?>
+                        <?php echo $content_part1; ?>
+                        <div class="article-cta-inline" aria-label="Консультация">
+                            <p class="article-cta-inline-text">Нужна помощь с включением в реестр Минпромторга или подготовкой документов? Мы бесплатно подскажем, какие шаги актуальны для вашей продукции.</p>
+                            <a href="/#form" class="article-cta-inline-btn">Получить консультацию</a>
+                        </div>
+                        <?php echo $content_part2; ?>
+                        <div class="article-cta-mid">
+                            <div class="article-cta-mid-inner">
+                                <span class="article-cta-mid-label">Проблема</span>
+                                <p>Не знаете, с чего начать внесение в реестр, или получили отказ?</p>
+                                <span class="article-cta-mid-label">Решение</span>
+                                <p>Подготовим документы, обучим ваших сотрудников или проведём включение под ключ.</p>
+                                <a href="/price-list" class="article-cta-mid-btn">Узнать условия</a>
+                            </div>
+                        </div>
+                        <?php echo $content_part3; ?>
+                    </div>
+
+                    <!-- E-E-A-T: автор статьи -->
+                    <div class="article-author-block">
+                        <div class="article-author-avatar" aria-hidden="true">
+                            <img src="/apple-touch-icon.png" alt="" width="64" height="64">
+                        </div>
+                        <div class="article-author-info">
+                            <span class="article-author-name">Реестр Гарант</span>
+                            <p class="article-author-bio">Команда экспертов по включению в реестры Минпромторга, сертификации и сопровождению бизнеса. Помогаем производителям и поставщикам пройти процедуры с первого раза.</p>
+                        </div>
                     </div>
 
                     <!-- Блок с информацией об оригинальной статье и контактах -->
@@ -862,6 +960,18 @@ $meta_description = $news['meta_description'] ?:
 
                 <!-- Sidebar -->
                 <aside class="article-sidebar">
+                    <?php if (!empty($toc_items)): ?>
+                    <nav class="sidebar-widget article-toc-widget" aria-label="Оглавление статьи">
+                        <h3 class="article-toc-title">Содержание</h3>
+                        <ol class="article-toc-list">
+                            <?php foreach ($toc_items as $toc): ?>
+                                <li class="article-toc-item article-toc-level-<?php echo $toc['level']; ?>">
+                                    <a href="#<?php echo htmlspecialchars($toc['id']); ?>"><?php echo htmlspecialchars($toc['title']); ?></a>
+                                </li>
+                            <?php endforeach; ?>
+                        </ol>
+                    </nav>
+                    <?php endif; ?>
                     <!-- CTA виджет - скрыт на мобильных -->
                     <div class="sidebar-widget cta-widget desktop-only">
                         <h3>Нужна помощь?</h3>
@@ -1158,6 +1268,7 @@ $meta_description = $news['meta_description'] ?:
     <div data-include="../footer.html"></div>
 
     <!-- Подключение JavaScript файлов -->
+    <script src="/news/article-seo-hub.js"></script>
     <script src="/include.js"></script>
     <script src="/script.js"></script>
     <!-- Google tag (gtag.js) -->

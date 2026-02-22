@@ -1,0 +1,184 @@
+/* SEO Content Hub: прогресс чтения, TOC, CTA в статье, автор */
+
+/* Прогресс чтения */
+.article-read-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    width: 0%;
+    z-index: 9999;
+    transition: width 0.1s ease-out;
+}
+
+/* Мета: дата обновления, время чтения */
+.article-updated {
+    color: #6b7280;
+    font-size: 0.9rem;
+}
+.article-reading-time {
+    color: #6b7280;
+    font-size: 0.9rem;
+}
+
+/* Оглавление (sticky в сайдбаре) */
+.article-toc-widget {
+    position: sticky;
+    top: 24px;
+}
+.article-toc-title {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #111827;
+}
+.article-toc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.9rem;
+}
+.article-toc-item {
+    margin-bottom: 6px;
+}
+.article-toc-item a {
+    color: #4b5563;
+    text-decoration: none;
+    display: block;
+    padding: 4px 0;
+    border-left: 3px solid transparent;
+    padding-left: 10px;
+    transition: color 0.2s, border-color 0.2s;
+}
+.article-toc-item a:hover {
+    color: #667eea;
+}
+.article-toc-item a.is-active {
+    color: #667eea;
+    border-left-color: #667eea;
+    font-weight: 600;
+}
+.article-toc-level-2 {
+    padding-left: 0;
+}
+.article-toc-level-3 {
+    padding-left: 14px;
+}
+.article-toc-level-3 a {
+    font-size: 0.85rem;
+}
+
+/* Inline CTA (после ~25% статьи) */
+.article-cta-inline {
+    margin: 28px 0;
+    padding: 20px 24px;
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    border: 2px solid #0ea5e9;
+    border-radius: 12px;
+}
+.article-cta-inline-text {
+    margin: 0 0 14px 0;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #0c4a6e;
+}
+.article-cta-inline-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #0ea5e9;
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background 0.2s;
+}
+.article-cta-inline-btn:hover {
+    background: #0284c7;
+}
+
+/* Mid-article CTA (проблема — решение — кнопка) */
+.article-cta-mid {
+    margin: 32px 0;
+    padding: 24px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 16px;
+    color: #fff;
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.25);
+}
+.article-cta-mid-inner {
+    max-width: 520px;
+}
+.article-cta-mid-label {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    opacity: 0.9;
+    margin-bottom: 4px;
+}
+.article-cta-mid-inner p {
+    margin: 0 0 16px 0;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+.article-cta-mid-btn {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 12px 24px;
+    background: rgba(255,255,255,0.25);
+    border: 2px solid rgba(255,255,255,0.5);
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background 0.2s, border-color 0.2s;
+}
+.article-cta-mid-btn:hover {
+    background: rgba(255,255,255,0.35);
+    border-color: rgba(255,255,255,0.7);
+}
+
+/* E-E-A-T: блок автора */
+.article-author-block {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    margin-top: 36px;
+    padding: 24px;
+    background: #f9fafb;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+}
+.article-author-avatar {
+    flex-shrink: 0;
+}
+.article-author-avatar img {
+    border-radius: 50%;
+    display: block;
+}
+.article-author-name {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #111827;
+    display: block;
+    margin-bottom: 6px;
+}
+.article-author-bio {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #4b5563;
+}
+
+@media (max-width: 768px) {
+    .article-toc-widget {
+        position: static;
+        margin-bottom: 24px;
+    }
+    .article-author-block {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+}
