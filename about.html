@@ -72,12 +72,59 @@
     @media (max-width: 900px) { .about-stats-grid { grid-template-columns: repeat(3, 1fr); } }
     @media (max-width: 480px) { .about-stats-grid { grid-template-columns: repeat(2, 1fr); } }
     /* БЛОК 6 — Сравнительная таблица */
-    .about-compare { overflow-x: auto; margin-top: 1.5rem; }
-    .about-compare table { width: 100%; max-width: 700px; margin: 0 auto; border-collapse: collapse; }
-    .about-compare th, .about-compare td { padding: 0.9rem 1rem; text-align: left; border-bottom: 1px solid #e2e8f0; }
-    .about-compare th { background: #f8fafc; font-weight: 600; color: #475569; font-size: 0.9rem; }
+    .about-compare {
+        overflow-x: auto;
+        margin-top: 1.5rem;
+        background: #fff;
+        border-radius: 16px;
+        box-shadow: 0 4px 24px rgba(30, 60, 114, 0.08);
+        border: 1px solid #e2e8f0;
+        padding: 0;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .about-compare table {
+        width: 100%;
+        margin: 0;
+        border-collapse: collapse;
+        border-radius: 16px;
+        overflow: hidden;
+    }
+    .about-compare thead tr {
+        background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+    }
+    .about-compare th {
+        padding: 1rem 1.25rem;
+        text-align: left;
+        font-weight: 700;
+        font-size: 1rem;
+        color: #334155;
+        border-bottom: 2px solid #cbd5e1;
+    }
+    .about-compare th:first-child { color: #64748b; }
+    .about-compare th:last-child {
+        color: #1e3c72;
+        background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+    }
+    .about-compare tbody tr {
+        border-bottom: 1px solid #e2e8f0;
+        transition: background 0.15s ease;
+    }
+    .about-compare tbody tr:last-child { border-bottom: none; }
+    .about-compare tbody tr:hover { background: #f8fafc; }
+    .about-compare td {
+        padding: 1rem 1.25rem;
+        text-align: left;
+        font-size: 1rem;
+        line-height: 1.4;
+    }
     .about-compare td:first-child { color: #64748b; }
-    .about-compare td:last-child { color: #1e3c72; font-weight: 600; }
+    .about-compare td:last-child {
+        color: #1e3c72;
+        font-weight: 700;
+        background: rgba(30, 60, 114, 0.03);
+    }
     /* БЛОК 7 — Кому полезны */
     .about-segments { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
     .about-segments a { display: block; padding: 1rem; background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; text-align: center; font-weight: 600; color: #1e3c72; text-decoration: none; transition: all 0.2s; }
