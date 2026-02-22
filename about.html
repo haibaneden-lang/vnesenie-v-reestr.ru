@@ -46,13 +46,16 @@
     }
     body.about h1 { font-size: clamp(36px, 5vw, 56px); line-height: 1.1; font-weight: 700; }
     body.about h2 { font-size: clamp(28px, 4vw, 40px); line-height: 1.2; font-weight: 700; }
-    body.about .container { max-width: var(--container); margin: 0 auto; padding: 0 24px; box-sizing: border-box; }
+    body.about .container { max-width: var(--container) !important; margin: 0 auto !important; padding: 0 24px !important; box-sizing: border-box; }
+    /* Шапка как на остальных страницах — не сужать контейнер (иначе «Реестр Гарант» в 2 строки) */
+    body.about .header .container { max-width: 1400px !important; padding-left: 2rem !important; padding-right: 2rem !important; }
 
-    /* 1. HERO */
+    /* 1. HERO — перебиваем styles-new.css */
     body.about .hero {
-      background: linear-gradient(135deg, var(--bg-dark), var(--bg-darker));
-      color: var(--text-light);
-      padding: 120px 0 100px;
+      background: linear-gradient(135deg, var(--bg-dark), var(--bg-darker)) !important;
+      color: var(--text-light) !important;
+      padding: 120px 0 100px !important;
+      text-align: left !important;
     }
     .hero-grid {
       display: grid;
