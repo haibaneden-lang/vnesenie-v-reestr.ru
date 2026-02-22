@@ -1,841 +1,234 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <!-- Фавиконы -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>О компании — Реестр Гарант | Лидер в сфере включения в реестры Минпромторга</title>
-    <meta name="description" content="История компании Реестр Гарант: от 2015 года помогаем российским производителям включать продукцию в реестры Минпромторга. Более 5000+ успешных проектов, работа с ведущими предприятиями России.">
-    <meta name="keywords" content="о компании реестр гарант, история включения реестр минпромторг, опыт работы минпромторг, партнер тпп рф">
-    
-    <!-- Open Graph для соцсетей -->
+    <title>О компании — Реестр Гарант | Архитекторы доступа бизнеса к государственным возможностям</title>
+    <meta name="description" content="Реестр Гарант — команда экспертов с 2015 года. Открываем бизнесу доступ к реестрам Минпромторга, субсидиям, льготам и госзакупкам. Экосистема: навигатор мер, калькуляторы, включение под ключ.">
+    <meta name="keywords" content="реестр гарант о компании, включение в реестр минпромторга, господдержка бизнеса, субсидии, реестры минпромторга">
     <meta property="og:title" content="О компании — Реестр Гарант">
-    <meta property="og:description" content="История компании Реестр Гарант: от 2015 года помогаем российским производителям включать продукцию в реестры Минпромторга.">
+    <meta property="og:description" content="Архитекторы доступа бизнеса к государственным возможностям. Реестры, субсидии, госзакупки с 2015 года.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://vnesenie-v-reestr.ru/about">
     <meta property="og:image" content="https://vnesenie-v-reestr.ru/og-image.jpg">
-    
-    <!-- Дополнительные мета-теги для SEO -->
     <meta name="robots" content="index, follow">
-    <meta name="author" content="Реестр Гарант">
     <link rel="canonical" href="https://vnesenie-v-reestr.ru/about">
-    
-    <!-- Подключение CSS файлов -->
-    <link rel="stylesheet" href="styles-new.css">
-    <link rel="stylesheet" href="components-styles.css">
-    
-    <!-- Структурированные данные для Google -->
+    <link rel="stylesheet" href="/styles-new.css">
+    <link rel="stylesheet" href="/components-styles.css">
     <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "AboutPage",
-        "name": "О компании — Реестр Гарант",
-        "description": "История и достижения компании Реестр Гарант в сфере включения продукции в реестры Минпромторга",
-        "mainEntity": {
-            "@type": "Organization",
-            "name": "Реестр Гарант",
-            "foundingDate": "2015",
-            "description": "Ведущая компания в сфере включения продукции в реестры Минпромторга",
-            "url": "https://vnesenie-v-reestr.ru"
-        }
-    }
+    {"@context":"https://schema.org","@type":"AboutPage","name":"О компании — Реестр Гарант","mainEntity":{"@type":"Organization","name":"Реестр Гарант","foundingDate":"2015","url":"https://vnesenie-v-reestr.ru"}}
     </script>
-    
     <style>
-    .about-hero {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        padding: 120px 0 80px;
-        text-align: center;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .about-hero::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,255,255,0.05)" points="0,0 1000,300 1000,1000 0,700"/></svg>');
-        background-size: cover;
-    }
-
-    .about-hero-content {
-        position: relative;
-        z-index: 1;
-    }
-
-    .about-hero h1 {
-        font-size: 3.2rem;
-        font-weight: 700;
-        margin-bottom: 1.5rem;
-        animation: fadeInUp 1s ease-out;
-    }
-
-    .about-hero p {
-        font-size: 1.3rem;
-        margin-bottom: 2rem;
-        opacity: 0.9;
-        animation: fadeInUp 1s ease-out 0.2s both;
-        max-width: 800px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .founding-year {
-        background: rgba(255,255,255,0.2);
-        padding: 15px 30px;
-        border-radius: 50px;
-        font-size: 1.1rem;
-        font-weight: 600;
-        display: inline-block;
-        margin-top: 20px;
-        backdrop-filter: blur(10px);
-        animation: fadeInUp 1s ease-out 0.4s both;
-    }
-
-    .timeline-section {
-        padding: 80px 0;
-        background: #f8f9fa;
-    }
-
-    .timeline-container {
-        max-width: 1000px;
-        margin: 0 auto;
-        position: relative;
-    }
-
-    .timeline-line {
-        position: absolute;
-        left: 50%;
-        top: 0;
-        bottom: 0;
-        width: 4px;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        transform: translateX(-50%);
-    }
-
-    .timeline-item {
-        display: flex;
-        margin-bottom: 60px;
-        position: relative;
-    }
-
-    .timeline-item:nth-child(even) {
-        flex-direction: row-reverse;
-    }
-
-    .timeline-content {
-        background: white;
-        padding: 30px;
-        border-radius: 20px;
-        width: 45%;
-        box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-        position: relative;
-        transition: all 0.3s ease;
-    }
-
-    .timeline-content:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-    }
-
-    .timeline-year {
-        position: absolute;
-        left: 50%;
-        top: 20px;
-        transform: translateX(-50%);
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        padding: 15px 25px;
-        border-radius: 50px;
-        font-weight: 700;
-        font-size: 1.1rem;
-        z-index: 2;
-        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
-    }
-
-    .timeline-content h3 {
-        color: #2c3e50;
-        font-size: 1.5rem;
-        margin-bottom: 15px;
-        font-weight: 600;
-    }
-
-    .timeline-content p {
-        color: #666;
-        line-height: 1.7;
-        margin-bottom: 15px;
-    }
-
-    .achievement-list {
-        list-style: none;
-        padding: 0;
-        margin: 15px 0;
-    }
-
-    .achievement-list li {
-        padding: 8px 0;
-        position: relative;
-        padding-left: 25px;
-        color: #555;
-    }
-
-    .achievement-list li::before {
-        content: "✓";
-        position: absolute;
-        left: 0;
-        color: #27ae60;
-        font-weight: bold;
-        font-size: 1.1rem;
-    }
-
-    .stats-section {
-        padding: 80px 0;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        text-align: center;
-    }
-
-    .stats-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 40px;
-        margin-top: 50px;
-    }
-
-    .stat-item {
-        background: rgba(255,255,255,0.1);
-        padding: 40px 20px;
-        border-radius: 20px;
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255,255,255,0.2);
-        transition: all 0.3s ease;
-    }
-
-    .stat-item:hover {
-        background: rgba(255,255,255,0.15);
-        transform: translateY(-5px);
-    }
-
-    .stat-number {
-        font-size: 3rem;
-        font-weight: bold;
-        margin-bottom: 10px;
-        display: block;
-        background: linear-gradient(45deg, #fff, #b8d4ff);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-    }
-
-    .stat-label {
-        font-size: 1rem;
-        opacity: 0.9;
-        line-height: 1.4;
-    }
-
-    .industries-section {
-        padding: 80px 0;
-        background: white;
-    }
-
-    .industries-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 25px;
-        margin-top: 50px;
-    }
-
-    .industry-card {
-        background: #f8f9fa;
-        padding: 25px;
-        border-radius: 15px;
-        text-align: center;
-        transition: all 0.3s ease;
-        border: 2px solid transparent;
-    }
-
-    .industry-card:hover {
-        background: white;
-        border-color: #667eea;
-        transform: translateY(-5px);
-        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
-    }
-
-    .industry-icon {
-        font-size: 2.5rem;
-        margin-bottom: 15px;
-        display: block;
-    }
-
-    .industry-card h4 {
-        color: #2c3e50;
-        font-size: 1.1rem;
-        margin-bottom: 10px;
-        font-weight: 600;
-    }
-
-    .industry-card p {
-        color: #666;
-        font-size: 0.9rem;
-        line-height: 1.5;
-        margin: 0;
-    }
-
-    .principles-section {
-        padding: 80px 0;
-        background: #f8f9fa;
-    }
-
-    .principles-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 30px;
-        margin-top: 50px;
-    }
-
-    .principle-card {
-        background: white;
-        padding: 35px;
-        border-radius: 20px;
-        text-align: center;
-        box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-        transition: all 0.3s ease;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .principle-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 4px;
-        background: linear-gradient(90deg, #667eea, #764ba2);
-    }
-
-    .principle-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-    }
-
-    .principle-icon {
-        width: 80px;
-        height: 80px;
-        background: linear-gradient(135deg, #667eea, #764ba2);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0 auto 20px;
-        font-size: 32px;
-        color: white;
-    }
-
-    .principle-card h3 {
-        color: #2c3e50;
-        font-size: 1.4rem;
-        margin-bottom: 15px;
-        font-weight: 600;
-    }
-
-    .principle-card p {
-        color: #666;
-        line-height: 1.7;
-    }
-
-    .team-section {
-        padding: 80px 0;
-        background: white;
-    }
-
-    .team-intro {
-        text-align: center;
-        max-width: 800px;
-        margin: 0 auto 50px;
-    }
-
-    .team-intro p {
-        font-size: 1.1rem;
-        color: #666;
-        line-height: 1.7;
-    }
-
-    .expertise-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 30px;
-        margin-top: 50px;
-    }
-
-    .expertise-card {
-        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-        padding: 30px;
-        border-radius: 15px;
-        border-left: 5px solid #667eea;
-        transition: all 0.3s ease;
-    }
-
-    .expertise-card:hover {
-        background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
-        transform: translateX(10px);
-    }
-
-    .expertise-card h4 {
-        color: #2c3e50;
-        font-size: 1.2rem;
-        margin-bottom: 15px;
-        font-weight: 600;
-    }
-
-    .expertise-card p {
-        color: #555;
-        line-height: 1.6;
-        margin: 0;
-    }
-
-    .cta-section {
-        padding: 80px 0;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        text-align: center;
-    }
-
-    .cta-content {
-        max-width: 700px;
-        margin: 0 auto;
-    }
-
-    .cta-section h2 {
-        font-size: 2.5rem;
-        margin-bottom: 20px;
-        font-weight: 700;
-    }
-
-    .cta-section p {
-        font-size: 1.2rem;
-        margin-bottom: 30px;
-        opacity: 0.9;
-        line-height: 1.6;
-    }
-
-    @keyframes fadeInUp {
-        from {
-            opacity: 0;
-            transform: translateY(30px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    /* Адаптивность */
-    @media (max-width: 768px) {
-        .about-hero h1 {
-            font-size: 2.5rem;
-        }
-
-        .timeline-line {
-            left: 30px;
-        }
-
-        .timeline-item {
-            flex-direction: column;
-            margin-left: 60px;
-        }
-
-        .timeline-item:nth-child(even) {
-            flex-direction: column;
-        }
-
-        .timeline-content {
-            width: 100%;
-        }
-
-        .timeline-year {
-            left: -45px;
-            transform: none;
-        }
-
-        .stats-grid {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-        }
-
-        .industries-grid {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-        }
-
-        .principles-grid,
-        .expertise-grid {
-            grid-template-columns: 1fr;
-            gap: 20px;
-        }
-
-        .cta-section h2 {
-            font-size: 2rem;
-        }
-    }
+    .about-longread .lead { font-size: 1.15rem; line-height: 1.75; color: #374151; max-width: 800px; margin: 0 auto 1rem; }
+    .about-longread .intro-list { list-style: none; padding: 0; max-width: 560px; margin: 1rem auto 2rem; }
+    .about-longread .intro-list li { padding: 0.4rem 0; padding-left: 1.5rem; position: relative; color: #1e293b; }
+    .about-longread .intro-list li::before { content: "✓"; position: absolute; left: 0; color: #059669; font-weight: 700; }
+    .about-longread .section-block { padding: 3.5rem 0; }
+    .about-longread .section-block:nth-child(even) { background: #f8fafc; }
+    .about-longread .step-card { background: #fff; border-radius: 16px; padding: 1.75rem; margin-bottom: 1.25rem; border: 1px solid #e2e8f0; box-shadow: 0 4px 20px rgba(30,60,114,0.06); }
+    .about-longread .step-card h3 { font-size: 1.2rem; margin: 0 0 0.75rem; color: #1e3c72; }
+    .about-longread .step-card ul { margin: 0; padding-left: 1.25rem; color: #475569; line-height: 1.65; }
+    .about-longread .step-card a { color: #1e3c72; font-weight: 600; }
+    .about-longread .step-num { display: inline-block; width: 2rem; height: 2rem; line-height: 2rem; text-align: center; background: #1e3c72; color: #fff; border-radius: 50%; font-weight: 700; font-size: 0.9rem; margin-right: 0.5rem; }
+    .about-longread .when-list { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0.75rem; }
+    .about-longread .when-list li { padding: 0.5rem 0 0.5rem 1.5rem; position: relative; color: #374151; }
+    .about-longread .when-list li::before { content: "•"; position: absolute; left: 0; color: #1e3c72; font-weight: 700; }
+    .about-longread .stats-section { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff; text-align: center; }
+    .about-longread .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1.5rem; margin-top: 2rem; max-width: 900px; margin-left: auto; margin-right: auto; }
+    .about-longread .stat-item { background: rgba(255,255,255,0.12); padding: 1.5rem 1rem; border-radius: 16px; backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.2); }
+    .about-longread .stat-number { display: block; font-size: 2rem; font-weight: 700; margin-bottom: 0.35rem; color: #fff; }
+    .about-longread .stat-label { font-size: 0.9rem; opacity: 0.95; line-height: 1.3; }
     </style>
 </head>
 <body>
-    <!-- Подключение шапки -->
-    <div data-include="header.html"></div>
+    <div data-include="/header.html"></div>
 
-    <!-- Hero Section -->
-    <section class="about-hero">
+    <!-- Hero в стиле главной -->
+    <section class="hero">
         <div class="container">
-            <div class="about-hero-content">
-                <h1>Реестр Гарант — лидер в сфере включения продукции в реестры Минпромторга</h1>
-                <p>Команда экспертов с многолетним опытом помогает российским производителям получать статус отечественного производителя и доступ к государственным преференциям</p>
-                <div class="founding-year">Работаем с 2015 года</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- История компании -->
-    <section class="timeline-section">
-        <div class="container">
-            <h2 class="section-title">История компании</h2>
-            <div class="timeline-container">
-                <div class="timeline-line"></div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-year">2015</div>
-                    <div class="timeline-content">
-                        <h3>Основание компании</h3>
-                        <p>После выхода ПП РФ №719 от 17.07.2015 о подтверждении производства промышленной продукции на территории РФ основали компанию для помощи производителям.</p>
-                        <ul class="achievement-list">
-                            <li>Создание команды экспертов по реестрам Минпромторга</li>
-                            <li>Первые успешные проекты включения продукции</li>
-                            <li>Изучение всех нюансов требований постановления</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-year">2018</div>
-                    <div class="timeline-content">
-                        <h3>Становление экспертизы</h3>
-                        <p>Накопили значительный опыт работы с различными отраслями промышленности и стали одними из ведущих экспертов по включению в реестры.</p>
-                        <ul class="achievement-list">
-                            <li>Более 500 успешных проектов</li>
-                            <li>Работа с 15+ отраслями промышленности</li>
-                            <li>Партнерство с ведущими ТПП</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-year">2020</div>
-                    <div class="timeline-content">
-                        <h3>Расширение деятельности</h3>
-                        <p>С выходом ПП РФ №616 существенно возрос спрос на услуги включения в реестры. Расширили команду и сферу деятельности.</p>
-                        <ul class="achievement-list">
-                            <li>Увеличение команды экспертов в 3 раза</li>
-                            <li>Запуск новых направлений по реестрам</li>
-                            <li>Автоматизация процессов подготовки документов</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-year">2023</div>
-                    <div class="timeline-content">
-                        <h3>Лидер рынка</h3>
-                        <p>Стали одной из ведущих частных компаний в сфере включения продукции в реестры Минпромторга с высоким уровнем удовлетворенности клиентов.</p>
-                        <ul class="achievement-list">
-                            <li>Более 5000 позиций товаров в реестрах</li>
-                            <li>95% успешных включений с первого раза</li>
-                            <li>Клиентская база в 30+ регионах России</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-year">2025</div>
-                    <div class="timeline-content">
-                        <h3>Инновации и развитие</h3>
-                        <p>Продолжаем развиваться, внедряем новые технологии и расширяем спектр услуг для максимального удобства клиентов.</p>
-                        <ul class="achievement-list">
-                            <li>Цифровая платформа для клиентов</li>
-                            <li>Экспресс-анализ возможности включения</li>
-                            <li>Расширение в новые сферы регулирования</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Статистика -->
-    <section class="stats-section">
-        <div class="container">
-            <h2 class="section-title" style="color: white;">Наши достижения в цифрах</h2>
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <span class="stat-number">10+</span>
-                    <span class="stat-label">лет успешной работы</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">5000+</span>
-                    <span class="stat-label">позиций товаров внесено в реестры</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">95%</span>
-                    <span class="stat-label">успешных включений с первого раза</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">800+</span>
-                    <span class="stat-label">довольных клиентов</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">30+</span>
-                    <span class="stat-label">отраслей промышленности</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">85%</span>
-                    <span class="stat-label">клиентов обращаются повторно</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Отрасли -->
-    <section class="industries-section">
-        <div class="container">
-            <h2 class="section-title">Отрасли, в которых мы работаем</h2>
-            <p style="text-align: center; font-size: 1.1rem; color: #666; max-width: 800px; margin: 0 auto;">За годы работы накопили экспертизу в большинстве отраслей российской промышленности</p>
-            
-            <div class="industries-grid">
-                <div class="industry-card">
-                    <span class="industry-icon">🏭</span>
-                    <h4>Машиностроение</h4>
-                    <p>Оборудование, станки, промышленные машины</p>
-                </div>
-                <div class="industry-card">
-                    <span class="industry-icon">📡</span>
-                    <h4>Радиоэлектроника</h4>
-                    <p>Электронные компоненты, телекоммуникации</p>
-                </div>
-                <div class="industry-card">
-                    <span class="industry-icon">⚗️</span>
-                    <h4>Химическая промышленность</h4>
-                    <p>Химические продукты, материалы</p>
-                </div>
-                <div class="industry-card">
-                    <span class="industry-icon">⚕️</span>
-                    <h4>Медицинские изделия</h4>
-                    <p>Медицинское оборудование и изделия</p>
-                </div>
-                <div class="industry-card">
-                    <span class="industry-icon">🏗️</span>
-                    <h4>Строительство</h4>
-                    <p>Строительные материалы и конструкции</p>
-                </div>
-                <div class="industry-card">
-                    <span class="industry-icon">⛽</span>
-                    <h4>Нефтегазовая отрасль</h4>
-                    <p>Оборудование для добычи и переработки</p>
-                </div>
-                <div class="industry-card">
-                    <span class="industry-icon">🔋</span>
-                    <h4>Электроэнергетика</h4>
-                    <p>Энергетическое оборудование</p>
-                </div>
-                <div class="industry-card">
-                    <span class="industry-icon">🚂</span>
-                    <h4>Транспорт</h4>
-                    <p>Транспортные средства и компоненты</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Принципы работы -->
-    <section class="principles-section">
-        <div class="container">
-            <h2 class="section-title">Принципы нашей работы</h2>
-            <div class="principles-grid">
-                <div class="principle-card">
-                    <div class="principle-icon">🎯</div>
-                    <h3>Результат превыше всего</h3>
-                    <p>Берем на себя полную ответственность за успешное включение вашей продукции в реестр. Гарантируем результат или возвращаем деньги.</p>
-                </div>
-                <div class="principle-card">
-                    <div class="principle-icon">⚡</div>
-                    <h3>Максимальная скорость</h3>
-                    <p>Оптимизированные процессы и многолетний опыт позволяют нам включать продукцию в реестры в минимально возможные сроки.</p>
-                </div>
-                <div class="principle-card">
-                    <div class="principle-icon">🔍</div>
-                    <h3>Внимание к деталям</h3>
-                    <p>Тщательно проверяем каждый документ и требование. Наша экспертиза исключает ошибки и возвраты на доработку.</p>
-                </div>
-                <div class="principle-card">
-                    <div class="principle-icon">🤝</div>
-                    <h3>Партнерский подход</h3>
-                    <p>Мы не просто исполнители, а ваши партнеры в достижении бизнес-целей. Консультируем и поддерживаем на всех этапах.</p>
-                </div>
-                <div class="principle-card">
-                    <div class="principle-icon">💡</div>
-                    <h3>Инновационность</h3>
-                    <p>Постоянно совершенствуем методы работы, внедряем новые технологии для повышения качества услуг.</p>
-                </div>
-                <div class="principle-card">
-                    <div class="principle-icon">🏆</div>
-                    <h3>Высокие стандарты</h3>
-                    <p>Соблюдаем самые высокие стандарты качества в подготовке документов и взаимодействии с государственными органами.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Команда -->
-    <section class="team-section">
-        <div class="container">
-            <h2 class="section-title">Наша команда</h2>
-            <div class="team-intro">
-                <p>В Реестр Гарант работают высококвалифицированные специалисты с глубокой экспертизой в области включения продукции в реестры Минпромторга. Каждый член команды имеет многолетний опыт работы с государственными структурами и досконально знает все тонкости законодательства.</p>
-            </div>
-            
-            <div class="expertise-grid">
-                <div class="expertise-card">
-                    <h4>Эксперты по нормативному регулированию</h4>
-                    <p>Специалисты с юридическим образованием, знающие все нюансы постановлений Правительства РФ и требований Минпромторга</p>
-                </div>
-                <div class="expertise-card">
-                    <h4>Технические консультанты</h4>
-                    <p>Инженеры с опытом работы в различных отраслях промышленности для качественной подготовки технической документации</p>
-                </div>
-                <div class="expertise-card">
-                    <h4>Специалисты по взаимодействию с ТПП</h4>
-                    <p>Эксперты с многолетним опытом работы с Торгово-промышленными палатами для эффективного прохождения экспертиз</p>
-                </div>
-                <div class="expertise-card">
-                    <h4>Менеджеры проектов</h4>
-                    <p>Опытные координаторы, обеспечивающие качественное ведение проектов и своевременное выполнение всех этапов включения в реестр</p>
-                </div>
-                <div class="expertise-card">
-                    <h4>Аналитики и исследователи</h4>
-                    <p>Специалисты, отслеживающие изменения в законодательстве и анализирующие новые требования для поддержания актуальной экспертизы</p>
-                </div>
-                <div class="expertise-card">
-                    <h4>Специалисты по клиентскому сервису</h4>
-                    <p>Команда поддержки, обеспечивающая комфортное взаимодействие с клиентами и оперативное решение всех вопросов</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Призыв к действию -->
-    <section class="cta-section">
-        <div class="container">
-            <div class="cta-content">
-                <h2>Готовы помочь вашей компании</h2>
-                <p>Доверьте включение вашей продукции в реестры Минпромторга профессионалам. Мы гарантируем качественный результат в минимальные сроки.</p>
+            <div class="hero-content">
+                <h1>Реестр Гарант — архитекторы доступа бизнеса к государственным возможностям</h1>
+                <p class="lead" style="color: rgba(255,255,255,0.95); max-width: 820px; margin-left: auto; margin-right: auto;">Реестр Гарант — это не просто консалтинг по реестрам. Мы — команда экспертов, инженеров и аналитиков, которая системно открывает бизнесу доступ к государственным преференциям, реестрам Минпромторга, субсидиям, льготам и рынку госзакупок.</p>
+                <p style="opacity: 0.95;">С 2015 года мы решаем одну ключевую задачу: <strong>превращаем сложную государственную регуляторику в управляемый инструмент роста компаний.</strong></p>
+                <p style="opacity: 0.9;">Сегодня через нашу экспертизу компании:</p>
+                <ul class="intro-list" style="color: rgba(255,255,255,0.95); text-align: left;">
+                    <li>получают статус отечественного производителя</li>
+                    <li>входят в ключевые реестры</li>
+                    <li>получают субсидии и льготы</li>
+                    <li>выходят на рынок госзаказа</li>
+                    <li>усиливают позиции в импортозамещении</li>
+                </ul>
                 <div class="cta-buttons">
-                    <button class="btn btn-primary" onclick="openModal('consultation')" style="background: white; color: #667eea; margin-right: 20px;">Получить консультацию</button>
-                    <a href="/contacts" class="btn btn-secondary" style="border: 2px solid white; color: white;">Наши контакты</a>
+                    <button type="button" class="btn btn-primary" onclick="typeof openModal === 'function' && openModal('consultation')">Получить консультацию</button>
+                    <a href="/contacts" class="btn btn-secondary" style="border-color: rgba(255,255,255,0.6); color: #fff;">Контакты</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Подключение модального окна -->
-    <div data-include="modal.html"></div>
+    <div class="about-longread">
+        <!-- Философия -->
+        <section class="section-block">
+            <div class="container">
+                <h2 class="section-title">Наша философия: государство должно работать на бизнес</h2>
+                <p class="section-subtitle">Мы глубоко внутри отрасли и видим одну и ту же проблему у большинства компаний.</p>
+                <p class="lead">Государство ежегодно выделяет миллиарды рублей на субсидии, льготы, поддержку локализации, развитие промышленности, IT-компании и импортозамещение. Но до бизнеса доходит лишь часть этих возможностей.</p>
+                <p class="lead">Почему? Потому что между компанией и господдержкой стоит сложная система: постановления, методики, балльные системы, экспертизы, реестры, межведомственные требования.</p>
+                <p class="lead" style="font-weight: 600; color: #1e3c72;">Именно этот разрыв мы закрываем. Реестр Гарант — это проводник бизнеса через государственную систему поддержки.</p>
+            </div>
+        </section>
 
-    <!-- Подключение футера -->
-    <div data-include="footer.html"></div>
+        <!-- Чем отличаемся -->
+        <section class="section-block">
+            <div class="container">
+                <h2 class="section-title">Чем мы реально отличаемся от обычных консультантов</h2>
+                <p class="section-subtitle">Большинство компаний на рынке готовят документы, подают заявки, сопровождают точечные услуги. Мы построили целую инфраструктуру принятия решений.</p>
+                <p class="lead">Внутри нашей платформы клиент может:</p>
+                <ul class="intro-list" style="max-width: 100%;">
+                    <li>найти подходящую меру поддержки</li>
+                    <li>проверить себя по открытым реестрам</li>
+                    <li>рассчитать экономику проекта</li>
+                    <li>понять готовность к включению</li>
+                    <li>подготовить документы</li>
+                    <li>пройти включение «под ключ»</li>
+                    <li>выйти на госзакупки</li>
+                </ul>
+                <p class="lead" style="font-weight: 600; color: #1e3c72;">Такой глубины экосистемы нет у большинства игроков рынка.</p>
+            </div>
+        </section>
 
-    <!-- Подключение JavaScript файлов -->
-    <script src="include.js"></script>
-    <script src="script.js"></script>
+        <!-- Экосистема: 5 шагов -->
+        <section class="section-block">
+            <div class="container">
+                <h2 class="section-title">Экосистема Реестр Гарант: путь компании от идеи до господдержки</h2>
+                <p class="section-subtitle">Мы сознательно выстроили систему, которая закрывает весь жизненный цикл проекта.</p>
 
-    <script>
-    // Анимация появления элементов при прокрутке
-    document.addEventListener('DOMContentLoaded', function() {
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+                <div class="step-card">
+                    <h3><span class="step-num">1</span> Найти возможности (даже если вы только начинаете)</h3>
+                    <p class="lead" style="margin-bottom: 1rem;">Многие клиенты приходят с вопросом: «А нам вообще что-то положено от государства?» Именно для этого мы создали открытые инструменты.</p>
+                    <p><strong>Навигатор мер поддержки ГИСП — 200+ программ в одном месте.</strong> С его помощью можно подобрать субсидии, найти льготы, изучить программы Минпромторга, определить релевантные реестры, понять требования заранее.</p>
+                    <p><a href="/navigator-mer-podderzhki-gisp">Навигатор мер поддержки ГИСП →</a></p>
+                    <p><strong>Проверка по официальным реестрам и базам.</strong> <a href="/reestry-i-bazy/">Реестры и базы →</a></p>
+                    <p><strong>База ОКПД2</strong> — фундамент любой стратегии включения. <a href="/okpd2/">ОКПД2 →</a></p>
+                </div>
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
+                <div class="step-card">
+                    <h3><span class="step-num">2</span> Просчитать экономику и риски до старта</h3>
+                    <p class="lead">Профессиональные калькуляторы: доля локализации по ПП РФ №719, сроки и стоимость включения в ГИСП, ценовое преимущество по 44-ФЗ, минимальная доля закупок по 223-ФЗ, балльная оценка, анализ конкурентов, бюджет сопровождения, прирост выручки от госзакупок и многое другое.</p>
+                    <p><a href="/calculators/">Калькуляторы Минпромторга →</a></p>
+                </div>
 
-        // Наблюдаем за элементами
-        const elementsToAnimate = document.querySelectorAll('.timeline-content, .stat-item, .industry-card, .principle-card, .expertise-card');
-        
-        elementsToAnimate.forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'all 0.6s ease';
-            observer.observe(el);
-        });
+                <div class="step-card">
+                    <h3><span class="step-num">3</span> Подготовить документацию без риска возвратов</h3>
+                    <p>Полный комплект документации под требования Минпромторга, ТПП и профильных ведомств:</p>
+                    <ul>
+                        <li><a href="/ekspluatatsionnaya-dokumentatsiya">Эксплуатационная документация</a>, <a href="/tehnologicheskaya-dokumentatsiya">технологическая</a>, <a href="/razrabotka-konstruktorskoy-dokumentatsii">конструкторская</a></li>
+                        <li><a href="/akt-ekspertizy-tpp">Акт экспертизы ТПП</a>, <a href="/sertifikat-sootvetstviya-st-1">сертификат СТ-1</a></li>
+                    </ul>
+                    <p>Наш подход — сразу готовить пакет под успешное прохождение.</p>
+                </div>
 
-        // Анимация счетчиков
-        const statNumbers = document.querySelectorAll('.stat-number');
-        
-        const animateCounters = (entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const target = entry.target;
-                    const finalValue = target.textContent;
-                    const numericValue = parseInt(finalValue.replace(/\D/g, ''));
-                    
-                    if (numericValue) {
-                        let current = 0;
-                        const increment = numericValue / 50;
-                        const timer = setInterval(() => {
-                            current += increment;
-                            if (current >= numericValue) {
-                                current = numericValue;
-                                clearInterval(timer);
-                            }
-                            target.textContent = Math.floor(current) + finalValue.replace(/\d/g, '').replace(/\+/g, '');
-                            if (finalValue.includes('+')) {
-                                target.textContent += '+';
-                            }
-                            if (finalValue.includes('%')) {
-                                target.textContent = Math.floor(current) + '%';
-                            }
-                        }, 40);
-                    }
-                    
-                    counterObserver.unobserve(target);
-                }
-            });
-        };
+                <div class="step-card">
+                    <h3><span class="step-num">4</span> Включение в реестры и получение статусов</h3>
+                    <p>Реестры Минпромторга: <a href="/">главная</a>, <a href="/industrial">промышленная продукция</a>, <a href="/radioelectronic">радиоэлектроника</a>, <a href="/software">ПО</a>, <a href="/medical-devices">медицинские изделия</a>, <a href="/telecom-equipment">телеком-оборудование</a>, <a href="/oil-gas-equipment">нефтегазовое оборудование</a>.</p>
+                    <p>Специализированные статусы: <a href="/doverennoe-po">доверенное ПО</a>, <a href="/akkreditatsiya-it-kompaniy/">аккредитация IT</a>, <a href="/vklyuchenie-v-reestr-mtk/">реестр МТК</a>, <a href="/vklyuchenie-v-reestr-utilizatorov/">утилизаторы</a>, <a href="/status-rezidenta-skolkovo/">Сколково</a>, <a href="/vnesenie-v-reestr-turoperatorov">туроператоры</a>, <a href="/roskomnadzor-registration">Роскомнадзор</a> и др.</p>
+                </div>
 
-        const counterObserver = new IntersectionObserver(animateCounters, observerOptions);
-        
-        statNumbers.forEach(num => {
-            counterObserver.observe(num);
-        });
-    });
-    </script>
+                <div class="step-card">
+                    <h3><span class="step-num">5</span> Получить реальные деньги и контракты</h3>
+                    <p>Наша задача — не просто включить в реестр, а монетизировать статус.</p>
+                    <p><a href="/pricing">Консалтинг по субсидиям и мерам поддержки</a> — подбор программ, заявки, сопровождение защиты.</p>
+                    <p><a href="/tendernoe-soprovozhdenie">Тендерное сопровождение</a> — после включения многие клиенты кратно увеличивают выручку за счёт 44-ФЗ и 223-ФЗ.</p>
+                </div>
+
+                <p class="lead">Самостоятельное ведение части процессов: <a href="/news/obuchenie-vklyucheniyu-v-reestr-minpromtorga-kursy-dlya-proizvoditeley-akademiya-ekspertov-po-lokalizatsii-ekonom-te-ot-200-000-na-kazhdom-vklyuchenii">обучение включению в реестр Минпромторга</a>. Сертификация: <a href="https://certification.vnesenie-v-reestr.ru/">certification.vnesenie-v-reestr.ru</a>.</p>
+            </div>
+        </section>
+
+        <!-- Цифры -->
+        <section class="stats-section" style="padding: 4rem 0;">
+            <div class="container">
+                <h2 class="section-title" style="color: white;">Реестр Гарант в цифрах</h2>
+                <div class="stats-grid">
+                    <div class="stat-item"><span class="stat-number">10+</span><span class="stat-label">лет практики</span></div>
+                    <div class="stat-item"><span class="stat-number">5000+</span><span class="stat-label">позиций внесено в реестры</span></div>
+                    <div class="stat-item"><span class="stat-number">95%</span><span class="stat-label">успешных включений с первого раза</span></div>
+                    <div class="stat-item"><span class="stat-number">800+</span><span class="stat-label">компаний-клиентов</span></div>
+                    <div class="stat-item"><span class="stat-number">30+</span><span class="stat-label">отраслей промышленности</span></div>
+                    <div class="stat-item"><span class="stat-number">85%</span><span class="stat-label">клиентов возвращаются повторно</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Когда обратиться -->
+        <section class="section-block">
+            <div class="container">
+                <h2 class="section-title">Когда к нам особенно стоит обратиться</h2>
+                <ul class="when-list">
+                    <li>хотите получить субсидию</li>
+                    <li>планируете включение в реестр Минпромторга</li>
+                    <li>выходите на госзакупки</li>
+                    <li>запускаете импортозамещение</li>
+                    <li>масштабируете производство</li>
+                    <li>хотите провести стресс-диагностику проекта</li>
+                    <li>ищете точки роста через господдержку</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Финальный акцент + CTA -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>Реестр Гарант — не разовая услуга</h2>
+                    <p>Это системный партнёр бизнеса по работе с государственными возможностями. Мы можем подключиться на старте проекта, в момент роста, в точке кризиса, перед выходом в госзаказ, при масштабировании производства — и выстроить маршрут от текущего состояния к максимальным преференциям.</p>
+                    <div class="cta-buttons">
+                        <button type="button" class="btn btn-primary" onclick="typeof openModal === 'function' && openModal('consultation')" style="background: #fff; color: #667eea;">Получить консультацию</button>
+                        <a href="/contacts" class="btn btn-secondary" style="border: 2px solid rgba(255,255,255,0.8); color: #fff;">Наши контакты</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div data-include="/footer.html"></div>
+    <script src="/js/modal.js"></script>
+    <script src="/include.js"></script>
+    <script src="/script.js"></script>
+<!-- SEO_SITEMAP_START -->
+<section id="sitemap">
+<h2>Карта сайта — Реестр Гарант</h2>
+<p>Полный перечень услуг и разделов сайта vnesenie-v-reestr.ru:</p>
+<h3>Гранты</h3>
+<p><a href="/start">Старт</a> | <a href="/razvitie">Развитие</a> | <a href="/commertsializatsia">Коммерциализация</a> | <a href="/granti-v-ramkah-767-pprf">Гранты на доработку и внедрение решений в сфере ИТ</a> | <a href="/granti-v-ramkah-550-555-pprf">Гранты на доработку и внедрение решений на базе ИИ</a></p>
+<h3>Услуги</h3>
+<p><a href="/industrial">Промышленная продукция</a> | <a href="/software">Программное обеспечение</a> | <a href="/radioelectronic">Радиоэлектронная продукция</a> | <a href="/medical-devices">Медицинские изделия</a> | <a href="/telecom-equipment">Телекоммуникационное оборудование</a> | <a href="/oil-gas-equipment">Нефтегазовое оборудование</a> | <a href="/paketnoe-predlozhenie-dlya-ekonomii-vremeni-i-usiliy">Пакетное предложение</a> | <a href="/pricing">Стоимость услуг</a> | <a href="/roskomnadzor-preparation-expanded">Подготовка к проверке Роскомнадзора</a> | <a href="/roskomnadzor-services">Стоимость регистрации в реестре РКН</a> | <a href="/tendernoe-soprovozhdenie">Тендерное сопровождение</a> | <a href="/vnesenie-v-reestr-turoperatorov">Включение в реестр туроператоров</a> | <a href="/news/vklyuchenie-v-tamozhennyy-reestr-brokerov-i-perevozchikov">Включение в таможенный реестр</a> | <a href="/news/vklyuchenie-v-reestr-svh-pod-klyuch">Включение в Реестр владельцев СВХ</a> | <a href="/status-rezidenta-skolkovo">Статус резидента Сколково</a> | <a href="/vklyuchenie-v-reestr-utilizatorov">Включение в реестр утилизаторов</a> | <a href="/vklyuchenie-v-reestr-mtk">Включение в реестр МТК</a> | <a href="/akkreditatsiya-it-kompaniy">Аккредитация IT-компаний</a> | <a href="/doverennoe-po">Получение статуса доверенного ПО</a></p>
+<p><a href="/price-list">Прайс</a></p>
+<h3>Займы</h3>
+<p><a href="/vysokotekh">Высокотех</a> | <a href="/promyshlennaya-ipoteka">Промышленная ипотека</a> | <a href="/programma-1764-minekonomrazvitiya">Программа 1764 Минэкономразвития</a> | <a href="/programma-proekty-razvitiya">Программа "Проекты развития"</a> | <a href="/programma-psk-1764">Программа «ПСК» + Программа 1764</a> | <a href="/selkhoz-zaymy">Сельхоз</a></p>
+<p><a href="/news/obuchenie-vklyucheniyu-v-reestr-minpromtorga-kursy-dlya-proizvoditeley-akademiya-ekspertov-po-lokalizatsii-ekonom-te-ot-200-000-na-kazhdom-vklyuchenii">Обучение</a></p>
+<h3>Документы</h3>
+<p><a href="/sertifikat-sootvetstviya-st-1">Сертификат соответствия СТ-1</a> | <a href="/tendernoe-soprovozhdenie">Тендерное сопровождение для реестра Минпромторга</a> | <a href="/tehnologicheskaya-dokumentatsiya">Технологическая документация для реестра Минпромторга</a> | <a href="/akt-ekspertizy-tpp">Акт экспертизы для реестра Минпромторга</a> | <a href="/razrabotka-konstruktorskoy-dokumentatsii">Конструкторская документация</a> | <a href="/ekspluatatsionnaya-dokumentatsiya">Эксплуатационная документация</a></p>
+<h3>Инструменты</h3>
+<p><a href="/reestry-i-bazy/">Реестры и базы</a> | <a href="/okpd2/">ОКПД2</a> | <a href="/calculators/">Калькуляторы</a></p>
+<p><a href="/contacts">Контакты</a></p>
+<h3>Наши услуги</h3>
+<p><a href="/industrial">Промышленная продукция</a> | <a href="/radioelectronic">Радиоэлектронная продукция</a> | <a href="/software">Программное обеспечение</a> | <a href="/medical-devices">Медицинские изделия</a> | <a href="/telecom-equipment">Телекоммуникационное оборудование</a> | <a href="/oil-gas-equipment">Нефтегазовое оборудование</a></p>
+<h3>Информация</h3>
+<p><a href="https://vnesenie-v-reestr.ru/about">О компании</a> | <a href="/news/">Новости</a> | <a href="/calculators/">Калькуляторы Минпромторга</a> | <a href="/pricing">Стоимость услуг</a> | <a href="/news/?category=6">Часто задаваемые вопросы</a> | <a href="/gisp-minpromtorg">Реестр Минпромторга</a> | <a href="https://certification.vnesenie-v-reestr.ru/">Сертификация</a></p>
+<h3>Мы в соцсетях</h3>
+<p><a href="https://dzen.ru/vnesenie-v-reestr.ru">Дзен</a> | <a href="https://ok.ru/group/70000010421044">Одноклассники</a> | <a href="https://vk.com/wall-235708943">ВКонтакте</a> | <a href="https://t.me/reestr_garant">Telegram</a> | <a href="https://yandex.ru/profile/29246620835">Яндекс Бизнес</a></p>
+<h3>Экспертные сообщества</h3>
+<p><a href="https://music.yandex.ru/album/40561553">Подкасты Яндекс Музыка</a> | <a href="https://vc.ru/id5680649">VC.ru</a></p>
+<h3>Контактная информация</h3>
+<p>Телефон: +7 920-898-17-18 | Email: reestrgarant@mail.ru | Режим работы: Пн-Пт 9:00-18:00</p>
+</section>
+<!-- SEO_SITEMAP_END -->
 </body>
 </html>

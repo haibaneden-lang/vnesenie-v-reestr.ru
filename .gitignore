@@ -1,10 +1,6 @@
-# Временные файлы
+# Системные файлы
 .DS_Store
-*.tmp
-*.temp
-*.swp
-*.swo
-*~
+Thumbs.db
 
 # Логи
 *.log
@@ -32,30 +28,41 @@ cache/
 
 # Временные файлы PHP
 *.php~
+*.tmp
+*.temp
+~*
 
 # Резервные копии
 *.bak
 *.backup
 *_backup.*
 
-# Файлы IDE
+# Загруженные файлы (если не нужны в репозитории)
+uploads/
+uploads/*
+
+# Конфигурационные файлы с паролями
+config/local.php
+.env
+
+# IDE файлы
 .vscode/
 .idea/
-*.sublime-*
+*.swp
+*.swo
 
-# Node modules (если будут)
+# Node.js (если используется)
 node_modules/
 npm-debug.log*
 
-# Composer (если будет)
+# Composer (если используется)
 vendor/
-composer.lock
 
-# Файлы загрузок
-telegram_bot/published_news.db
-telegram_bot/bot.log
-telegram_bot/telegram_bot.log
-telegram_bot/published.txt
+# Кэш
+cache/
+tmp/
 
-# Временные файлы загрузок
-admin/media/
+# Тестовые файлы
+test_*.php
+*_test.php
+db_test.php
