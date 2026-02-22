@@ -23,9 +23,12 @@
     {"@context":"https://schema.org","@type":"AboutPage","name":"О компании — Реестр Гарант","mainEntity":{"@type":"Organization","name":"Реестр Гарант","foundingDate":"2015","url":"https://vnesenie-v-reestr.ru"}}
     </script>
     <style>
-    /* Общие UX: контейнер, отступы, переходы */
-    .about .container { max-width: 1200px; }
-    .section-block { padding: 4.5rem 0 !important; }
+    /* Стили страницы «О компании» — приоритет над общими (body.about) */
+    body.about .hero { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important; color: #fff !important; padding: 4rem 0 !important; }
+    body.about .container { max-width: 1200px !important; margin-left: auto; margin-right: auto; padding: 0 20px; box-sizing: border-box; }
+    body.about .section-title { text-align: center !important; font-size: 2rem !important; margin-bottom: 0.75rem !important; color: #1e293b !important; }
+    body.about .section-subtitle { text-align: center !important; font-size: 1.1rem !important; color: #64748b !important; margin-bottom: 1rem !important; }
+    body.about .section-block { padding: 4.5rem 0 !important; }
     /* БЛОК 1 — Hero двухколоночный */
     .about-hero-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
     .about-hero-left h1 { font-size: 2.25rem; line-height: 1.25; margin-bottom: 1rem; }
@@ -66,16 +69,18 @@
     .about-eco-card .card-links a:hover { text-decoration: underline; color: #bfdbfe; }
     @media (max-width: 900px) { .about-eco-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 560px) { .about-eco-grid { grid-template-columns: 1fr; } }
-    /* БЛОК 4 — Путь клиента */
-    .about-path { display: flex; justify-content: space-between; gap: 0.5rem; margin-top: 2rem; flex-wrap: wrap; }
-    .about-path-step { flex: 1; min-width: 140px; text-align: center; padding: 1.25rem 0.75rem; background: #fff; border: 2px solid #e2e8f0; border-radius: 16px; position: relative; transition: all .25s ease; }
+    /* БЛОК 4 — Путь клиента (7 шагов) */
+    .about-path { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0.5rem; margin-top: 2rem; }
+    .about-path-step { text-align: center; padding: 1.25rem 0.5rem; background: #fff; border: 2px solid #e2e8f0; border-radius: 16px; transition: all .25s ease; }
     .about-path-step:hover { border-color: #1e3c72; box-shadow: 0 4px 16px rgba(30,60,114,0.15); }
     .about-path-step .step-num { display: block; width: 32px; height: 32px; line-height: 32px; margin: 0 auto 0.5rem; background: #1e3c72; color: #fff; border-radius: 50%; font-weight: 700; font-size: 0.9rem; }
-    .about-path-step .step-title { font-weight: 600; color: #1e293b; font-size: 0.95rem; }
-    .about-path-step .step-detail { display: none; font-size: 0.8rem; color: #64748b; margin-top: 0.5rem; line-height: 1.4; }
+    .about-path-step .step-title { font-weight: 600; color: #1e293b; font-size: 0.9rem; }
+    .about-path-step .step-detail { display: none; font-size: 0.75rem; color: #64748b; margin-top: 0.5rem; line-height: 1.35; }
     .about-path-step:hover .step-detail { display: block; }
     .section-sub { text-align: center; max-width: 760px; margin: 0 auto 40px; color: #9ca3af; font-size: 1.05rem; line-height: 1.5; }
-    @media (max-width: 768px) { .about-path { flex-direction: column; } }
+    @media (max-width: 1100px) { .about-path { grid-template-columns: repeat(4, 1fr); } }
+    @media (max-width: 640px) { .about-path { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 400px) { .about-path { grid-template-columns: 1fr; } }
     /* БЛОК 5 — Цифры */
     .about-stats { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff; padding: 4rem 0; text-align: center; }
     .about-stats-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1.5rem; max-width: 1000px; margin: 2rem auto 0; }
@@ -84,72 +89,118 @@
     .about-stats-item .lbl { font-size: 0.85rem; opacity: 0.95; }
     @media (max-width: 900px) { .about-stats-grid { grid-template-columns: repeat(3, 1fr); } }
     @media (max-width: 480px) { .about-stats-grid { grid-template-columns: repeat(2, 1fr); } }
-    /* БЛОК 6 — Сравнительная таблица */
+    /* БЛОК 6 — Сравнительная таблица (премиум) */
     .about-compare {
         overflow-x: auto;
         margin-top: 1.5rem;
         background: #fff;
-        border-radius: 16px;
-        box-shadow: 0 4px 24px rgba(30, 60, 114, 0.08);
-        border: 1px solid #e2e8f0;
+        border-radius: 20px;
+        box-shadow: 0 12px 48px rgba(30, 60, 114, 0.12), 0 0 0 1px rgba(102, 126, 234, 0.08);
+        border: none;
         padding: 0;
-        max-width: 700px;
+        max-width: 720px;
         margin-left: auto;
         margin-right: auto;
+        position: relative;
+    }
+    .about-compare::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 4px;
+        background: linear-gradient(180deg, #667eea, #764ba2);
+        border-radius: 20px 0 0 20px;
     }
     .about-compare table {
         width: 100%;
         margin: 0;
         border-collapse: collapse;
-        border-radius: 16px;
+        border-radius: 20px;
         overflow: hidden;
     }
     .about-compare thead tr {
-        background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+        background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
     }
     .about-compare th {
-        padding: 1rem 1.25rem;
+        padding: 1.15rem 1.5rem;
         text-align: left;
         font-weight: 700;
-        font-size: 1rem;
+        font-size: 1.05rem;
         color: #334155;
-        border-bottom: 2px solid #cbd5e1;
+        border-bottom: 2px solid #e2e8f0;
     }
     .about-compare th:first-child { color: #64748b; }
     .about-compare th:last-child {
         color: #1e3c72;
-        background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+        background: linear-gradient(135deg, #c7d2fe 0%, #a5b4fc 100%);
+        border-bottom-color: #818cf8;
     }
     .about-compare tbody tr {
-        border-bottom: 1px solid #e2e8f0;
-        transition: background 0.15s ease;
+        border-bottom: 1px solid #f1f5f9;
+        transition: background .2s ease;
     }
     .about-compare tbody tr:last-child { border-bottom: none; }
     .about-compare tbody tr:hover { background: #f8fafc; }
     .about-compare td {
-        padding: 1rem 1.25rem;
+        padding: 1.15rem 1.5rem;
         text-align: left;
-        font-size: 1rem;
-        line-height: 1.4;
+        font-size: 1.05rem;
+        line-height: 1.45;
     }
     .about-compare td:first-child { color: #64748b; }
     .about-compare td:last-child {
         color: #1e3c72;
         font-weight: 700;
-        background: rgba(30, 60, 114, 0.03);
+        background: linear-gradient(90deg, rgba(199, 210, 254, 0.15), rgba(167, 139, 250, 0.08));
     }
-    .compare-intro { text-align: center; font-size: 20px; color: #64748b; margin-bottom: 26px; line-height: 1.45; }
-    /* БЛОК 7 — Кому полезны */
-    .about-segments { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
-    .about-segments a { display: block; padding: 1rem; background: #fff; border: 1px solid #e2e8f0; border-radius: 16px; text-align: center; font-weight: 600; color: #1e3c72; text-decoration: none; transition: all .25s ease; }
-    .about-segments a:hover { border-color: #1e3c72; box-shadow: 0 4px 12px rgba(30,60,114,0.12); transform: translateY(-2px); }
-    .about-segments a { transition: all .25s ease; }
-    /* БЛОК 8 — Медиа */
-    .media-intro { text-align: center; max-width: 720px; margin: 0 auto 28px; font-size: 18px; color: #64748b; line-height: 1.5; }
-    .about-media-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
-    .about-media-card { display: block; padding: 1.25rem; background: #f8fafc; border-radius: 16px; text-align: center; text-decoration: none; color: #1e3c72; font-weight: 600; font-size: 0.95rem; border: 1px solid #e2e8f0; transition: all .25s ease; }
-    .about-media-card:hover { background: #fff; border-color: #1e3c72; box-shadow: 0 4px 12px rgba(30,60,114,0.1); transform: translateY(-2px); }
-    .about-media-card { transition: all .25s ease; }
+    .compare-intro { text-align: center; font-size: 1.2rem; font-weight: 500; color: #475569; margin-bottom: 28px; line-height: 1.5; max-width: 560px; margin-left: auto; margin-right: auto; }
+    /* БЛОК 7 — Кому полезны (карточки с объёмом) */
+    .about-segments { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 1.25rem; margin-top: 1.5rem; }
+    .about-segments a {
+        display: block;
+        padding: 1.25rem 1rem;
+        background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+        border: 2px solid #e2e8f0;
+        border-radius: 18px;
+        text-align: center;
+        font-weight: 600;
+        font-size: 1rem;
+        color: #1e3c72;
+        text-decoration: none;
+        transition: all .25s ease;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+    .about-segments a:hover {
+        border-color: #667eea;
+        box-shadow: 0 12px 32px rgba(102, 126, 234, 0.2);
+        transform: translateY(-4px);
+        background: #fff;
+    }
+    /* БЛОК 8 — Медиа (карточки премиум) */
+    .media-intro { text-align: center; max-width: 720px; margin: 0 auto 28px; font-size: 1.1rem; font-weight: 500; color: #475569; line-height: 1.55; }
+    .about-media-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 1.25rem; margin-top: 1.5rem; }
+    .about-media-card {
+        display: block;
+        padding: 1.5rem 1.25rem;
+        background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+        border-radius: 18px;
+        text-align: center;
+        text-decoration: none;
+        color: #1e3c72;
+        font-weight: 600;
+        font-size: 1rem;
+        border: 2px solid #e2e8f0;
+        transition: all .25s ease;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    }
+    .about-media-card:hover {
+        background: #fff;
+        border-color: #667eea;
+        box-shadow: 0 12px 36px rgba(102, 126, 234, 0.18);
+        transform: translateY(-4px);
+    }
     /* БЛОК 9 — Финальный CTA */
     .about-final-cta { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: #fff; padding: 4rem 0; text-align: center; }
     .about-final-cta h2 { color: #fff; margin-bottom: 1rem; font-size: 1.75rem; }
@@ -157,6 +208,22 @@
     .about-final-cta .cta-buttons { justify-content: center; margin-top: 1.5rem; }
     .about-final-cta .btn-primary { background: #fff; color: #1e3c72; }
     .about-final-cta .btn-secondary { border: 2px solid rgba(255,255,255,0.8); color: #fff; }
+    /* Блок «Почему 90% теряют доступ» */
+    .about-problem-block { background: #f8fafc; border-radius: 20px; padding: 2.5rem; margin-top: 2rem; border: 1px solid #e2e8f0; }
+    .about-problem-block h3 { font-size: 1.35rem; color: #1e293b; margin: 0 0 1.25rem; text-align: center; }
+    .about-problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; max-width: 900px; margin: 0 auto; }
+    .about-problem-list { margin: 0; padding-left: 1.25rem; }
+    .about-problem-list li { margin-bottom: 0.5rem; line-height: 1.5; color: #475569; }
+    .about-problem-list strong { color: #1e293b; }
+    .about-problem-block .problem-cta { text-align: center; margin-top: 1.5rem; font-weight: 600; color: #1e3c72; }
+    @media (max-width: 640px) { .about-problem-grid { grid-template-columns: 1fr; } }
+    /* Блок «Что можно сделать самостоятельно» */
+    .about-self-service { background: linear-gradient(180deg, #f1f5f9 0%, #e2e8f0 100%); border-radius: 20px; padding: 2.5rem; margin-top: 2rem; border: 1px solid #cbd5e1; }
+    .about-self-service h3 { font-size: 1.25rem; color: #1e293b; margin: 0 0 1rem; }
+    .about-self-service p { color: #475569; margin-bottom: 1rem; line-height: 1.6; }
+    .about-self-service-links { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+    .about-self-service-links a { display: inline-block; padding: 0.6rem 1rem; background: #fff; border: 2px solid #667eea; color: #1e3c72; font-weight: 600; border-radius: 12px; text-decoration: none; transition: all .2s; }
+    .about-self-service-links a:hover { background: #667eea; color: #fff; }
     </style>
 </head>
 <body class="about">
@@ -167,9 +234,9 @@
         <div class="container">
             <div class="about-hero-wrap">
                 <div class="about-hero-left">
-                    <h1>Реестр Гарант — единое окно бизнеса к господдержке и реестрам</h1>
-                    <p class="hero-sub">Включение в реестры Минпромторга, субсидии и льготы, нормативная документация, выход в госзакупки — в одной экосистеме.</p>
-                    <p class="hero-lead">Работаем на стыке промышленности, IT и государственного регулирования. Берём на себя самую сложную часть — превращаем требования Минпромторга в понятную дорожную карту роста вашего бизнеса.</p>
+                    <h1>Реестр Гарант — инфраструктура доступа бизнеса к господдержке</h1>
+                    <p class="hero-sub">Включение в реестры Минпромторга, субсидии, льготы, госзакупки и стратегическое сопровождение — в единой системе.</p>
+                    <p class="hero-lead">Государство уже распределяет триллионы рублей поддержки. Большинство компаний просто не умеют к ним подключаться. Мы это исправляем.</p>
                     <div class="cta-buttons">
                         <a href="/price-list" class="btn btn-primary">Получить стратегию</a>
                         <a href="/navigator-mer-podderzhki-gisp" class="btn btn-secondary" style="border-color: rgba(255,255,255,0.6); color: #fff;">Подобрать меру поддержки</a>
@@ -182,7 +249,7 @@
                     </div>
                 </div>
                 <div class="about-hero-right">
-                    <p>Путь компании от идеи до господдержки: диагностика → карта возможностей → подготовка → сопровождение → результат</p>
+                    <p>Путь компании: диагностика → карта возможностей → стратегический план → подготовка базы → экспертиза и подача → получение статуса → монетизация (субсидии, льготы, госзакупки)</p>
                 </div>
             </div>
         </div>
@@ -193,12 +260,12 @@
         <div class="container">
             <div class="about-philosophy">
                 <div class="about-philosophy-text">
-                    <h2 class="section-title">Государственная поддержка должна работать на бизнес</h2>
-                    <p>Между компанией и мерами господдержки сегодня стоит сложная система: постановления, методики, реестры, экспертизы. Из-за этого до бизнеса доходит лишь часть возможностей.</p>
-                    <p>Мы убираем этот барьер: помогаем с включением в реестр Минпромторга, подбором субсидий и выходом на госзакупки. Статус отечественного производителя и локализация продукции становятся управляемыми задачами.</p>
+                    <h2 class="section-title">Реестр Гарант — не точечная услуга, а инфраструктура</h2>
+                    <p>Это комплексная инфраструктура, которая превращает сложную систему государственного регулирования в управляемый инструмент роста бизнеса. Мы работаем не с документами. Мы работаем с возможностями.</p>
+                    <p>На рынке достаточно тех, кто оформляет одну услугу, готовит один пакет документов, подаёт одну заявку. Но бизнесу этого недостаточно: господдержка — это не действие, а стратегия.</p>
                     <div class="quote-box">
                         <div class="quote-line"></div>
-                        <p>Наша задача — не просто оформить документы. Наша задача — встроить вашу компанию в систему государственных возможностей так, чтобы она начала приносить деньги.</p>
+                        <p>Наша задача — выстроить для компании полный маршрут: от текущего состояния → к системному получению мер поддержки → к выходу на государственные рынки.</p>
                     </div>
                 </div>
                 <div class="about-quote-block">
@@ -208,16 +275,50 @@
         </div>
     </section>
 
+    <!-- БЛОК 2.1 — ПОЧЕМУ 90% ТЕРЯЮТ ДОСТУП -->
+    <section class="section-block" style="padding: 2rem 0 4rem; background: #fff;">
+        <div class="container">
+            <h2 class="section-title">Почему 90% компаний теряют доступ к господдержке</h2>
+            <p class="section-subtitle">За годы практики мы видим одну и ту же картину: компании не получают деньги не потому, что им отказали</p>
+            <div class="about-problem-block">
+                <div class="about-problem-grid">
+                    <div>
+                        <h3>Типичные причины</h3>
+                        <ul class="about-problem-list">
+                            <li>не знают, какие меры им доступны</li>
+                            <li>неправильно классифицируют продукцию</li>
+                            <li>не готовы по документации</li>
+                            <li>не понимают требования ПП РФ</li>
+                            <li>не считают экономику локализации</li>
+                            <li>боятся экспертиз Минпромторга</li>
+                            <li>не выстраивают стратегию входа</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>В результате бизнес теряет</h3>
+                        <ul class="about-problem-list">
+                            <li><strong>субсидии</strong></li>
+                            <li><strong>льготы</strong></li>
+                            <li><strong>приоритет в госзакупках</strong></li>
+                            <li><strong>доступ к крупным контрактам</strong></li>
+                        </ul>
+                    </div>
+                </div>
+                <p class="problem-cta">Мы закрываем эти разрывы системно.</p>
+            </div>
+        </div>
+    </section>
+
     <!-- БЛОК 3 — ЭКОСИСТЕМА -->
     <section class="section-block about-eco-section" style="padding: 4rem 0; background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);">
         <div class="container">
-            <h2 class="section-title">Экосистема решений Реестр Гарант</h2>
-            <p class="section-subtitle">Не точечные услуги, а полный цикл: от поиска мер поддержки до включения в реестры и выхода в госзакупки.</p>
-            <p class="section-intro">Большинство компаний теряют деньги не потому, что им ничего не положено, а потому что не выстроена система работы с господдержкой. Мы создали экосистему, которая закрывает весь путь компании — от первичной диагностики до реального выхода на рынок госзаказа.</p>
+            <h2 class="section-title">Экосистема Реестр Гарант</h2>
+            <p class="section-subtitle">Одна из самых полных частных инфраструктур доступа бизнеса к мерам государственной поддержки в России</p>
+            <p class="section-intro">Мы начинаем не с услуг, а с аналитики. Задача — найти деньги и возможности, которые уже доступны компании, затем просчитать экономику, подготовить документы и довести до включения в реестры и монетизации.</p>
             <div class="about-eco-grid">
                 <div class="about-eco-card">
-                    <h3>Найти возможности</h3>
-                    <p>Подбор мер господдержки, проверка по реестрам, ОКПД2.</p>
+                    <h3>1. Поиск возможностей</h3>
+                    <p>Навигатор 200+ программ, базы реестров, отраслевые подборки, ОКПД2, мониторинг закупок.</p>
                     <div class="card-links">
                         <a href="/navigator-mer-podderzhki-gisp">Навигатор мер поддержки →</a>
                         <a href="/reestry-i-bazy/">Реестры и базы →</a>
@@ -225,15 +326,15 @@
                     </div>
                 </div>
                 <div class="about-eco-card">
-                    <h3>Просчитать экономику</h3>
-                    <p>Калькуляторы локализации, сроков, стоимости, госзакупок.</p>
+                    <h3>2. Аналитика и экономическое моделирование</h3>
+                    <p>Калькулятор локализации, расчёт ROI включения в реестр, моделирование 44-ФЗ и 223-ФЗ, оценка вероятности и финансового эффекта. Считаем не «можно ли», а «выгодно ли».</p>
                     <div class="card-links">
                         <a href="/calculators/">Калькуляторы →</a>
                     </div>
                 </div>
                 <div class="about-eco-card">
-                    <h3>Подготовить документы</h3>
-                    <p>Техническая и нормативная документация под реестры.</p>
+                    <h3>3. Документационная подготовка</h3>
+                    <p>Конструкторская, технологическая, эксплуатационная документация, акты ТПП, сертификаты СТ-1, отраслевые пакеты. Выстроим базу с нуля.</p>
                     <div class="card-links">
                         <a href="/ekspluatatsionnaya-dokumentatsiya">Эксплуатационная документация</a>
                         <a href="/razrabotka-konstruktorskoy-dokumentatsii">Конструкторская</a>
@@ -243,8 +344,8 @@
                     </div>
                 </div>
                 <div class="about-eco-card">
-                    <h3>Включение в реестры</h3>
-                    <p>Реестры Минпромторга и отраслевые направления.</p>
+                    <h3>4. Включение в реестры Минпромторга</h3>
+                    <p>Реестр промышленной продукции, радиоэлектронный реестр, реестр ПО, медицинские изделия, телеком, отраслевые перечни. ПП РФ 719, 878, 616, 1236.</p>
                     <div class="card-links">
                         <a href="/industrial">Промышленная продукция</a>
                         <a href="/radioelectronic">Радиоэлектроника</a>
@@ -255,64 +356,75 @@
                     </div>
                 </div>
                 <div class="about-eco-card">
-                    <h3>Субсидии и льготы</h3>
-                    <p>Прайс, тендерное сопровождение, меры поддержки.</p>
+                    <h3>5. Субсидии, льготы и финансовая поддержка</h3>
+                    <p>Федеральные и региональные субсидии, гранты, льготные кредиты, займы фондов, статус резидента, IT-аккредитация, меры Сколково.</p>
                     <div class="card-links">
                         <a href="/price-list">Прайс-лист →</a>
                         <a href="/tendernoe-soprovozhdenie/">Тендерное сопровождение →</a>
                     </div>
                 </div>
                 <div class="about-eco-card">
-                    <h3>Обучение и сертификация</h3>
-                    <p>Курсы по включению в реестр, центр сертификации.</p>
+                    <h3>6. Выход в государственные закупки</h3>
+                    <p>Выход в 44-ФЗ и 223-ФЗ, тендерная стратегия, мониторинг закупок, повышение вероятности побед. Реестр — вход, госзакупки — масштабирование.</p>
                     <div class="card-links">
-                        <a href="/news/obuchenie-vklyucheniyu-v-reestr-minpromtorga-kursy-dlya-proizvoditeley-akademiya-ekspertov-po-lokalizatsii-ekonom-te-ot-200-000-na-kazhdom-vklyuchenii">Курсы →</a>
-                        <a href="https://certification.vnesenie-v-reestr.ru/">Центр сертификации →</a>
+                        <a href="/tendernoe-soprovozhdenie/">Тендерное сопровождение →</a>
                     </div>
                 </div>
             </div>
+            <p class="section-subtitle" style="margin-top: 2rem; color: #94a3b8;">Обучение и сертификация: <a href="/news/obuchenie-vklyucheniyu-v-reestr-minpromtorga-kursy-dlya-proizvoditeley-akademiya-ekspertov-po-lokalizatsii-ekonom-te-ot-200-000-na-kazhdom-vklyuchenii" style="color: #93c5fd;">Курсы по включению в реестр</a> · <a href="https://certification.vnesenie-v-reestr.ru/" style="color: #93c5fd;" target="_blank" rel="noopener">Центр сертификации</a></p>
         </div>
     </section>
 
     <!-- БЛОК 4 — ПУТЬ КЛИЕНТА -->
     <section class="section-block" style="padding: 4rem 0; background: #fff;">
         <div class="container">
-            <h2 class="section-title">Понятный маршрут от текущего состояния к господдержке</h2>
-            <p class="section-sub">Вы всегда понимаете, на каком этапе находитесь, какие документы готовятся и какой результат будет на выходе.</p>
+            <h2 class="section-title">Как проходит путь клиента</h2>
+            <p class="section-sub">Управляемая воронка от диагностики до монетизации статуса</p>
             <div class="about-path">
                 <div class="about-path-step">
                     <span class="step-num">1</span>
                     <span class="step-title">Диагностика</span>
-                    <p class="step-detail">Оценка готовности, рисков и подходящих реестров</p>
+                    <p class="step-detail">Анализ текущей позиции компании</p>
                 </div>
                 <div class="about-path-step">
                     <span class="step-num">2</span>
                     <span class="step-title">Карта возможностей</span>
-                    <p class="step-detail">Меры поддержки, субсидии, реестры под вашу отрасль</p>
+                    <p class="step-detail">Все доступные меры поддержки</p>
                 </div>
                 <div class="about-path-step">
                     <span class="step-num">3</span>
-                    <span class="step-title">Подготовка</span>
-                    <p class="step-detail">Документация и экспертизы под требования Минпромторга</p>
+                    <span class="step-title">Стратегический план</span>
+                    <p class="step-detail">Маршрут включения и получения льгот</p>
                 </div>
                 <div class="about-path-step">
                     <span class="step-num">4</span>
-                    <span class="step-title">Сопровождение</span>
-                    <p class="step-detail">Подача, работа с замечаниями, включение в реестр</p>
+                    <span class="step-title">Подготовка базы</span>
+                    <p class="step-detail">Документация, расчёты, доказательная часть</p>
                 </div>
                 <div class="about-path-step">
                     <span class="step-num">5</span>
-                    <span class="step-title">Результат</span>
-                    <p class="step-detail">Статус, госзакупки, субсидии и льготы</p>
+                    <span class="step-title">Экспертиза и подача</span>
+                    <p class="step-detail">Сопровождение до результата</p>
+                </div>
+                <div class="about-path-step">
+                    <span class="step-num">6</span>
+                    <span class="step-title">Получение статуса</span>
+                    <p class="step-detail">Включение в реестры</p>
+                </div>
+                <div class="about-path-step">
+                    <span class="step-num">7</span>
+                    <span class="step-title">Монетизация статуса</span>
+                    <p class="step-detail">Субсидии, льготы, закупки</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- БЛОК 5 — ЦИФРЫ -->
+    <!-- БЛОК 5 — Показатели -->
     <section class="about-stats">
         <div class="container">
-            <h2 class="section-title" style="color: #fff;">Цифры и доказательства</h2>
+            <h2 class="section-title" style="color: #fff;">Показатели</h2>
+            <p class="section-subtitle" style="color: rgba(255,255,255,0.9); margin-bottom: 1.5rem;">10+ лет практики, 800+ компаний в работе, до 95% успешных включений, 85% повторных обращений</p>
             <div class="about-stats-grid">
                 <div class="about-stats-item"><span class="num">10+</span><span class="lbl">лет</span></div>
                 <div class="about-stats-item"><span class="num">5000+</span><span class="lbl">позиций</span></div>
@@ -327,9 +439,9 @@
     <!-- БЛОК 6 — ГДЕ МЫ СИЛЬНЕЕ РЫНКА -->
     <section class="section-block" style="padding: 4rem 0; background: #f8fafc;">
         <div class="container">
-            <h2 class="section-title">Где мы сильнее рынка</h2>
-            <p class="section-subtitle">Отстройка от обычных консультантов</p>
-            <p class="compare-intro">Мы не конкурируем с обычными консультантами. Мы работаем на другом уровне глубины проекта.</p>
+            <h2 class="section-title">Почему Реестр Гарант сильнее типового консалтинга</h2>
+            <p class="section-subtitle">Где мы сильнее рынка</p>
+            <p class="compare-intro">Мы не точечный подрядчик — мы инфраструктурный партнёр бизнеса. Большинство игроков решают одну узкую задачу; мы закрываем весь контур.</p>
             <div class="about-compare">
                 <table>
                     <thead><tr><th>Обычные консультанты</th><th>Реестр Гарант</th></tr></thead>
@@ -348,8 +460,8 @@
     <!-- БЛОК 7 — КОМУ МЫ ПОЛЕЗНЫ -->
     <section class="section-block" style="padding: 4rem 0; background: #fff;">
         <div class="container">
-            <h2 class="section-title">Кому мы полезны</h2>
-            <p class="section-subtitle">Сегменты, которым подходят меры господдержки и включение в реестры</p>
+            <h2 class="section-title">Кому особенно нужен Реестр Гарант</h2>
+            <p class="section-subtitle">Производственным компаниям, IT, стартапам, компаниям в росте и в кризисе</p>
             <div class="about-segments">
                 <a href="/industrial">Производители</a>
                 <a href="/software">IT-компании</a>
@@ -359,15 +471,25 @@
                 <a href="/price-list">Компании в кризисе</a>
                 <a href="/calculators/">Компании в росте</a>
             </div>
+            <div class="about-self-service">
+                <h3>Что можно сделать самостоятельно</h3>
+                <p>Мы сознательно открываем часть инструментов. Вы уже сейчас можете: проверить наличие продукции в реестрах, подобрать меры поддержки, определить ОКПД2, оценить уровень локализации, изучить требования. Если нужны скорость, точность и минимизация рисков — подключаемся как системный партнёр.</p>
+                <div class="about-self-service-links">
+                    <a href="/reestry-i-bazy/">Проверить реестры</a>
+                    <a href="/navigator-mer-podderzhki-gisp">Подобрать меры поддержки</a>
+                    <a href="/okpd2/">Определить ОКПД2</a>
+                    <a href="/calculators/">Оценить локализацию</a>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- БЛОК 8 — МЕДИА И ЭКСПЕРТНОСТЬ -->
     <section class="section-block" style="padding: 4rem 0; background: #f8fafc;">
         <div class="container">
-            <h2 class="section-title">Медиа и экспертность</h2>
+            <h2 class="section-title">Экспертность и медийное присутствие</h2>
             <p class="section-subtitle">Дзен, VC, Telegram, подкасты, VK</p>
-            <p class="media-intro">Мы регулярно публикуем разборы изменений законодательства, практику включений и стратегии получения господдержки.</p>
+            <p class="media-intro">Реестр Гарант формирует экспертную повестку в сфере господдержки бизнеса. Публикуем аналитику и практику в отраслевых медиа, профессиональных сообществах, Telegram-каналах, подкастах и образовательных программах — не просто сопровождаем рынок, а повышаем его зрелость.</p>
             <div class="about-media-grid">
                 <a href="https://dzen.ru/vnesenie-v-reestr.ru" class="about-media-card" target="_blank" rel="noopener">Дзен</a>
                 <a href="https://vc.ru/id5680649" class="about-media-card" target="_blank" rel="noopener">VC.ru</a>
@@ -378,14 +500,23 @@
         </div>
     </section>
 
+    <!-- БЛОК 8.1 — ДЛЯ ИНВЕСТОРОВ И ПАРТНЁРОВ -->
+    <section class="section-block" style="padding: 3rem 0; background: #fff;">
+        <div class="container">
+            <h2 class="section-title">Для инвесторов и партнёров</h2>
+            <p class="section-subtitle">Реестр Гарант — масштабируемая инфраструктурная платформа на стыке госрегулирования, промышленной политики, цифровой аналитики и B2G-рынка</p>
+            <p style="text-align: center; max-width: 720px; margin: 0 auto; color: #475569; line-height: 1.6;">Потенциал: расширение цифровых сервисов, подписочная аналитика, отраслевые платформы, автоматизация подбора мер поддержки, интеграция с закупочными системами, развитие образовательного направления. Открыты к стратегическим партнёрствам и технологическому развитию экосистемы.</p>
+        </div>
+    </section>
+
     <!-- БЛОК 9 — ФИНАЛЬНЫЙ CTA -->
     <section class="about-final-cta">
         <div class="container">
-            <h2>Получите персональную карту господдержки для вашего бизнеса</h2>
-            <p style="opacity: 0.95; max-width: 560px; margin: 0 auto;">Подбор мер поддержки, включение в реестр Минпромторга, субсидии и выход на госзакупки — с учётом вашей отрасли и целей.</p>
-            <p class="cta-pre">Ответим честно: можно ли вам получить субсидии, включиться в реестр и какие деньги вы реально можете забрать у государства.</p>
+            <h2>Получите персональную карту доступа к господдержке</h2>
+            <p style="opacity: 0.95; max-width: 560px; margin: 0 auto;">На первой диагностике мы честно скажем: можно ли вам включиться в реестры, какие субсидии доступны, сколько это может дать в деньгах, какие риски есть и какой маршрут будет оптимальным.</p>
+            <p class="cta-pre">Без иллюзий. Без лишних действий. С опорой на цифры.</p>
             <div class="cta-buttons">
-                <a href="/price-list" class="btn btn-primary">Получить консультацию</a>
+                <a href="/price-list" class="btn btn-primary">Оставить заявку — получить стратегию</a>
                 <a href="/navigator-mer-podderzhki-gisp" class="btn btn-secondary">Самостоятельно подобрать меры</a>
             </div>
         </div>
